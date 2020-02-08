@@ -1,14 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 
 namespace PixivCSharp
 {
-    static class WebClient
+    static class WebRequests
     {
-        public static HttpClient Client;
+        private static HttpClient Client;
 
         //Initialises httpclient and adds default request headers
         public static void ClientInit()
@@ -22,23 +20,20 @@ namespace PixivCSharp
         {
             //Creates http request and uribuilder
             string responseString = "";
-            HttpRequestMessage request = new HttpRequestMessage();
             UriBuilder address = new UriBuilder(url.Address);
             
             //Adds parameters to uri and sends get request
             if (url.Type == "GET")
             {
                 address.Query = parameters;
-                request.Method = HttpMethod.Get;
-                request.RequestUri = new Uri(address.ToString());
-                HttpResponseMessage response = await Client.SendAsync(request);
+                HttpResponseMessage response = await Client.GetAsync(address.ToString());
                 responseString = await response.Content.ReadAsStringAsync();
             }
             //Adds parameters to body and sends post request
             else if (url.Type == "POST")
             {
                 //Adds parameters in the correct Content-Type header
-                if (multipart == true)
+                if (multipart)
                 {
                     //multipart code
                 }
