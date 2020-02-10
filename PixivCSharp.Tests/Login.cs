@@ -8,12 +8,7 @@ namespace PixivCSharp.Tests
         static void Main(string[] args)
         {
             client = new Pixiv();
-            IllustSearchResult walkthough = client.WalkthoughIllusts();
-
-            foreach (Illust illust in walkthough.illusts)
-            {
-                Console.WriteLine(illust.sanity_level);
-            }
+            Walkthrough();
         }
 
         static void Walkthrough()
