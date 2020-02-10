@@ -2,18 +2,52 @@
 
 namespace PixivCSharp.Tests
 {
-    class Login
+    static class Login
     {
-        private static Pixiv client;
+        private static PixivClient Client;
         static void Main(string[] args)
         {
-            client = new Pixiv();
-            Walkthrough();
+            //Loops until the user exits
+            string choice = string.Empty;
+            while (choice != "0")
+            {
+                Client = new PixivClient();
+                Console.WriteLine("Please enter a function to test:\n" +
+                                  "1 - Walkthough\n" +
+                                  "2 - EmojiList\n" +
+                                  "3 - Login\n" +
+                                  "0 - Exit");
+            
+                //User choice
+                Console.Write("> ");
+                choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        Walkthrough();
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                        break;
+                    case "2":
+                        //
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                        break;
+                    case "3":
+                        FirstLogin();
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
+                        break;
+
+                }
+                Console.Clear();
+            }
         }
 
+        //Walkthrough illusts test
         static void Walkthrough()
         {
-            IllustSearchResult walkthough = client.WalkthoughIllusts();
+            IllustSearchResult walkthough = Client.WalkthoughIllusts().Result;
 
             Console.WriteLine("Walkthough Illusts: ");
 
@@ -33,7 +67,7 @@ namespace PixivCSharp.Tests
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("User id: {0}", illust.user.id.ToString());
                 Console.WriteLine("User name: {0}", illust.user.name);
-                Console.WriteLine("User account {0}", illust.user.account);
+                Console.WriteLine("User account: {0}", illust.user.account);
                 Console.WriteLine("User profile picture url: {0}", illust.user.profile_image_urls.medium);
                 Console.WriteLine("Is user followed: {0}", illust.user.is_followed);
                 Console.WriteLine("-------------------------------------------------------------------------------");
@@ -74,6 +108,61 @@ namespace PixivCSharp.Tests
             }
 
             Console.WriteLine("Next url: {0}", walkthough.next_url);
+            Console.WriteLine("\n\n\n");
+        }
+
+        //Emoji Test
+        public static void EmojiList()
+        {
+            EmojiList emojis = Client.EmojiList().Result;
+            
+            Console.WriteLine("Emojis: ");
+
+            foreach (EmojiDef emoji in emojis.emoji_definitions)
+            {
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("Emoji ID: {0}", emoji.id.ToString());
+                Console.WriteLine("Emoji slug: {0}", emoji.slug);
+                Console.WriteLine("Emoji image url: {0}", emoji.image_url_medium);
+                Console.WriteLine("-------------------------------------------------------------------------------");
+            }
+            
+            Console.WriteLine("\n\n\n");
+        }
+        
+        //Password login test
+        public static void FirstLogin()
+        {
+            Console.Write("Please enter your username\n> ");
+            string username = Console.ReadLine();
+            Console.Write("Please enter your password\n> ");
+            string password = Console.ReadLine();
+            Console.Clear();
+
+            LoginResponse response = Client.Auth.RefreshLogin(username, password).Result;
+            
+            Console.WriteLine("Login respones");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Access token: {0}", response.access_token);
+            Console.WriteLine("expires in: {0}", response.expires_in);
+            Console.WriteLine("token_type: {0}", response.token_type);
+            Console.WriteLine("scope: {0}", response.scope);
+            Console.WriteLine("refresh_token: {0}", response.refresh_token);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("User: ");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("profile_image_url: {0}", response.user.profile_image_urls.px_170x170);
+            Console.WriteLine("User ID: {0}", response.user.id);
+            Console.WriteLine("Username: {0}", response.user.name);
+            Console.WriteLine("User account: {0}", response.user.account);
+            Console.WriteLine("Mail address: {0}", response.user.mail_address);
+            Console.WriteLine("Is premium: {0}", response.user.is_premium);
+            Console.WriteLine("X restrict: {0}", response.user.x_restrict);
+            Console.WriteLine("Is mail authorised: {0}", response.user.is_mail_authorizde);
+            Console.WriteLine("Require policy agreement: {0}", response.user.require_policy_agreement);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Device token: {0}", response.device_token);
+            Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
         }
     }

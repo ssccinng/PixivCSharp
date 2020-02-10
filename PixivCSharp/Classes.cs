@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace PixivCSharp
 {
@@ -63,19 +64,19 @@ namespace PixivCSharp
         public string medium { get; set; }
     }
 
-    public class MetaPagesImageUrls : ImageUrls
-    {
-        public string square_medium { get; set; }
-        public string large { get; set; }
-        public string original { get; set; }
-    }
-
     public class IllustImageUrls : ImageUrls
     {
         public string square_medium { get; set; }
         public string large { get; set; }
     }
 
+    public class MetaPagesImageUrls : ImageUrls
+    {
+        public string square_medium { get; set; }
+        public string large { get; set; }
+        public string original { get; set; }
+    }
+    
     public class MetaPages
     {
         public MetaPagesImageUrls image_urls { get; set; }
@@ -96,6 +97,23 @@ namespace PixivCSharp
         public bool is_followed { get; set; }
     }
 
+    public class ClientUser : User
+    {
+        public new UserImageUrls profile_image_urls { get; set; }
+        public string mail_address { get; set; }
+        public bool is_premium { get; set; }
+        public int x_restrict { get; set; }
+        public bool is_mail_authorizde { get; set; }
+        public bool require_policy_agreement { get; set; }
+    }
+    
+    public class UserImageUrls
+    {
+        public string px_16x16 { get; set; }
+        public string px_50x50 { get; set; }
+        public string px_170x170 { get; set; }
+    }
+
     public class Series
     {
         public int? id { get; set; }
@@ -105,19 +123,44 @@ namespace PixivCSharp
     //Search results classes
     public class IllustSearchResult
     {
-        public List<Illust> illusts { get; set; } = new List<Illust>();
+        public List<Illust> illusts { get; set; }
         public string next_url { get; set; }
     }
 
     public class NovelSearchResult
     {
-        public List<Novel> novels { get; set; } = new List<Novel>();
+        public List<Novel> novels { get; set; }
         public string next_url { get; set; }
     }
 
     public class UserSearchResult
     {
-        public List<User> user_previews { get; set; } = new List<User>();
+        public List<User> user_previews { get; set; }
         public string next_url { get; set; }
+    }
+    
+    //Emoji classes
+    public class EmojiDef
+    {
+        public int id { get; set; }
+        public string slug { get; set; }
+        public string image_url_medium { get; set; }
+    }
+    
+    public class EmojiList
+    {
+        public EmojiDef[] emoji_definitions { get; set; }
+    }
+    
+    //Login class
+    public class LoginResponse
+    {
+        public string access_token { get; set; }
+        public int expires_in { get; set; }
+        public string token_type { get; set; }
+        public string scope { get; set; }
+        public string refresh_token { get; set; }
+        public ClientUser user { get; set; }
+        public string device_token { get; set; }
     }
 }
