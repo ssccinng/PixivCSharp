@@ -68,7 +68,10 @@ namespace PixivCSharp
                 }
             }
 
-            response.EnsureSuccessStatusCode();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException(((int)response.StatusCode).ToString());
+            }
             return response;
         }
     }

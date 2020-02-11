@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
@@ -45,7 +46,7 @@ namespace PixivCSharp.Tests
                         break;
                     case "4":
                         Console.Clear();
-                        RefreshToken();
+                        await RefreshToken();
                         Console.WriteLine("Press enter to continue");
                         Console.ReadLine();
                         break;
@@ -143,14 +144,24 @@ namespace PixivCSharp.Tests
         //Password login test
         static async Task FirstLogin()
         {
+            LoginResponse response;
             Console.Write("Please enter your username\n> ");
             string username = Console.ReadLine();
             Console.Write("Please enter your password\n> ");
             string password = Console.ReadLine();
             Console.Clear();
 
-            LoginResponse response = await Client.Login(username, password);
-            
+            //Error handling
+            try
+            {
+                response = await Client.Login(username, password);
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine("An error occured. Status code: {0}", e.Message);
+                return;
+            }
+
             Console.WriteLine("Login respones");
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Access token: {0}", response.access_token);
@@ -176,23 +187,25 @@ namespace PixivCSharp.Tests
             Console.WriteLine("\n\n\n");
         }
         
-        static async void RefreshToken()
+        static async Task RefreshToken()
         {
             LoginResponse response;
             
-            if (Client.CheckTokens() == false)
+            //Checks tokens are set
+            if (Client.CheckTokens())
             {
                 Console.WriteLine("Please login to obtain access tokens before testing login refresh.");
                 return;
             }
 
+            //Error handling
             try
             {
                 response = await Client.RefreshLogin();
             }
-            catch (Exception e)
+            catch (HttpRequestException e)
             {
-                Console.WriteLine(e.GetType());
+                Console.WriteLine("An error occured. Status code: {0}", e.Message);
                 return;
             }
             
