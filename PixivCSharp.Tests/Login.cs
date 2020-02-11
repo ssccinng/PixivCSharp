@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
 {
-    static class Login
+    static partial class Login
     {
         private static PixivClient Client;
         static async Task Main(string[] args)
@@ -19,6 +19,7 @@ namespace PixivCSharp.Tests
                                   "2 - EmojiList\n" +
                                   "3 - Login\n" +
                                   "4 - Refresh login\n" +
+                                  "5 - View Illust\n" +
                                   "0 - Exit");
             
                 //User choice
@@ -29,28 +30,26 @@ namespace PixivCSharp.Tests
                     case "1":
                         Console.Clear();
                         await Walkthrough();
-                        Console.WriteLine("Press enter to continue");
-                        Console.ReadLine();
                         break;
                     case "2":
                         Console.Clear();
                         await EmojiList();
-                        Console.WriteLine("Press enter to continue");
-                        Console.ReadLine();
                         break;
                     case "3":
                         Console.Clear();
                         await FirstLogin();
-                        Console.WriteLine("Press enter to continue");
-                        Console.ReadLine();
                         break;
                     case "4":
                         Console.Clear();
                         await RefreshToken();
-                        Console.WriteLine("Press enter to continue");
-                        Console.ReadLine();
+                        break;
+                    case "5" :
+                        Console.Clear();
+                        await ViewIllust();
                         break;
                 }
+                Console.WriteLine("Press enter to continue");
+                Console.ReadLine();
                 Console.Clear();
             }
         }

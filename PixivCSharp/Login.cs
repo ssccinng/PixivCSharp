@@ -7,19 +7,17 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
-        //Access tokens
-        private string access_token;
-        private string refresh_token;
-        private string device_token;
+        private WebRequests requestClient;
 
         public PixivClient()
         {
-            WebRequests.ClientInit();
+            requestClient = new WebRequests();
         }
 
         public bool CheckTokens()
         {
-            if (access_token == null || refresh_token == null || device_token == null)
+            if (requestClient.access_token == null || requestClient.refresh_token == null ||
+                requestClient.device_token == null)
             {
                 return true;
             }
@@ -28,20 +26,11 @@ namespace PixivCSharp
                 return false;
             }
         }
-
-        //Sets access tokens
-        private void setTokens(string access, string refresh, string device)
-        {
-            access_token = access;
-            refresh_token = refresh;
-            device_token = device;
-        }
         
-
         public async Task<IllustSearchResult> WalkthoughIllusts()
         {
             //Retrieves walkthrough illusts and converts to json, and then returns it as IllustSearchResult
-            HttpResponseMessage response = await WebRequests.Request(PixivUrls.WalkthroughIllusts).ConfigureAwait(false);
+            HttpResponseMessage response = await requestClient.Request(PixivUrls.WalkthroughIllusts).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             IllustSearchResult result = json.ToObject<IllustSearchResult>();
             return result;
@@ -50,7 +39,7 @@ namespace PixivCSharp
         public async Task<EmojiList> EmojiList()
         {
             //Retrieves emoji list, converts to json, and returns as search result object
-            HttpResponseMessage response = await WebRequests.Request(PixivUrls.GetEmoji).ConfigureAwait(false);
+            HttpResponseMessage response = await requestClient.Request(PixivUrls.GetEmoji).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             EmojiList result = json.ToObject<EmojiList>();
             return result;
@@ -74,10 +63,10 @@ namespace PixivCSharp
 
             //Login request is sent, converted to json and returned
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-            HttpResponseMessage response = await WebRequests.Request(PixivUrls.Login, encodedParams).ConfigureAwait(false);
+            HttpResponseMessage response = await requestClient.Request(PixivUrls.Login, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             LoginResponse result = json["response"].ToObject<LoginResponse>();
-            setTokens(result.access_token, result.refresh_token, result.device_token);
+            requestClient.setTokens(result.access_token, result.refresh_token, result.device_token);
             return result;
             
           
@@ -91,18 +80,18 @@ namespace PixivCSharp
                 { "client_id", "MOBrBDS8blbauoSck0ZfDbtuzpyT" },
                 { "client_secret", "lsACyCD94FhDUtGTXi3QzcFE2uU1hqtDaKeqrdwj" },
                 { "grant_type", "refresh_token" },
-                { "refresh_token", refresh_token },
-                { "device_token", device_token },
+                { "refresh_token", requestClient.refresh_token },
+                { "device_token", requestClient.device_token },
                 { "secure_url", "true" },
                 { "include_policy", "true" }
             };
             
             //Refresh request is sent, and new token is retrieved
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-            HttpResponseMessage response = await WebRequests.Request(PixivUrls.Login, encodedParams).ConfigureAwait(false);
+            HttpResponseMessage response = await requestClient.Request(PixivUrls.Login, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             LoginResponse result = json["response"].ToObject<LoginResponse>();
-            setTokens(result.access_token, result.refresh_token, result.device_token);
+            requestClient.setTokens(result.access_token, result.refresh_token, result.device_token);
             return result;
         }
     }

@@ -84,15 +84,16 @@ namespace PixivCSharp
         public static URL DeleteNovelComment = new URL() {Address = "https://app-api.pixiv.net/v1/novel/comment/delete", Type = "POST"};
         
         //Misc urls
-        public static URL GetEmoji = new URL() {Address = "https://app-api.pixiv.net/v1/emoji", Type = "GET"};
-        public static URL WalkthroughIllusts = new URL() {Address = "https://app-api.pixiv.net/v1/walkthrough/illusts", Type = "GET"};
-        public static URL RegisterNotifications = new URL() {Address = "https://app-api.pixiv.net/v1/notification/user/register", Type = "GET"};
+        public static URL GetEmoji = new URL() {Address = "https://app-api.pixiv.net/v1/emoji", Type = "GET", AuthRequired = false};
+        public static URL WalkthroughIllusts = new URL() {Address = "https://app-api.pixiv.net/v1/walkthrough/illusts", Type = "GET", AuthRequired = false};
+        public static URL RegisterNotifications = new URL() {Address = "https://app-api.pixiv.net/v1/notification/user/register", Type = "GET", AuthRequired = false};
     }
 
     public class URL
     {
         public string Address { get; set; }
         public string Type { get; set; }
-        public bool Multipart { get; set; } = false;
+        public bool AuthRequired { get; set; } = true;
+        public bool Multipart { get; set; }
     }
 }
