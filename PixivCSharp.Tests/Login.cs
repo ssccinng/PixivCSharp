@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
 {
     static class Login
     {
         private static PixivClient Client;
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             //Loops until the user exits
             Client = new PixivClient();
@@ -26,19 +27,19 @@ namespace PixivCSharp.Tests
                 {
                     case "1":
                         Console.Clear();
-                        Walkthrough();
+                        await Walkthrough();
                         Console.WriteLine("Press enter to continue");
                         Console.ReadLine();
                         break;
                     case "2":
                         Console.Clear();
-                        EmojiList();
+                        await EmojiList();
                         Console.WriteLine("Press enter to continue");
                         Console.ReadLine();
                         break;
                     case "3":
                         Console.Clear();
-                        FirstLogin();
+                        await FirstLogin();
                         Console.WriteLine("Press enter to continue");
                         Console.ReadLine();
                         break;
@@ -54,9 +55,9 @@ namespace PixivCSharp.Tests
         }
 
         //Walkthrough illusts test
-        static void Walkthrough()
+        static async Task Walkthrough()
         {
-            IllustSearchResult walkthough = Client.WalkthoughIllusts().Result;
+            IllustSearchResult walkthough = await Client.WalkthoughIllusts();
 
             Console.WriteLine("Walkthough Illusts: ");
 
@@ -121,9 +122,9 @@ namespace PixivCSharp.Tests
         }
 
         //Emoji Test
-        public static void EmojiList()
+        public static async Task EmojiList()
         {
-            EmojiList emojis = Client.EmojiList().Result;
+            EmojiList emojis = await Client.EmojiList();
             
             Console.WriteLine("Emojis: ");
 
@@ -140,7 +141,7 @@ namespace PixivCSharp.Tests
         }
         
         //Password login test
-        public static void FirstLogin()
+        static async Task FirstLogin()
         {
             Console.Write("Please enter your username\n> ");
             string username = Console.ReadLine();
@@ -148,7 +149,7 @@ namespace PixivCSharp.Tests
             string password = Console.ReadLine();
             Console.Clear();
 
-            LoginResponse response = Client.Login(username, password).Result;
+            LoginResponse response = await Client.Login(username, password);
             
             Console.WriteLine("Login respones");
             Console.WriteLine("-------------------------------------------------------------------------------");
@@ -175,15 +176,25 @@ namespace PixivCSharp.Tests
             Console.WriteLine("\n\n\n");
         }
         
-        public static void RefreshToken()
+        static async void RefreshToken()
         {
-            if (Client.CheckTokens() == true)
+            LoginResponse response;
+            
+            if (Client.CheckTokens() == false)
             {
                 Console.WriteLine("Please login to obtain access tokens before testing login refresh.");
                 return;
             }
 
-            LoginResponse response = Client.RefreshLogin().Result;
+            try
+            {
+                response = await Client.RefreshLogin();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.GetType());
+                return;
+            }
             
             Console.WriteLine("Login respones");
             Console.WriteLine("-------------------------------------------------------------------------------");
