@@ -8,14 +8,15 @@ namespace PixivCSharp.Tests
         static void Main(string[] args)
         {
             //Loops until the user exits
+            Client = new PixivClient();
             string choice = string.Empty;
             while (choice != "0")
             {
-                Client = new PixivClient();
                 Console.WriteLine("Please enter a function to test:\n" +
                                   "1 - Walkthough\n" +
                                   "2 - EmojiList\n" +
                                   "3 - Login\n" +
+                                  "4 - Refresh login\n" +
                                   "0 - Exit");
             
                 //User choice
@@ -24,21 +25,29 @@ namespace PixivCSharp.Tests
                 switch (choice)
                 {
                     case "1":
+                        Console.Clear();
                         Walkthrough();
-                        Console.WriteLine("Press any key to continue");
+                        Console.WriteLine("Press enter to continue");
                         Console.ReadLine();
                         break;
                     case "2":
-                        //
-                        Console.WriteLine("Press any key to continue");
+                        Console.Clear();
+                        EmojiList();
+                        Console.WriteLine("Press enter to continue");
                         Console.ReadLine();
                         break;
                     case "3":
+                        Console.Clear();
                         FirstLogin();
-                        Console.WriteLine("Press any key to continue");
+                        Console.WriteLine("Press enter to continue");
                         Console.ReadLine();
                         break;
-
+                    case "4":
+                        Console.Clear();
+                        RefreshToken();
+                        Console.WriteLine("Press enter to continue");
+                        Console.ReadLine();
+                        break;
                 }
                 Console.Clear();
             }
@@ -139,7 +148,42 @@ namespace PixivCSharp.Tests
             string password = Console.ReadLine();
             Console.Clear();
 
-            LoginResponse response = Client.Auth.RefreshLogin(username, password).Result;
+            LoginResponse response = Client.Login(username, password).Result;
+            
+            Console.WriteLine("Login respones");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Access token: {0}", response.access_token);
+            Console.WriteLine("expires in: {0}", response.expires_in);
+            Console.WriteLine("token_type: {0}", response.token_type);
+            Console.WriteLine("scope: {0}", response.scope);
+            Console.WriteLine("refresh_token: {0}", response.refresh_token);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("User: ");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("profile_image_url: {0}", response.user.profile_image_urls.px_170x170);
+            Console.WriteLine("User ID: {0}", response.user.id);
+            Console.WriteLine("Username: {0}", response.user.name);
+            Console.WriteLine("User account: {0}", response.user.account);
+            Console.WriteLine("Mail address: {0}", response.user.mail_address);
+            Console.WriteLine("Is premium: {0}", response.user.is_premium);
+            Console.WriteLine("X restrict: {0}", response.user.x_restrict);
+            Console.WriteLine("Is mail authorised: {0}", response.user.is_mail_authorizde);
+            Console.WriteLine("Require policy agreement: {0}", response.user.require_policy_agreement);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Device token: {0}", response.device_token);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("\n\n\n");
+        }
+        
+        public static void RefreshToken()
+        {
+            if (Client.CheckTokens() == true)
+            {
+                Console.WriteLine("Please login to obtain access tokens before testing login refresh.");
+                return;
+            }
+
+            LoginResponse response = Client.RefreshLogin().Result;
             
             Console.WriteLine("Login respones");
             Console.WriteLine("-------------------------------------------------------------------------------");
