@@ -18,7 +18,7 @@ namespace PixivCSharp
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             
             //Sends request and retrieves illust
-            HttpResponseMessage response = await requestClient.Request(PixivUrls.ViewIllust, encodedParams).ConfigureAwait(false);
+            HttpResponseMessage response = await RequestClient.Request(PixivUrls.ViewIllust, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             Illust result = json["illust"].ToObject<Illust>();
             return result;
@@ -26,7 +26,7 @@ namespace PixivCSharp
 
         public async Task<Stream> GetImage(string imageUrl)
         {
-            return await requestClient.GetImage(imageUrl).ConfigureAwait(false);
+            return await RequestClient.GetImage(imageUrl).ConfigureAwait(false);
         }
     }
 }

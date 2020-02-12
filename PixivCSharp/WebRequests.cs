@@ -31,8 +31,6 @@ namespace PixivCSharp
         public WebRequests()
         {
             HttpClientHandler hch = new HttpClientHandler();
-            hch.Proxy = WebRequest.DefaultWebProxy;
-            hch.UseProxy = false;
             hch.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
             Client = new HttpClient(hch);
             Client.DefaultRequestHeaders.Add("User-Agent", "PixivAndroidApp/5.0.170 (Android 5.1; Google Nexus 5)");
@@ -92,7 +90,7 @@ namespace PixivCSharp
                 }
             }
             
-            if (!response.IsSuccessStatusCode)
+            if (response != null && !response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException(((int)response.StatusCode).ToString());
             }
