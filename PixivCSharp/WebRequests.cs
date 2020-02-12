@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -28,7 +30,11 @@ namespace PixivCSharp
         //Initialises httpclient and adds default request headers
         public WebRequests()
         {
-            Client = new HttpClient();
+            HttpClientHandler hch = new HttpClientHandler();
+            hch.Proxy = WebRequest.DefaultWebProxy;
+            hch.UseProxy = false;
+            hch.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            Client = new HttpClient(hch);
             Client.DefaultRequestHeaders.Add("User-Agent", "PixivAndroidApp/5.0.170 (Android 5.1; Google Nexus 5)");
             Client.DefaultRequestHeaders.Add("Accept-Language", "en_US");
             Client.DefaultRequestHeaders.Add("App-OS", "android");
@@ -85,12 +91,19 @@ namespace PixivCSharp
                     response = await Client.SendAsync(request).ConfigureAwait(false);
                 }
             }
-
+            
             if (!response.IsSuccessStatusCode)
             {
                 throw new HttpRequestException(((int)response.StatusCode).ToString());
             }
+            
             return response;
+        }
+
+        public async Task<Stream> GetImage(string ImageUrl)
+        {
+            HttpResponseMessage response = await Client.GetAsync(ImageUrl).ConfigureAwait(false);
+            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
     }
 }

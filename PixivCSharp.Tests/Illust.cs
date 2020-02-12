@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -73,6 +75,20 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Is illust visible: {0}", illust.visible);
             Console.WriteLine("Is illust muted: {0}", illust.is_muted);
             Console.WriteLine("-------------------------------------------------------------------------------");
+        }
+
+        static async Task TimeTest()
+        {
+            Stopwatch timer = new Stopwatch();
+            IllustSearchResult list = await Client.WalkthoughIllusts();
+            timer.Start();
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(list.illusts[i].image_urls.square_medium);
+                Stream image = await Client.GetImage(list.illusts[i].image_urls.square_medium);
+            }
+            timer.Stop();
+            Console.WriteLine(timer.Elapsed.Seconds);
         }
     }
 }

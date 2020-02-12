@@ -20,6 +20,7 @@ namespace PixivCSharp.Tests
                                   "3 - Login\n" +
                                   "4 - Refresh login\n" +
                                   "5 - View Illust\n" +
+                                  "6 - Illust download test\n" +
                                   "0 - Exit");
             
                 //User choice
@@ -46,6 +47,10 @@ namespace PixivCSharp.Tests
                     case "5" :
                         Console.Clear();
                         await ViewIllust();
+                        break;
+                    case "6":
+                        Console.Clear();
+                        await TimeTest();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");

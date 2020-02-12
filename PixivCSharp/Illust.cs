@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
@@ -21,6 +22,11 @@ namespace PixivCSharp
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             Illust result = json["illust"].ToObject<Illust>();
             return result;
+        }
+
+        public async Task<Stream> GetImage(string imageUrl)
+        {
+            return await requestClient.GetImage(imageUrl).ConfigureAwait(false);
         }
     }
 }
