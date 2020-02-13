@@ -21,6 +21,7 @@ namespace PixivCSharp.Tests
                                   "4 - Refresh login\n" +
                                   "5 - View Illust\n" +
                                   "6 - Illust download test\n" +
+                                  "7 - Download image test\n" +
                                   "0 - Exit");
             
                 //User choice
@@ -52,6 +53,10 @@ namespace PixivCSharp.Tests
                         Console.Clear();
                         await TimeTest();
                         break;
+                    case "7" :
+                        Console.Clear();
+                        await DownloadImageTest();
+                        break;
                 }
                 Console.WriteLine("Press enter to continue");
                 Console.ReadLine();
@@ -74,7 +79,9 @@ namespace PixivCSharp.Tests
                 Console.WriteLine("Illust ID: {0}", illust.id.ToString());
                 Console.WriteLine("Illust title: {0}", illust.title);
                 Console.WriteLine("Illust type: {0}", illust.type);
-                Console.WriteLine("Illust image urls: {0}", illust.image_urls.large);
+                Console.WriteLine("Illust medium image url: {0}", illust.image_urls.medium);
+                Console.WriteLine("Illust square medium url: {0}", illust.image_urls.square_medium);
+                Console.WriteLine("Illust large image url: {0}", illust.image_urls.large);
                 Console.WriteLine("Illust caption: {0}", illust.caption);
                 Console.WriteLine("Illust restrict: {0}", illust.restrict.ToString());
                 Console.WriteLine("-------------------------------------------------------------------------------");

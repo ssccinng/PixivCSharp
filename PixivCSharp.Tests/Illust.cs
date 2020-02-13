@@ -2,18 +2,22 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
 {
     static partial class Login
     {
+        //View illust test
         static async Task ViewIllust()
         {
             Illust illust;
             Console.Write("Enter the id of the illust to view\n> ");
             string id = Console.ReadLine();
             Console.Clear();
+            
+            //Error handling
             try
             {
                 illust = await Client.ViewIllust(id);
@@ -29,7 +33,9 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Illust ID: {0}", illust.id.ToString());
             Console.WriteLine("Illust title: {0}", illust.title);
             Console.WriteLine("Illust type: {0}", illust.type);
-            Console.WriteLine("Illust image urls: {0}", illust.image_urls.large);
+            Console.WriteLine("Illust medium image url: {0}", illust.image_urls.medium);
+            Console.WriteLine("Illust square medium url: {0}", illust.image_urls.square_medium);
+            Console.WriteLine("Illust large image url: {0}", illust.image_urls.large);
             Console.WriteLine("Illust caption: {0}", illust.caption);
             Console.WriteLine("Illust restrict: {0}", illust.restrict.ToString());
             Console.WriteLine("-------------------------------------------------------------------------------");
@@ -77,18 +83,44 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
 
+        //Download time test
         static async Task TimeTest()
         {
-            Stopwatch timer = new Stopwatch();
             IllustSearchResult list = await Client.WalkthoughIllusts();
+            Task<Stream>[] taskArray = new Task<Stream>[10];
+            Stopwatch timer = new Stopwatch();
             timer.Start();
+            
             for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine(list.illusts[i].image_urls.square_medium);
-                Stream image = await Client.GetImage(list.illusts[i].image_urls.square_medium);
+                taskArray[i] = Client.GetImage(list.illusts[i].image_urls.square_medium);
             }
+
+            for (int i = 0; i < 10; i++)
+            {
+                Stream image = await taskArray[i];
+                using (FileStream filestream = new FileStream((i + ".jpg"), FileMode.OpenOrCreate, FileAccess.Write))
+                {
+                    image.Seek(0, SeekOrigin.Begin);
+                    await image.CopyToAsync(filestream);
+                }
+            }
+            
             timer.Stop();
             Console.WriteLine(timer.Elapsed.Seconds);
+        }
+
+        //Download image test
+        static async Task DownloadImageTest()
+        {
+            IllustSearchResult list = await Client.WalkthoughIllusts();
+            Stream imageStream = await Client.GetImage(list.illusts[0].image_urls.medium);
+            using (FileStream fileStream = new FileStream("test.jpg", FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                imageStream.Seek(0, SeekOrigin.Begin);
+                imageStream.CopyTo(fileStream);
+            }
         }
     }
 }

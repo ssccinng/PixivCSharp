@@ -98,10 +98,14 @@ namespace PixivCSharp
             return response;
         }
 
-        public async Task<Stream> GetImage(string ImageUrl)
+        public async Task<HttpResponseMessage> GetImage(string ImageUrl)
         {
-            HttpResponseMessage response = await Client.GetAsync(ImageUrl).ConfigureAwait(false);
-            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            //Adds referer header and sends request
+            HttpRequestMessage request = new HttpRequestMessage();
+            request.RequestUri = new Uri(ImageUrl);
+            request.Method = HttpMethod.Get;
+            request.Headers.Add("Referer", "https://app-api.pixiv.net");
+            return await Client.SendAsync(request).ConfigureAwait(false);
         }
     }
 }

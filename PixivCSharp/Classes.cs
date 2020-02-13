@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Dynamic;
+using System.Text;
 
 namespace PixivCSharp
 {
@@ -23,7 +23,6 @@ namespace PixivCSharp
         public bool is_bookmarked { get; set; }
         public bool visible { get; set; }
         public bool is_muted { get; set; }
-        public abstract void bookmark();
     }
     
     //Main works classes
@@ -35,10 +34,6 @@ namespace PixivCSharp
         public int sanity_level { get; set; }
         public MetaSinglePage meta_single_page { get; set; }
         public MetaPages[] meta_pages { get; set; }
-        public override void bookmark()
-        {
-            //
-        }
     }
 
     public class Novel : Works
@@ -47,10 +42,6 @@ namespace PixivCSharp
         public bool is_mypixiv_only { get; set; }
         public bool is_x_restricted { get; set; }
         public int total_comments { get; set; }
-        public override void bookmark()
-        {
-            //
-        }
     }
 
     //Works helper classes
@@ -66,7 +57,22 @@ namespace PixivCSharp
 
     public class IllustImageUrls : ImageUrls
     {
-        public string square_medium { get; set; }
+        private string _square_medium;
+        public string square_medium
+        {
+            get => _square_medium;
+            //Pixiv currently provides the square thumbnail in the android api in webp format, which isn't usable
+            //on many platforms, to get around this this square thumbnail url is changed to the one provided by the
+            //public api, this has the cost of the speed of loading thumbnails. To be changed when webp can be
+            //converted to jpg.
+            set
+            {
+                StringBuilder urlBuilder = new StringBuilder(value);
+                urlBuilder.Replace("540x540_10_webp", "600x600");
+                _square_medium = urlBuilder.ToString();
+            }
+        }
+        //Large thumbnail is provided as a webp file, there is currently no reliable way to replace the link.
         public string large { get; set; }
     }
 

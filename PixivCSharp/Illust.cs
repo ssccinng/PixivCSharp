@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
@@ -26,7 +27,8 @@ namespace PixivCSharp
 
         public async Task<Stream> GetImage(string imageUrl)
         {
-            return await RequestClient.GetImage(imageUrl).ConfigureAwait(false);
+            HttpResponseMessage response = await RequestClient.GetImage(imageUrl).ConfigureAwait(false);
+            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
     }
 }
