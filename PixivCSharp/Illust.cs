@@ -32,6 +32,7 @@ namespace PixivCSharp
             return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
 
+        //Retrieves a list of comments for an illust
         public async Task<CommentList> IllustComments(string id)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -40,10 +41,20 @@ namespace PixivCSharp
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             HttpResponseMessage response = await RequestClient.Request(PixivUrls.IllustComments, encodedParams).ConfigureAwait(false);
+            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            CommentList result = json.ToObject<CommentList>();
+            return result;
+        }
 
-            Console.WriteLine(await response.Content.ReadAsStringAsync());
-            Console.ReadLine();
-            
+        //Retrieves a list of replies to a comment
+        public async Task<CommentList> IllustCommentReplies(string id)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                { "comment_id", id}
+            };
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+            HttpResponseMessage response = await RequestClient.Request(PixivUrls.IllustCommentReplies, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             CommentList result = json.ToObject<CommentList>();
             return result;

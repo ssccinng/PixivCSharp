@@ -125,10 +125,29 @@ namespace PixivCSharp.Tests
         //Viewing comments test
         static async Task ViewComments()
         {
-            Console.Write("Please enter the id of an illust to view comments of\n> ");
-            CommentList list = await Client.IllustComments(Console.ReadLine());
+            CommentList list;
+            Console.Write("Enter 1 for comments for an illust, enter 2 for replies to a comment\n> ");
+            string choice = Console.ReadLine();
+            Console.Clear();
+
+            if (choice == "1")
+            {
+                Console.Write("Please enter the id of an illust to view comments of\n> ");
+                list = await Client.IllustComments(Console.ReadLine());
+            }
+            else if (choice == "2")
+            {
+                Console.Write("Please enter the id of the comment to view replies to\n> ");
+                list = await Client.IllustCommentReplies(Console.ReadLine());
+            }
+            else
+            {
+                return;
+            }
+            
+            
+            Console.WriteLine("Comments:");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Comments");
             foreach (Comment comment in list.comments)
             {
                 Console.WriteLine("Comment:");
