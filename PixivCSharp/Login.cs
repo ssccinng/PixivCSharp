@@ -9,11 +9,20 @@ namespace PixivCSharp
     {
         private WebRequests RequestClient;
 
+        //Creates instance of WebRequests
         public PixivClient()
         {
             RequestClient = new WebRequests();
         }
-
+        
+        //Sets access tokens
+        public void SetTokens(string access, string refresh, string device)
+        {
+            RequestClient.access_token = access;
+            RequestClient.refresh_token = refresh;
+            RequestClient.device_token = device;
+        }
+        
         public bool CheckTokens()
         {
             if (RequestClient.access_token == null || RequestClient.refresh_token == null ||
@@ -66,7 +75,7 @@ namespace PixivCSharp
             HttpResponseMessage response = await RequestClient.Request(PixivUrls.Login, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             LoginResponse result = json["response"].ToObject<LoginResponse>();
-            RequestClient.setTokens(result.access_token, result.refresh_token, result.device_token);
+            SetTokens(result.access_token, result.refresh_token, result.device_token);
             return result;
             
           
@@ -91,7 +100,7 @@ namespace PixivCSharp
             HttpResponseMessage response = await RequestClient.Request(PixivUrls.Login, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             LoginResponse result = json["response"].ToObject<LoginResponse>();
-            RequestClient.setTokens(result.access_token, result.refresh_token, result.device_token);
+            SetTokens(result.access_token, result.refresh_token, result.device_token);
             return result;
         }
     }

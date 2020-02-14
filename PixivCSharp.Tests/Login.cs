@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
 {
-    static partial class Login
+    static partial class Tests
     {
         private static PixivClient Client;
         static async Task Main(string[] args)
@@ -22,6 +22,8 @@ namespace PixivCSharp.Tests
                                   "5 - View Illust\n" +
                                   "6 - Illust download test\n" +
                                   "7 - Download image test\n" +
+                                  "8 - View comments\n" +
+                                  "9 - Load tokens\n" +
                                   "0 - Exit");
             
                 //User choice
@@ -56,6 +58,14 @@ namespace PixivCSharp.Tests
                     case "7" :
                         Console.Clear();
                         await DownloadImageTest();
+                        break;
+                    case "8":
+                        Console.Clear();
+                        await ViewComments();
+                        break;
+                    case "9":
+                        Console.Clear();
+                        ReadTokens();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
@@ -196,6 +206,10 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Device token: {0}", response.device_token);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
+            
+            string[] tokens = new string[3] { response.access_token, response.refresh_token, response.device_token };
+            string tokenSring = String.Join(",", tokens);
+            StoreTokens(tokenSring);
         }
         
         static async Task RefreshToken()

@@ -2,12 +2,11 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
 {
-    static partial class Login
+    static partial class Tests
     {
         //View illust test
         static async Task ViewIllust()
@@ -121,6 +120,34 @@ namespace PixivCSharp.Tests
                 imageStream.Seek(0, SeekOrigin.Begin);
                 imageStream.CopyTo(fileStream);
             }
+        }
+
+        //Viewing comments test
+        static async Task ViewComments()
+        {
+            Console.Write("Please enter the id of an illust to view comments of\n> ");
+            CommentList list = await Client.IllustComments(Console.ReadLine());
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Comments");
+            foreach (Comment comment in list.comments)
+            {
+                Console.WriteLine("Comment:");
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("Comment ID: {0}", comment.id);
+                Console.WriteLine("Comment: {0}", comment.comment);
+                Console.WriteLine("Comment date: {0}", comment.date);
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("User id: {0}", comment.user.id.ToString());
+                Console.WriteLine("User name: {0}", comment.user.name);
+                Console.WriteLine("User account: {0}", comment.user.account);
+                Console.WriteLine("User profile picture url: {0}", comment.user.profile_image_urls.medium);
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("Comment has replies: {0}", comment.has_replies);
+                Console.WriteLine("-------------------------------------------------------------------------------");
+            }
+            Console.WriteLine("Next url: {0}", list.next_url);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("-------------------------------------------------------------------------------");
         }
     }
 }

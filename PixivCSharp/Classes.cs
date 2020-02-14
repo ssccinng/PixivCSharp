@@ -126,6 +126,22 @@ namespace PixivCSharp
         public string title { get; set; }
     }
 
+    //Comment classes
+    public class Comment
+    {
+        public int id { get; set; }
+        public string comment { get; set; }
+        public string date { get; set; }
+        public User user { get; set; }
+        public bool has_replies { get; set; }
+    }
+
+    public class CommentList
+    {
+        public List<Comment> comments { get; set; }
+        public string next_url { get; set; }
+    }
+
     //Search results classes
     public class IllustSearchResult
     {

@@ -18,14 +18,6 @@ namespace PixivCSharp
         //Declares httpclient and md5
         private HttpClient Client;
         private MD5 md5;
-        
-        //Sets access tokens
-        public void setTokens(string access, string refresh, string device)
-        {
-            access_token = access;
-            refresh_token = refresh;
-            device_token = device;
-        }
 
         //Initialises httpclient and adds default request headers
         public WebRequests()
