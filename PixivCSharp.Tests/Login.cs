@@ -24,6 +24,7 @@ namespace PixivCSharp.Tests
                                   "7 - Download image test\n" +
                                   "8 - View comments\n" +
                                   "9 - Load tokens\n" +
+                                  "10 - Add/remove bookmark\n" +
                                   "0 - Exit");
             
                 //User choice
@@ -66,6 +67,10 @@ namespace PixivCSharp.Tests
                     case "9":
                         Console.Clear();
                         ReadTokens();
+                        break;
+                    case "10":
+                        Console.Clear();
+                        await BookmarkIllust();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
@@ -207,6 +212,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
             
+            //Stores tokens in local storage
             string[] tokens = new string[3] { response.access_token, response.refresh_token, response.device_token };
             string tokenSring = String.Join(",", tokens);
             StoreTokens(tokenSring);
@@ -257,6 +263,11 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Device token: {0}", response.device_token);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
+            
+            //Stores tokens in local storage
+            string[] tokens = new string[3] { response.access_token, response.refresh_token, response.device_token };
+            string tokenSring = String.Join(",", tokens);
+            StoreTokens(tokenSring);
         }
     }
 }

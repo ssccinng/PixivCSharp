@@ -168,5 +168,23 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
+
+        //Tests bookmarks
+        static async Task BookmarkIllust()
+        {
+            Console.Write("Enter 1 to add a bookmark, enter 0 to remove a bookmark\n> ");
+            string choice = Console.ReadLine();
+
+            if (choice == "1")
+            {
+                Console.Write("Enter the id of the illust to bookmark\n> ");
+                await Client.AddBookmarkIllust(Console.ReadLine(), "public");
+            }
+            else if (choice == "2")
+            {
+                Console.Write("Enter the id of illust to remove from bookmarks");
+                await Client.RemoveBookmarkIllust(Console.ReadLine());
+            }
+        }
     }
 }
