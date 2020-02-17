@@ -24,7 +24,10 @@ namespace PixivCSharp.Tests
                                   "7 - Download image test\n" +
                                   "8 - View comments\n" +
                                   "9 - Load tokens\n" +
-                                  "10 - Add/remove bookmark\n" +
+                                  "10 - Add/remove illust bookmark\n" +
+                                  "11 - View novel\n" +
+                                  "12 - View novel text\n" +
+                                  "13 - Add/remove novel bookmark\n" +
                                   "0 - Exit");
             
                 //User choice
@@ -71,6 +74,14 @@ namespace PixivCSharp.Tests
                     case "10":
                         Console.Clear();
                         await BookmarkIllust();
+                        break;
+                    case "11":
+                        Console.Clear();
+                        await ViewNovel();
+                        break;
+                    case "13" :
+                        Console.Clear();
+                        await BookmarkNovel();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
@@ -139,6 +150,7 @@ namespace PixivCSharp.Tests
                 }
                 Console.WriteLine("Illust view count: {0}", illust.total_view.ToString());
                 Console.WriteLine("Illust bookmarks: {0}", illust.total_bookmarks.ToString());
+                Console.WriteLine("Is bookmarked: {0}", illust.is_bookmarked);
                 Console.WriteLine("Is illust visible: {0}", illust.visible);
                 Console.WriteLine("Is illust muted: {0}", illust.is_muted);
                 Console.WriteLine("-------------------------------------------------------------------------------");

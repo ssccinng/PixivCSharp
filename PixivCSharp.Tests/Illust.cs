@@ -77,6 +77,7 @@ namespace PixivCSharp.Tests
             }
             Console.WriteLine("Illust view count: {0}", illust.total_view.ToString());
             Console.WriteLine("Illust bookmarks: {0}", illust.total_bookmarks.ToString());
+            Console.WriteLine("Is bookmarked: {0}", illust.is_bookmarked);
             Console.WriteLine("Is illust visible: {0}", illust.visible);
             Console.WriteLine("Is illust muted: {0}", illust.is_muted);
             Console.WriteLine("-------------------------------------------------------------------------------");

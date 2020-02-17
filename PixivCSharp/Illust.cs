@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace PixivCSharp
@@ -60,18 +61,6 @@ namespace PixivCSharp
         }
         
         //Bookmarks an illust
-        public async Task AddBookmarkIllust(Illust illust, string restrict)
-        {
-            if (illust.is_bookmarked) return;
-            Dictionary<string, string> parameters = new Dictionary<string, string>()
-            {
-                { "illust_id", illust.id.ToString() },
-                { "restrict", restrict }
-            };
-            await RequestClient.Request(PixivUrls.IllustBookmarkAdd).ConfigureAwait(false);
-            illust.is_bookmarked = true;
-        }
-
         public async Task AddBookmarkIllust(string id, string restrict)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -79,28 +68,19 @@ namespace PixivCSharp
                 { "illust_id", id },
                 { "restrict", restrict }
             };
-            await RequestClient.Request(PixivUrls.IllustBookmarkAdd).ConfigureAwait(false);
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+            await RequestClient.Request(PixivUrls.IllustBookmarkAdd, encodedParams).ConfigureAwait(false);
         }
 
         //Removes illust bookmark
-        public async Task RemoveBookmarkIllust(Illust illust)
-        {
-            if (!illust.is_bookmarked) return;
-            Dictionary<string, string> parameters = new Dictionary<string, string>()
-            {
-                { "illust_id", illust.id.ToString() }
-            };
-            await RequestClient.Request(PixivUrls.IllustBookmarkRemove).ConfigureAwait(false);
-            illust.is_bookmarked = false;
-        }
-
         public async Task RemoveBookmarkIllust(string id)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "illust_id", id }
             };
-            await RequestClient.Request(PixivUrls.IllustBookmarkRemove).ConfigureAwait(false);
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+            await RequestClient.Request(PixivUrls.IllustBookmarkRemove, encodedParams).ConfigureAwait(false);
         }
     }
 }

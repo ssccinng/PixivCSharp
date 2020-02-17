@@ -38,10 +38,18 @@ namespace PixivCSharp
 
     public class Novel : Works
     {
+        public bool is_original { get; set; }
         public int text_length { get; set; }
         public bool is_mypixiv_only { get; set; }
         public bool is_x_restricted { get; set; }
         public int total_comments { get; set; }
+    }
+
+    public class NovelTetxt : Novel
+    {
+        public string novel_text { get; set; }
+        public Novel series_prev { get; set; }
+        public Novel series_next { get; set; }
     }
 
     //Works helper classes
@@ -92,6 +100,7 @@ namespace PixivCSharp
     {
         public string name { get; set; }
         public string translated_name { get; set; }
+        public bool added_by_uploader { get; set; }
     }
 
     public class User
