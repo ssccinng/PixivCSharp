@@ -70,6 +70,52 @@ namespace PixivCSharp.Tests
             Console.WriteLine(noveltext.novel_text);
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
+
+        // Tests viewing novel comments
+        static async Task ViewNovelComments()
+        {
+            CommentList list;
+            Console.Write("Enter 1 for comments of a novel, enter 2 for replies of a comment\n> ");
+            string choice = Console.ReadLine();
+            Console.Clear();
+            
+            if (choice == "1")
+            {
+                Console.Write("Please enter the id of the novel to view comments of\n> ");
+                list = await Client.NovelCommentsAsync(Console.ReadLine());
+            }
+            else if (choice == "2")
+            {
+                Console.Write("Please enter the id of the comment to see replies to\n> ");
+                list = await Client.NovelCommentRepliesAsync(Console.ReadLine());
+            }
+            else
+            {
+                return;
+            }
+            
+            Console.WriteLine("Comments:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            foreach (Comment comment in list.comments)
+            {
+                Console.WriteLine("Comment:");
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("Comment ID: {0}", comment.id);
+                Console.WriteLine("Comment: {0}", comment.comment);
+                Console.WriteLine("Comment date: {0}", comment.date);
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("User id: {0}", comment.user.id.ToString());
+                Console.WriteLine("User name: {0}", comment.user.name);
+                Console.WriteLine("User account: {0}", comment.user.account);
+                Console.WriteLine("User profile picture url: {0}", comment.user.profile_image_urls.medium);
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("Comment has replies: {0}", comment.has_replies);
+                Console.WriteLine("-------------------------------------------------------------------------------");
+            }
+            Console.WriteLine("Next url: {0}", list.next_url);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+        }
             
         static async Task BookmarkNovel()
         {

@@ -21,12 +21,13 @@ namespace PixivCSharp.Tests
                                   "5 - View Illust\n" +
                                   "6 - Illust download test\n" +
                                   "7 - Download image test\n" +
-                                  "8 - View comments\n" +
+                                  "8 - View illust comments\n" +
                                   "9 - Load tokens\n" +
                                   "10 - Add/remove illust bookmark\n" +
                                   "11 - View novel\n" +
                                   "12 - View novel text\n" +
                                   "13 - Add/remove novel bookmark\n" +
+                                  "14 - View novel comments\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -85,6 +86,10 @@ namespace PixivCSharp.Tests
                     case "13" :
                         Console.Clear();
                         await BookmarkNovel();
+                        break;
+                    case "14":
+                        Console.Clear();
+                        await ViewNovelComments();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");

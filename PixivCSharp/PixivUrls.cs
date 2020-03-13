@@ -29,7 +29,7 @@ namespace PixivCSharp
         public static URL ViewNovel = new URL() {Address = "https://app-api.pixiv.net/v2/novel/detail", Type = "GET"};
         public static URL ViewNovelText = new URL() {Address = "https://app-api.pixiv.net/v1/novel/text", Type = "GET"};
         public static URL NovelComments = new URL() {Address = "https://app-api.pixiv.net/v2/novel/comments", Type = "GET"};
-        public static URL NovelCommentsReplies = new URL() {Address = "https://app-api.pixiv.net/v1/novel/comment/replies", Type = "GET"};
+        public static URL NovelCommentReplies = new URL() {Address = "https://app-api.pixiv.net/v1/novel/comment/replies", Type = "GET"};
         public static URL NovelBookmarkAdd = new URL() {Address = "https://app-api.pixiv.net/v2/novel/bookmark/add", Type = "POST"};
         public static URL NovelBookmarkRemove = new URL() {Address = "https://app-api.pixiv.net/v1/novel/bookmark/delete", Type = "POST"};
         
