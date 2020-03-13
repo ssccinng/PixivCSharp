@@ -45,7 +45,7 @@ namespace PixivCSharp
         public int total_comments { get; set; }
     }
 
-    public class NovelTetxt : Novel
+    public class NovelText : Novel
     {
         public string novel_text { get; set; }
         public Novel series_prev { get; set; }

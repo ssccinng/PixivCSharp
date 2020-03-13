@@ -20,6 +20,19 @@ namespace PixivCSharp
             return json["novel"].ToObject<Novel>();
         }
 
+        //Retrieves novel text
+        public async Task<NovelText> ViewNovelText(string id)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                { "novel_id", id }
+            };
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+            HttpResponseMessage response = await RequestClient.Request(PixivUrls.ViewNovelText, encodedParams).ConfigureAwait(false);
+            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            return json.ToObject<NovelText>();
+        }
+
         //Bookmarks a novel
         public async Task AddBookmarkNovel(string id, string restrict)
         {
