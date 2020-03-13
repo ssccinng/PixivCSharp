@@ -78,6 +78,10 @@ namespace PixivCSharp.Tests
                         Console.Clear();
                         await ViewNovel();
                         break;
+                    case "12":
+                        Console.Clear();
+                        await ViewNovelText();
+                        break;
                     case "13" :
                         Console.Clear();
                         await BookmarkNovel();

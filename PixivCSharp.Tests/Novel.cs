@@ -62,6 +62,15 @@ namespace PixivCSharp.Tests
         }
         
         // Tests novel bookmarks
+        static async Task ViewNovelText()
+        {
+            Console.Write("Please enter the ID of the novel to view\n> ");
+            NovelText noveltext = await Client.ViewNovelTextAsync(Console.ReadLine());
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine(noveltext.novel_text);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+        }
+            
         static async Task BookmarkNovel()
         {
             Console.Write("Enter 1 to add a bookmark, enter 0 to remove a bookmark\n> ");
