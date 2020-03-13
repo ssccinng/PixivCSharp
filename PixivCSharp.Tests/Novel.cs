@@ -9,7 +9,7 @@ namespace PixivCSharp.Tests
         static async Task ViewNovel()
         {
             Console.Write("Please enter the id of the novel to view\n> ");
-            Novel novel = await Client.ViewNovel(Console.ReadLine());
+            Novel novel = await Client.ViewNovelAsync(Console.ReadLine());
             
             Console.WriteLine("Novel:");
             Console.WriteLine("-------------------------------------------------------------------------------");
@@ -70,12 +70,12 @@ namespace PixivCSharp.Tests
             if (choice == "1")
             {
                 Console.Write("Enter the id of the novel to bookmark\n> ");
-                await Client.AddBookmarkNovel(Console.ReadLine(), "public");
+                await Client.AddBookmarkNovelAsync(Console.ReadLine(), "public");
             }
             else if (choice == "2")
             {
                 Console.Write("Enter the id of novel to remove from bookmarks");
-                await Client.RemoveBookmarkNovel(Console.ReadLine());
+                await Client.RemoveBookmarkNovelAsync(Console.ReadLine());
             }
         }
     }

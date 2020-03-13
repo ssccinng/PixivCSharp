@@ -9,7 +9,7 @@ namespace PixivCSharp.Tests
         // Walkthrough illusts test
         static async Task Walkthrough()
         {
-            IllustSearchResult walkthough = await Client.WalkthoughIllusts();
+            IllustSearchResult walkthough = await Client.WalkthoughIllustsAsync();
 
             Console.WriteLine("Walkthough Illusts: ");
 
@@ -79,7 +79,7 @@ namespace PixivCSharp.Tests
         // Emoji Test
         public static async Task EmojiList()
         {
-            EmojiList emojis = await Client.EmojiList();
+            EmojiList emojis = await Client.EmojiListAsync();
             
             Console.WriteLine("Emojis: ");
 
@@ -108,7 +108,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                response = await Client.Login(username, password);
+                response = await Client.LoginAsync(username, password);
             }
             catch (HttpRequestException e)
             {
@@ -160,7 +160,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                response = await Client.RefreshLogin();
+                response = await Client.RefreshLoginAsync();
             }
             catch (HttpRequestException e)
             {

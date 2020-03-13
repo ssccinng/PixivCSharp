@@ -36,26 +36,26 @@ namespace PixivCSharp
             }
         }
         
-        public async Task<IllustSearchResult> WalkthoughIllusts()
+        public async Task<IllustSearchResult> WalkthoughIllustsAsync()
         {
             // Retrieves walkthrough illusts and converts to json, and then returns it as IllustSearchResult
-            HttpResponseMessage response = await RequestClient.Request(PixivUrls.WalkthroughIllusts).ConfigureAwait(false);
+            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.WalkthroughIllusts).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             IllustSearchResult result = json.ToObject<IllustSearchResult>();
             return result;
         }
 
-        public async Task<EmojiList> EmojiList()
+        public async Task<EmojiList> EmojiListAsync()
         {
             // Retrieves emoji list, converts to json, and returns as search result object
-            HttpResponseMessage response = await RequestClient.Request(PixivUrls.GetEmoji).ConfigureAwait(false);
+            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.GetEmoji).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             EmojiList result = json.ToObject<EmojiList>();
             return result;
         }
 
         // Login/refresh method
-        public async Task<LoginResponse> Login(string username, string password)
+        public async Task<LoginResponse> LoginAsync(string username, string password)
         {
             // Parameter dictionary
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -72,7 +72,7 @@ namespace PixivCSharp
 
             // Login request is sent, converted to json and returned
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-            HttpResponseMessage response = await RequestClient.Request(PixivUrls.Login, encodedParams).ConfigureAwait(false);
+            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.Login, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             LoginResponse result = json["response"].ToObject<LoginResponse>();
             SetTokens(result.access_token, result.refresh_token, result.device_token);
@@ -81,7 +81,7 @@ namespace PixivCSharp
           
         }
 
-        public async Task<LoginResponse> RefreshLogin()
+        public async Task<LoginResponse> RefreshLoginAsync()
         {
             // Parameter dictionary
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -97,7 +97,7 @@ namespace PixivCSharp
             
             // Refresh request is sent, and new token is retrieved
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-            HttpResponseMessage response = await RequestClient.Request(PixivUrls.Login, encodedParams).ConfigureAwait(false);
+            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.Login, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             LoginResponse result = json["response"].ToObject<LoginResponse>();
             SetTokens(result.access_token, result.refresh_token, result.device_token);

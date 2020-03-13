@@ -33,7 +33,7 @@ namespace PixivCSharp
             md5 = MD5.Create();
         }
 
-        public async Task<HttpResponseMessage> Request(URL url, FormUrlEncodedContent parameters = null, bool multipart = false)
+        public async Task<HttpResponseMessage> RequestAsync(URL url, FormUrlEncodedContent parameters = null, bool multipart = false)
         {
             // Creates http request and uribuilder
             HttpResponseMessage response = null;
@@ -90,7 +90,7 @@ namespace PixivCSharp
             return response;
         }
 
-        public async Task<HttpResponseMessage> GetImage(string ImageUrl)
+        public async Task<HttpResponseMessage> GetImageAsync(string ImageUrl)
         {
             // Adds referer header and sends request
             HttpRequestMessage request = new HttpRequestMessage();

@@ -19,7 +19,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                illust = await Client.ViewIllust(id);
+                illust = await Client.ViewIllustAsync(id);
             }
             catch (HttpRequestException e)
             {
@@ -86,7 +86,7 @@ namespace PixivCSharp.Tests
         // Download time test
         static async Task TimeTest()
         {
-            IllustSearchResult list = await Client.WalkthoughIllusts();
+            IllustSearchResult list = await Client.WalkthoughIllustsAsync();
             Task<Stream>[] taskArray = new Task<Stream>[10];
             Stopwatch timer = new Stopwatch();
             timer.Start();
@@ -94,7 +94,7 @@ namespace PixivCSharp.Tests
             for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine(list.illusts[i].image_urls.square_medium);
-                taskArray[i] = Client.GetImage(list.illusts[i].image_urls.square_medium);
+                taskArray[i] = Client.GetImageAsync(list.illusts[i].image_urls.square_medium);
             }
 
             for (int i = 0; i < 10; i++)
@@ -114,8 +114,8 @@ namespace PixivCSharp.Tests
         // Download image test
         static async Task DownloadImageTest()
         {
-            IllustSearchResult list = await Client.WalkthoughIllusts();
-            Stream imageStream = await Client.GetImage(list.illusts[0].image_urls.medium);
+            IllustSearchResult list = await Client.WalkthoughIllustsAsync();
+            Stream imageStream = await Client.GetImageAsync(list.illusts[0].image_urls.medium);
             using (FileStream fileStream = new FileStream("test.jpg", FileMode.OpenOrCreate, FileAccess.Write))
             {
                 imageStream.Seek(0, SeekOrigin.Begin);
@@ -134,12 +134,12 @@ namespace PixivCSharp.Tests
             if (choice == "1")
             {
                 Console.Write("Please enter the id of an illust to view comments of\n> ");
-                list = await Client.IllustComments(Console.ReadLine());
+                list = await Client.IllustCommentsAsync(Console.ReadLine());
             }
             else if (choice == "2")
             {
                 Console.Write("Please enter the id of the comment to view replies to\n> ");
-                list = await Client.IllustCommentReplies(Console.ReadLine());
+                list = await Client.IllustCommentRepliesAsync(Console.ReadLine());
             }
             else
             {
@@ -179,12 +179,12 @@ namespace PixivCSharp.Tests
             if (choice == "1")
             {
                 Console.Write("Enter the id of the illust to bookmark\n> ");
-                await Client.AddBookmarkIllust(Console.ReadLine(), "public");
+                await Client.AddBookmarkIllustAsync(Console.ReadLine(), "public");
             }
             else if (choice == "2")
             {
                 Console.Write("Enter the id of illust to remove from bookmarks");
-                await Client.RemoveBookmarkIllust(Console.ReadLine());
+                await Client.RemoveBookmarkIllustAsync(Console.ReadLine());
             }
         }
     }
