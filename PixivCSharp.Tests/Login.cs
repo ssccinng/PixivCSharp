@@ -6,7 +6,7 @@ namespace PixivCSharp.Tests
 {
     static partial class Tests
     {
-        //Walkthrough illusts test
+        // Walkthrough illusts test
         static async Task Walkthrough()
         {
             IllustSearchResult walkthough = await Client.WalkthoughIllusts();
@@ -76,7 +76,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("\n\n\n");
         }
 
-        //Emoji Test
+        // Emoji Test
         public static async Task EmojiList()
         {
             EmojiList emojis = await Client.EmojiList();
@@ -95,7 +95,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("\n\n\n");
         }
         
-        //Password login test
+        // Password login test
         static async Task FirstLogin()
         {
             LoginResponse response;
@@ -105,7 +105,7 @@ namespace PixivCSharp.Tests
             string password = Console.ReadLine();
             Console.Clear();
 
-            //Error handling
+            // Error handling
             try
             {
                 response = await Client.Login(username, password);
@@ -140,7 +140,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
             
-            //Stores tokens in local storage
+            // Stores tokens in local storage
             string[] tokens = new string[3] { response.access_token, response.refresh_token, response.device_token };
             string tokenSring = String.Join(",", tokens);
             StoreTokens(tokenSring);
@@ -150,14 +150,14 @@ namespace PixivCSharp.Tests
         {
             LoginResponse response;
             
-            //Checks tokens are set
+            // Checks tokens are set
             if (Client.CheckTokens())
             {
                 Console.WriteLine("Please login to obtain access tokens before testing login refresh.");
                 return;
             }
 
-            //Error handling
+            // Error handling
             try
             {
                 response = await Client.RefreshLogin();
@@ -192,7 +192,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
             
-            //Stores tokens in local storage
+            // Stores tokens in local storage
             string[] tokens = new string[3] { response.access_token, response.refresh_token, response.device_token };
             string tokenSring = String.Join(",", tokens);
             StoreTokens(tokenSring);

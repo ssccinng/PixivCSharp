@@ -8,7 +8,7 @@ namespace PixivCSharp.Tests
         private static PixivClient Client;
         static async Task Main()
         {
-            //Loops until the user exits
+            // Loops until the user exits
             Client = new PixivClient();
             string choice = string.Empty;
             while (choice != "0")
@@ -29,7 +29,7 @@ namespace PixivCSharp.Tests
                                   "13 - Add/remove novel bookmark\n" +
                                   "0 - Exit");
             
-                //User choice
+                // User choice
                 Console.Write("> ");
                 choice = Console.ReadLine();
                 switch (choice)

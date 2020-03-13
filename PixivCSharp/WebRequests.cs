@@ -10,16 +10,16 @@ namespace PixivCSharp
 {
     class WebRequests
     {
-        //Access tokens
+        // Access tokens
         public string access_token;
         public string refresh_token;
         public string device_token;
         
-        //Declares httpclient and md5
+        // Declares httpclient and md5
         private HttpClient Client;
         private MD5 md5;
 
-        //Initialises httpclient and adds default request headers
+        // Initialises httpclient and adds default request headers
         public WebRequests()
         {
             HttpClientHandler hch = new HttpClientHandler();
@@ -35,12 +35,12 @@ namespace PixivCSharp
 
         public async Task<HttpResponseMessage> Request(URL url, FormUrlEncodedContent parameters = null, bool multipart = false)
         {
-            //Creates http request and uribuilder
+            // Creates http request and uribuilder
             HttpResponseMessage response = null;
             HttpRequestMessage request = new HttpRequestMessage();
             UriBuilder address = new UriBuilder(url.Address);
 
-            //Creates and adds X-Client headers
+            // Creates and adds X-Client headers
             string time = DateTime.UtcNow.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:sszzz");
             byte[] hashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(time + "28c1fdd170a5204386cb1313c7077b34f83e4aaf4aa829ce78c231e05b0bae2c"));
             StringBuilder sb = new StringBuilder();
@@ -51,13 +51,13 @@ namespace PixivCSharp
             request.Headers.Add("X-Client-Time", time);
             request.Headers.Add("X-Client-Hash", sb.ToString());
 
-            //Adds auth headers
+            // Adds auth headers
             if (url.AuthRequired)
             {
                 request.Headers.Add("Authorization", ("Bearer " + access_token));
             }
 
-            //Adds parameters to uri and sends get request
+            // Adds parameters to uri and sends get request
             if (url.Type == "GET")
             {
                 if (parameters != null) address.Query = await parameters.ReadAsStringAsync().ConfigureAwait(false);
@@ -65,13 +65,13 @@ namespace PixivCSharp
                 request.Method = HttpMethod.Get;
                 response = await Client.SendAsync(request).ConfigureAwait(false);
             }
-            //Adds parameters to body and sends post request
+            // Adds parameters to body and sends post request
             else if (url.Type == "POST")
             {
-                //Adds parameters in the correct Content-Type header
+                // Adds parameters in the correct Content-Type header
                 if (multipart)
                 {
-                    //multipart code
+                    // multipart code
                 }
                 else
                 {
@@ -92,7 +92,7 @@ namespace PixivCSharp
 
         public async Task<HttpResponseMessage> GetImage(string ImageUrl)
         {
-            //Adds referer header and sends request
+            // Adds referer header and sends request
             HttpRequestMessage request = new HttpRequestMessage();
             request.RequestUri = new Uri(ImageUrl);
             request.Method = HttpMethod.Get;

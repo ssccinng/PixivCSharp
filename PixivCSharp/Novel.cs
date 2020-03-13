@@ -7,7 +7,7 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
-        //Views a novel
+        // Views a novel
         public async Task<Novel> ViewNovel(string id)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -20,7 +20,7 @@ namespace PixivCSharp
             return json["novel"].ToObject<Novel>();
         }
 
-        //Retrieves novel text
+        // Retrieves novel text
         public async Task<NovelText> ViewNovelText(string id)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -33,7 +33,7 @@ namespace PixivCSharp
             return json.ToObject<NovelText>();
         }
 
-        //Bookmarks a novel
+        // Bookmarks a novel
         public async Task AddBookmarkNovel(string id, string restrict)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -45,7 +45,7 @@ namespace PixivCSharp
             await RequestClient.Request(PixivUrls.NovelBookmarkAdd, encodedParams).ConfigureAwait(false);
         }
 
-        //Removes a novel bookmark
+        // Removes a novel bookmark
         public async Task RemoveBookmarkNovel(string id)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()

@@ -4,7 +4,7 @@ namespace PixivCSharp.Tests
 {
     public partial class Tests
     {
-        //Temporary methods for storing tokens for testing, not to be used in actual applications.
+        // Temporary methods for storing tokens for testing, not to be used in actual applications.
         
         public static void StoreTokens(string tokens)
         {

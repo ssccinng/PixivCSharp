@@ -5,6 +5,7 @@ namespace PixivCSharp.Tests
 {
     public partial class Tests
     {
+        // Tests viewing novel info
         static async Task ViewNovel()
         {
             Console.Write("Please enter the id of the novel to view\n> ");
@@ -58,10 +59,9 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Is x restricted: {0}", novel.is_x_restricted);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
-            
-            
         }
         
+        // Tests novel bookmarks
         static async Task BookmarkNovel()
         {
             Console.Write("Enter 1 to add a bookmark, enter 0 to remove a bookmark\n> ");

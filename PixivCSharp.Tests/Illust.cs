@@ -8,7 +8,7 @@ namespace PixivCSharp.Tests
 {
     static partial class Tests
     {
-        //View illust test
+        // View illust test
         static async Task ViewIllust()
         {
             Illust illust;
@@ -16,7 +16,7 @@ namespace PixivCSharp.Tests
             string id = Console.ReadLine();
             Console.Clear();
             
-            //Error handling
+            // Error handling
             try
             {
                 illust = await Client.ViewIllust(id);
@@ -83,7 +83,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
 
-        //Download time test
+        // Download time test
         static async Task TimeTest()
         {
             IllustSearchResult list = await Client.WalkthoughIllusts();
@@ -111,7 +111,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine(timer.Elapsed.Seconds);
         }
 
-        //Download image test
+        // Download image test
         static async Task DownloadImageTest()
         {
             IllustSearchResult list = await Client.WalkthoughIllusts();
@@ -123,7 +123,7 @@ namespace PixivCSharp.Tests
             }
         }
 
-        //Viewing comments test
+        // Viewing comments test
         static async Task ViewComments()
         {
             CommentList list;
@@ -170,7 +170,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
 
-        //Tests bookmarks
+        // Tests bookmarks
         static async Task BookmarkIllust()
         {
             Console.Write("Enter 1 to add a bookmark, enter 0 to remove a bookmark\n> ");
