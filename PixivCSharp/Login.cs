@@ -22,7 +22,18 @@ namespace PixivCSharp
             RequestClient.refresh_token = refresh;
             RequestClient.device_token = device;
         }
-        
+
+        private string _filter;
+
+        public string filter
+        {
+            get => filter;
+            set
+            {
+                if (value == "for_android") { filter = value; }
+            }
+        }
+
         public bool CheckTokens()
         {
             if (RequestClient.access_token == null || RequestClient.refresh_token == null ||

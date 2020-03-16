@@ -13,6 +13,7 @@ namespace PixivCSharp
             // Sets parameters
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
+                { "filter", filter ?? "none" },
                 { "illust_id", id}
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
