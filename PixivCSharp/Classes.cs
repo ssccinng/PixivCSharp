@@ -170,6 +170,40 @@ namespace PixivCSharp
         public string next_url { get; set; }
     }
     
+    // Recommended works classes
+    public class RecommendedIllusts : IllustSearchResult
+    {
+        public List<Illust> ranking_illusts { get; set; }
+        public bool content_exists { get; set; }
+        public PrivacyPolicy privacy_policy { get; set; }
+    }
+
+    public class RecommendedNovels : NovelSearchResult
+    {
+        public List<Novel> ranking_novels { get; set; }
+        public PrivacyPolicy privacy_policy { get; set; }
+    }
+
+    public class UserPreview
+    {
+        public User user { get; set; }
+        public List<Illust> illusts { get; set; }
+    }
+
+    public class RecommendedUsers
+    {
+        public List<UserPreview> user_previews { get; set; }
+        public string next_url { get; set; }
+    }
+
+    //Privacy policy class
+    public class PrivacyPolicy
+    {
+        public string version { get; set; }
+        public string message { get; set; }
+        public string url { get; set; }
+    }
+
     // Emoji classes
     public class EmojiDef
     {
