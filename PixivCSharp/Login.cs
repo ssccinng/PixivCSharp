@@ -52,8 +52,8 @@ namespace PixivCSharp
         {
             // Retrieves walkthrough illusts and converts to json, and then returns it as IllustSearchResult
             HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.WalkthroughIllusts).ConfigureAwait(false);
-            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-            IllustSearchResult result = json.ToObject<IllustSearchResult>();
+            string responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            IllustSearchResult result = Json.DeserializeJson<IllustSearchResult>(responseText);
             return result;
         }
 
