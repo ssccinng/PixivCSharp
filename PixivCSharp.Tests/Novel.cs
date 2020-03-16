@@ -18,7 +18,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Novel caption: {0}", novel.Caption);
             Console.WriteLine("Novel restrict: {0}", novel.Restrict);
             Console.WriteLine("Novel x-restrict: {0}", novel.XRestrict);
-            Console.WriteLine("Is original: {0}", novel.is_original);
+            Console.WriteLine("Is original: {0}", novel.IsOriginal);
             Console.WriteLine("Novel medium image url: {0}", novel.ImageUrls.medium);
             Console.WriteLine("Novel square medium url: {0}", novel.ImageUrls.square_medium);
             Console.WriteLine("Novel large image url: {0}", novel.ImageUrls.large);
@@ -34,7 +34,7 @@ namespace PixivCSharp.Tests
             }
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Page count: {0}", novel.PageCount);
-            Console.WriteLine("Text count: {0}", novel.text_length);
+            Console.WriteLine("Text count: {0}", novel.TextLength);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("User:");
             Console.WriteLine("-------------------------------------------------------------------------------");
@@ -55,8 +55,8 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Visible: {0}", novel.Visible);
             Console.WriteLine("Total comments: {0}", novel.total_comments);
             Console.WriteLine("Is muted: {0}", novel.IsMuted);
-            Console.WriteLine("Is my pixiv only: {0}", novel.is_mypixiv_only);
-            Console.WriteLine("Is x restricted: {0}", novel.is_x_restricted);
+            Console.WriteLine("Is my pixiv only: {0}", novel.IsMyPixivOnly);
+            Console.WriteLine("Is x restricted: {0}", novel.IsXRestricted);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
         }

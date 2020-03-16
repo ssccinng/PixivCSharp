@@ -9,36 +9,52 @@ namespace PixivCSharp
     {
         [JsonProperty(PropertyName = "id")]
         public int ID { get; set; }
+        
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
+        
         [JsonProperty(PropertyName = "type")]
         public string Type { get; set; }
+        
         [JsonProperty(PropertyName = "image_urls")]
         public IllustImageUrls ImageUrls { get; set; }
+        
         [JsonProperty(PropertyName = "caption")]
         public string Caption { get; set; }
+        
         [JsonProperty(PropertyName = "restrict")]
         public int Restrict { get; set; }
+        
         [JsonProperty(PropertyName = "x_restrict")]
         public int XRestrict { get; set; }
+        
         [JsonProperty(PropertyName = "user")]
         public User User { get; set; }
+        
         [JsonProperty(PropertyName = "tags")]
         public Tag[] Tags { get; set; }
+        
         [JsonProperty(PropertyName = "create_date")]
         public string CreateDate { get; set; }
+        
         [JsonProperty(PropertyName = "page_count")]
         public int PageCount { get; set; }
+        
         [JsonProperty(PropertyName = "series")]
         public Series Series { get; set; }
+        
         [JsonProperty(PropertyName = "total_view")]
         public int TotalView { get; set; }
+        
         [JsonProperty(PropertyName = "total_bookmarks")]
         public int TotalBookmarks { get; set; }
+        
         [JsonProperty(PropertyName = "is_bookmarked")]
         public bool IsBookmarked { get; set; }
+        
         [JsonProperty(PropertyName = "visible")]
         public bool Visible { get; set; }
+        
         [JsonProperty(PropertyName = "is_muted")]
         public bool IsMuted { get; set; }
     }
@@ -48,24 +64,38 @@ namespace PixivCSharp
     {
         [JsonProperty(PropertyName = "tools")]
         public string[] Tools { get; set; }
+        
         [JsonProperty(PropertyName = "width")]
         public int Width { get; set; }
+        
         [JsonProperty(PropertyName = "Height")]
         public int Height { get; set; }
+        
         [JsonProperty(PropertyName = "sanity_level")]
         public int SanityLevel { get; set; }
+        
         [JsonProperty(PropertyName = "meta_single_page")]
         public MetaSinglePage MetaSinglePage { get; set; }
+        
         [JsonProperty(PropertyName = "meta_pages")]
         public MetaPages[] MetaPages { get; set; }
     }
 
     public class Novel : Works
     {
-        public bool is_original { get; set; }
-        public int text_length { get; set; }
-        public bool is_mypixiv_only { get; set; }
-        public bool is_x_restricted { get; set; }
+        [JsonProperty(PropertyName = "is_original")]
+        public bool IsOriginal { get; set; }
+        
+        [JsonProperty(PropertyName = "text_length")]
+        public int TextLength { get; set; }
+        
+        [JsonProperty(PropertyName = "is_mypixiv_only")]
+        public bool IsMyPixivOnly { get; set; }
+        
+        [JsonProperty(PropertyName = "is_x_restricted")]
+        public bool IsXRestricted { get; set; }
+
+        [JsonProperty(PropertyName = "total_comments")]
         public int total_comments { get; set; }
     }
 
