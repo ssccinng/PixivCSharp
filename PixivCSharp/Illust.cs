@@ -8,12 +8,12 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
-        public async Task<Illust> ViewIllustAsync(string id)
+        public async Task<Illust> ViewIllustAsync(string id, string filter = null)
         {
             // Sets parameters
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
-                { "filter", filter ?? "none" },
+                { "filter", filter ?? Filter },
                 { "illust_id", id}
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
