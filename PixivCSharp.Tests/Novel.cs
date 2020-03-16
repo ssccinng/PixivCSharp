@@ -13,19 +13,19 @@ namespace PixivCSharp.Tests
             
             Console.WriteLine("Novel:");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Novel ID: {0}", novel.id);
-            Console.WriteLine("Novel title: {0}", novel.title);
-            Console.WriteLine("Novel caption: {0}", novel.caption);
-            Console.WriteLine("Novel restrict: {0}", novel.restrict);
-            Console.WriteLine("Novel x-restrict: {0}", novel.x_restrict);
+            Console.WriteLine("Novel ID: {0}", novel.ID);
+            Console.WriteLine("Novel title: {0}", novel.Title);
+            Console.WriteLine("Novel caption: {0}", novel.Caption);
+            Console.WriteLine("Novel restrict: {0}", novel.Restrict);
+            Console.WriteLine("Novel x-restrict: {0}", novel.XRestrict);
             Console.WriteLine("Is original: {0}", novel.is_original);
-            Console.WriteLine("Novel medium image url: {0}", novel.image_urls.medium);
-            Console.WriteLine("Novel square medium url: {0}", novel.image_urls.square_medium);
-            Console.WriteLine("Novel large image url: {0}", novel.image_urls.large);
-            Console.WriteLine("Novel create date: {0}", novel.create_date);
+            Console.WriteLine("Novel medium image url: {0}", novel.ImageUrls.medium);
+            Console.WriteLine("Novel square medium url: {0}", novel.ImageUrls.square_medium);
+            Console.WriteLine("Novel large image url: {0}", novel.ImageUrls.large);
+            Console.WriteLine("Novel create date: {0}", novel.CreateDate);
             Console.WriteLine("Tags:");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            foreach (Tag tag in novel.tags)
+            foreach (Tag tag in novel.Tags)
             {
                 Console.WriteLine("Tag name: {0}", tag.name);
                 Console.WriteLine("Translated name: {0}", tag.translated_name);
@@ -33,28 +33,28 @@ namespace PixivCSharp.Tests
                 Console.WriteLine("-------------------------------------------------------------------------------");
             }
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Page count: {0}", novel.page_count);
+            Console.WriteLine("Page count: {0}", novel.PageCount);
             Console.WriteLine("Text count: {0}", novel.text_length);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("User:");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("User id: {0}", novel.user.id.ToString());
-            Console.WriteLine("User name: {0}", novel.user.name);
-            Console.WriteLine("User account: {0}", novel.user.account);
-            Console.WriteLine("User profile picture url: {0}", novel.user.profile_image_urls.medium);
-            Console.WriteLine("Is user followed: {0}", novel.user.is_followed);
+            Console.WriteLine("User id: {0}", novel.User.id.ToString());
+            Console.WriteLine("User name: {0}", novel.User.name);
+            Console.WriteLine("User account: {0}", novel.User.account);
+            Console.WriteLine("User profile picture url: {0}", novel.User.profile_image_urls.medium);
+            Console.WriteLine("Is user followed: {0}", novel.User.is_followed);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Series:");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Series ID: {0}", novel.series.id);
-            Console.WriteLine("Series Title: {0}", novel.series.title);
+            Console.WriteLine("Series ID: {0}", novel.Series.id);
+            Console.WriteLine("Series Title: {0}", novel.Series.title);
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Is bookmarked: {0}", novel.is_bookmarked);
-            Console.WriteLine("Total bookmarks: {0}", novel.total_bookmarks);
-            Console.WriteLine("Total views: {0}", novel.total_view);
-            Console.WriteLine("Visible: {0}", novel.visible);
+            Console.WriteLine("Is bookmarked: {0}", novel.IsBookmarked);
+            Console.WriteLine("Total bookmarks: {0}", novel.TotalBookmarks);
+            Console.WriteLine("Total views: {0}", novel.TotalView);
+            Console.WriteLine("Visible: {0}", novel.Visible);
             Console.WriteLine("Total comments: {0}", novel.total_comments);
-            Console.WriteLine("Is muted: {0}", novel.is_muted);
+            Console.WriteLine("Is muted: {0}", novel.IsMuted);
             Console.WriteLine("Is my pixiv only: {0}", novel.is_mypixiv_only);
             Console.WriteLine("Is x restricted: {0}", novel.is_x_restricted);
             Console.WriteLine("-------------------------------------------------------------------------------");

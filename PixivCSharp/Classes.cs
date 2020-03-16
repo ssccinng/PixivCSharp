@@ -1,39 +1,63 @@
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace PixivCSharp
 {
     // Works base class
     public abstract class Works
     {
-        public int id { get; set; }
-        public string title { get; set; }
-        public string type { get; set; }
-        public IllustImageUrls image_urls { get; set; }
-        public string caption { get; set; }
-        public int restrict { get; set; }
-        public int x_restrict { get; set; }
-        public User user { get; set; }
-        public Tag[] tags { get; set; }
-        public string create_date { get; set; }
-        public int page_count { get; set; }
-        public Series series { get; set; }
-        public int total_view { get; set; }
-        public int total_bookmarks { get; set; }
-        public bool is_bookmarked { get; set; }
-        public bool visible { get; set; }
-        public bool is_muted { get; set; }
+        [JsonProperty(PropertyName = "id")]
+        public int ID { get; set; }
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+        [JsonProperty(PropertyName = "type")]
+        public string Type { get; set; }
+        [JsonProperty(PropertyName = "image_urls")]
+        public IllustImageUrls ImageUrls { get; set; }
+        [JsonProperty(PropertyName = "caption")]
+        public string Caption { get; set; }
+        [JsonProperty(PropertyName = "restrict")]
+        public int Restrict { get; set; }
+        [JsonProperty(PropertyName = "x_restrict")]
+        public int XRestrict { get; set; }
+        [JsonProperty(PropertyName = "user")]
+        public User User { get; set; }
+        [JsonProperty(PropertyName = "tags")]
+        public Tag[] Tags { get; set; }
+        [JsonProperty(PropertyName = "create_date")]
+        public string CreateDate { get; set; }
+        [JsonProperty(PropertyName = "page_count")]
+        public int PageCount { get; set; }
+        [JsonProperty(PropertyName = "series")]
+        public Series Series { get; set; }
+        [JsonProperty(PropertyName = "total_view")]
+        public int TotalView { get; set; }
+        [JsonProperty(PropertyName = "total_bookmarks")]
+        public int TotalBookmarks { get; set; }
+        [JsonProperty(PropertyName = "is_bookmarked")]
+        public bool IsBookmarked { get; set; }
+        [JsonProperty(PropertyName = "visible")]
+        public bool Visible { get; set; }
+        [JsonProperty(PropertyName = "is_muted")]
+        public bool IsMuted { get; set; }
     }
     
     // Main works classes
     public class Illust : Works
     {
-        public string[] tools { get; set; }
-        public int width { get; set; }
-        public int height { get; set; }
-        public int sanity_level { get; set; }
-        public MetaSinglePage meta_single_page { get; set; }
-        public MetaPages[] meta_pages { get; set; }
+        [JsonProperty(PropertyName = "tools")]
+        public string[] Tools { get; set; }
+        [JsonProperty(PropertyName = "width")]
+        public int Width { get; set; }
+        [JsonProperty(PropertyName = "Height")]
+        public int Height { get; set; }
+        [JsonProperty(PropertyName = "sanity_level")]
+        public int SanityLevel { get; set; }
+        [JsonProperty(PropertyName = "meta_single_page")]
+        public MetaSinglePage MetaSinglePage { get; set; }
+        [JsonProperty(PropertyName = "meta_pages")]
+        public MetaPages[] MetaPages { get; set; }
     }
 
     public class Novel : Works

@@ -29,57 +29,57 @@ namespace PixivCSharp.Tests
 
             Console.WriteLine("Illust: ");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Illust ID: {0}", illust.id.ToString());
-            Console.WriteLine("Illust title: {0}", illust.title);
-            Console.WriteLine("Illust type: {0}", illust.type);
-            Console.WriteLine("Illust medium image url: {0}", illust.image_urls.medium);
-            Console.WriteLine("Illust square medium url: {0}", illust.image_urls.square_medium);
-            Console.WriteLine("Illust large image url: {0}", illust.image_urls.large);
-            Console.WriteLine("Illust caption: {0}", illust.caption);
-            Console.WriteLine("Illust restrict: {0}", illust.restrict.ToString());
+            Console.WriteLine("Illust ID: {0}", illust.ID.ToString());
+            Console.WriteLine("Illust title: {0}", illust.Title);
+            Console.WriteLine("Illust type: {0}", illust.Type);
+            Console.WriteLine("Illust medium image url: {0}", illust.ImageUrls.medium);
+            Console.WriteLine("Illust square medium url: {0}", illust.ImageUrls.square_medium);
+            Console.WriteLine("Illust large image url: {0}", illust.ImageUrls.large);
+            Console.WriteLine("Illust caption: {0}", illust.Caption);
+            Console.WriteLine("Illust restrict: {0}", illust.Restrict.ToString());
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("User:");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("User id: {0}", illust.user.id.ToString());
-            Console.WriteLine("User name: {0}", illust.user.name);
-            Console.WriteLine("User account: {0}", illust.user.account);
-            Console.WriteLine("User profile picture url: {0}", illust.user.profile_image_urls.medium);
-            Console.WriteLine("Is user followed: {0}", illust.user.is_followed);
+            Console.WriteLine("User id: {0}", illust.User.id.ToString());
+            Console.WriteLine("User name: {0}", illust.User.name);
+            Console.WriteLine("User account: {0}", illust.User.account);
+            Console.WriteLine("User profile picture url: {0}", illust.User.profile_image_urls.medium);
+            Console.WriteLine("Is user followed: {0}", illust.User.is_followed);
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Illust tag: {0} | Illust translated tag: {1}", illust.tags[0].name, illust.tags[0].translated_name);
-            if (illust.tools.Length != 0) Console.WriteLine("Illust tools: {0}", illust.tools[0]);
-            Console.WriteLine("Illust creation date: {0}", illust.create_date);
-            Console.WriteLine("Illust page count: {0}", illust.page_count.ToString());
-            Console.WriteLine("Illust width: {0}", illust.width.ToString());
-            Console.WriteLine("Illust height: {0}", illust.height.ToString());
-            Console.WriteLine("Illust sanity level: {0}", illust.sanity_level.ToString());
-            Console.WriteLine("Illust x restrict: {0}", illust.x_restrict.ToString());
+            Console.WriteLine("Illust tag: {0} | Illust translated tag: {1}", illust.Tags[0].name, illust.Tags[0].translated_name);
+            if (illust.Tools.Length != 0) Console.WriteLine("Illust tools: {0}", illust.Tools[0]);
+            Console.WriteLine("Illust creation date: {0}", illust.CreateDate);
+            Console.WriteLine("Illust page count: {0}", illust.PageCount.ToString());
+            Console.WriteLine("Illust width: {0}", illust.Width.ToString());
+            Console.WriteLine("Illust height: {0}", illust.Height.ToString());
+            Console.WriteLine("Illust sanity level: {0}", illust.SanityLevel.ToString());
+            Console.WriteLine("Illust x restrict: {0}", illust.XRestrict.ToString());
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Series:");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            if (illust.series != null)
+            if (illust.Series != null)
             {
-                Console.WriteLine("Series ID: {0}", illust.series.id);
-                Console.WriteLine("Series title: {0}", illust.series.title);
+                Console.WriteLine("Series ID: {0}", illust.Series.id);
+                Console.WriteLine("Series title: {0}", illust.Series.title);
             }
             else
             {
                 Console.WriteLine("Not part of a series");
             }
             Console.WriteLine("-------------------------------------------------------------------------------");
-            if (illust.meta_single_page != null)
+            if (illust.MetaSinglePage != null)
             {
-                Console.WriteLine("Page url: {0}", illust.meta_single_page.original_image_url);
+                Console.WriteLine("Page url: {0}", illust.MetaSinglePage.original_image_url);
             }
-            else if (illust.meta_single_page == null)
+            else if (illust.MetaSinglePage == null)
             {
-                Console.WriteLine("First page url: {0}", illust.meta_pages[0].image_urls.original);
+                Console.WriteLine("First page url: {0}", illust.MetaPages[0].image_urls.original);
             }
-            Console.WriteLine("Illust view count: {0}", illust.total_view.ToString());
-            Console.WriteLine("Illust bookmarks: {0}", illust.total_bookmarks.ToString());
-            Console.WriteLine("Is bookmarked: {0}", illust.is_bookmarked);
-            Console.WriteLine("Is illust visible: {0}", illust.visible);
-            Console.WriteLine("Is illust muted: {0}", illust.is_muted);
+            Console.WriteLine("Illust view count: {0}", illust.TotalView.ToString());
+            Console.WriteLine("Illust bookmarks: {0}", illust.TotalBookmarks.ToString());
+            Console.WriteLine("Is bookmarked: {0}", illust.IsBookmarked);
+            Console.WriteLine("Is illust visible: {0}", illust.Visible);
+            Console.WriteLine("Is illust muted: {0}", illust.IsMuted);
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
 
@@ -93,8 +93,8 @@ namespace PixivCSharp.Tests
             
             for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine(list.illusts[i].image_urls.square_medium);
-                taskArray[i] = Client.GetImageAsync(list.illusts[i].image_urls.square_medium);
+                Console.WriteLine(list.illusts[i].ImageUrls.square_medium);
+                taskArray[i] = Client.GetImageAsync(list.illusts[i].ImageUrls.square_medium);
             }
 
             for (int i = 0; i < 10; i++)
@@ -115,7 +115,7 @@ namespace PixivCSharp.Tests
         static async Task DownloadImageTest()
         {
             IllustSearchResult list = await Client.WalkthoughIllustsAsync();
-            Stream imageStream = await Client.GetImageAsync(list.illusts[0].image_urls.medium);
+            Stream imageStream = await Client.GetImageAsync(list.illusts[0].ImageUrls.medium);
             using (FileStream fileStream = new FileStream("test.jpg", FileMode.OpenOrCreate, FileAccess.Write))
             {
                 imageStream.Seek(0, SeekOrigin.Begin);
