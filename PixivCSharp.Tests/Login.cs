@@ -83,12 +83,12 @@ namespace PixivCSharp.Tests
             
             Console.WriteLine("Emojis: ");
 
-            foreach (EmojiDef emoji in emojis.emoji_definitions)
+            foreach (EmojiDef emoji in emojis.EmojiDefinitions)
             {
                 Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine("Emoji ID: {0}", emoji.id.ToString());
-                Console.WriteLine("Emoji slug: {0}", emoji.slug);
-                Console.WriteLine("Emoji image url: {0}", emoji.image_url_medium);
+                Console.WriteLine("Emoji ID: {0}", emoji.ID.ToString());
+                Console.WriteLine("Emoji slug: {0}", emoji.Slug);
+                Console.WriteLine("Emoji image url: {0}", emoji.ImageURLMedium);
                 Console.WriteLine("-------------------------------------------------------------------------------");
             }
             

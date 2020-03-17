@@ -335,22 +335,33 @@ namespace PixivCSharp
     //Privacy policy class
     public class PrivacyPolicy
     {
-        public string version { get; set; }
-        public string message { get; set; }
-        public string url { get; set; }
+        [JsonProperty("version")]
+        public string Version { get; set; }
+        
+        [JsonProperty("message")]
+        public string Message { get; set; }
+        
+        [JsonProperty("url")]
+        public string URL { get; set; }
     }
 
     // Emoji classes
     public class EmojiDef
     {
-        public int id { get; set; }
-        public string slug { get; set; }
-        public string image_url_medium { get; set; }
+        [JsonProperty("id")]
+        public int ID { get; set; }
+        
+        [JsonProperty("slug")]
+        public string Slug { get; set; }
+        
+        [JsonProperty("image_url_medium")]
+        public string ImageURLMedium { get; set; }
     }
     
     public class EmojiList
     {
-        public EmojiDef[] emoji_definitions { get; set; }
+        [JsonProperty("emoji_definitions")]
+        public EmojiDef[] EmojiDefinitions { get; set; }
     }
     
     // Login class
