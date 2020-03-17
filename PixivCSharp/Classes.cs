@@ -276,40 +276,60 @@ namespace PixivCSharp
 
     public class NovelSearchResult
     {
-        public List<Novel> novels { get; set; }
-        public string next_url { get; set; }
+        [JsonProperty("novels")]
+        public List<Novel> Novels { get; set; }
+        
+        [JsonProperty("next_url")]
+        public string NextUrl { get; set; }
     }
 
     public class UserSearchResult
     {
-        public List<User> user_previews { get; set; }
-        public string next_url { get; set; }
+        [JsonProperty("user_previews")]
+        public List<User> UserPreviews { get; set; }
+        
+        [JsonProperty("next_url")]
+        public string NextUrl { get; set; }
     }
     
     // Recommended works classes
     public class RecommendedIllusts : IllustSearchResult
     {
-        public List<Illust> ranking_illusts { get; set; }
-        public bool content_exists { get; set; }
-        public PrivacyPolicy privacy_policy { get; set; }
+        [JsonProperty("ranking_illusts")]
+        public List<Illust> RankingIllusts { get; set; }
+        
+        [JsonProperty("content_exists")]
+        public bool ContentExists { get; set; }
+        
+        [JsonProperty("privacy_policy")]
+        public PrivacyPolicy PrivacyPolicy { get; set; }
     }
 
     public class RecommendedNovels : NovelSearchResult
     {
-        public List<Novel> ranking_novels { get; set; }
-        public PrivacyPolicy privacy_policy { get; set; }
+        [JsonProperty("ranking_novels")]
+        public List<Novel> RankingNovels { get; set; }
+        
+        [JsonProperty("privacy_policy")]
+        public PrivacyPolicy PrivacyPolicy { get; set; }
     }
 
     public class UserPreview
     {
-        public User user { get; set; }
-        public List<Illust> illusts { get; set; }
+        [JsonProperty("user")]
+        public User User { get; set; }
+        
+        [JsonProperty("illusts")]
+        public List<Illust> Illusts { get; set; }
     }
 
     public class RecommendedUsers
     {
-        public List<UserPreview> user_previews { get; set; }
-        public string next_url { get; set; }
+        [JsonProperty("user_previews")]
+        public List<UserPreview> UserPreviews { get; set; }
+        
+        [JsonProperty("next_url")]
+        public string NextUrl { get; set; }
     }
 
     //Privacy policy class
