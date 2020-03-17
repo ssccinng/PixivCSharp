@@ -27,9 +27,9 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             foreach (Tag tag in novel.Tags)
             {
-                Console.WriteLine("Tag name: {0}", tag.name);
-                Console.WriteLine("Translated name: {0}", tag.translated_name);
-                Console.WriteLine("Added by uploader: {0}", tag.added_by_uploader);
+                Console.WriteLine("Tag name: {0}", tag.Name);
+                Console.WriteLine("Translated name: {0}", tag.TranslatedName);
+                Console.WriteLine("Added by uploader: {0}", tag.AddedByUploader);
                 Console.WriteLine("-------------------------------------------------------------------------------");
             }
             Console.WriteLine("-------------------------------------------------------------------------------");

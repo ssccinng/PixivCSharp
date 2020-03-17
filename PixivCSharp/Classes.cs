@@ -169,9 +169,14 @@ namespace PixivCSharp
     
     public class Tag
     {
-        public string name { get; set; }
-        public string translated_name { get; set; }
-        public bool added_by_uploader { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        
+        [JsonProperty("translated_name")]
+        public string TranslatedName { get; set; }
+        
+        [JsonProperty("added_by_uploader")]
+        public bool AddedByUploader { get; set; }
     }
 
     public class User
