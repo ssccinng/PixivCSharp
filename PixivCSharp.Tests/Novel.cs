@@ -19,8 +19,8 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Novel restrict: {0}", novel.Restrict);
             Console.WriteLine("Novel x-restrict: {0}", novel.XRestrict);
             Console.WriteLine("Is original: {0}", novel.IsOriginal);
-            Console.WriteLine("Novel medium image url: {0}", novel.ImageUrls.medium);
-            Console.WriteLine("Novel square medium url: {0}", novel.ImageUrls.square_medium);
+            Console.WriteLine("Novel medium image url: {0}", novel.ImageUrls.Medium);
+            Console.WriteLine("Novel square medium url: {0}", novel.ImageUrls.SquareMedium);
             Console.WriteLine("Novel large image url: {0}", novel.ImageUrls.large);
             Console.WriteLine("Novel create date: {0}", novel.CreateDate);
             Console.WriteLine("Tags:");
@@ -41,7 +41,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("User id: {0}", novel.User.id.ToString());
             Console.WriteLine("User name: {0}", novel.User.name);
             Console.WriteLine("User account: {0}", novel.User.account);
-            Console.WriteLine("User profile picture url: {0}", novel.User.profile_image_urls.medium);
+            Console.WriteLine("User profile picture url: {0}", novel.User.profile_image_urls.Medium);
             Console.WriteLine("Is user followed: {0}", novel.User.is_followed);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Series:");
@@ -107,7 +107,7 @@ namespace PixivCSharp.Tests
                 Console.WriteLine("User id: {0}", comment.user.id.ToString());
                 Console.WriteLine("User name: {0}", comment.user.name);
                 Console.WriteLine("User account: {0}", comment.user.account);
-                Console.WriteLine("User profile picture url: {0}", comment.user.profile_image_urls.medium);
+                Console.WriteLine("User profile picture url: {0}", comment.user.profile_image_urls.Medium);
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("Comment has replies: {0}", comment.has_replies);
                 Console.WriteLine("-------------------------------------------------------------------------------");

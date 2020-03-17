@@ -114,20 +114,24 @@ namespace PixivCSharp
     // Works helper classes
     public class MetaSinglePage
     {
-        public string original_image_url { get; set; }
+        [JsonProperty("original_image_url")]
+        public string OriginalImageUrl { get; set; }
     }
 
     public class ImageUrls
     {
-        public string medium { get; set; }
+        [JsonProperty("medium")]
+        public string Medium { get; set; }
     }
 
     public class IllustImageUrls : ImageUrls
     {
-        private string _square_medium;
-        public string square_medium
+        private string _SquareMedium;
+        
+        [JsonProperty("square_medium")]
+        public string SquareMedium
         {
-            get => _square_medium;
+            get => _SquareMedium;
             // Pixiv currently provides the square thumbnail in the android api in webp format, which isn't usable
             // on many platforms, to get around this this square thumbnail url is changed to the one provided by the
             // public api, this has the cost of the speed of loading thumbnails. To be changed when webp can be
@@ -136,23 +140,31 @@ namespace PixivCSharp
             {
                 StringBuilder urlBuilder = new StringBuilder(value);
                 urlBuilder.Replace("540x540_10_webp", "600x600");
-                _square_medium = urlBuilder.ToString();
+                _SquareMedium = urlBuilder.ToString();
             }
         }
+        
         // Large thumbnail is provided as a webp file, there is currently no reliable way to replace the link.
+        [JsonProperty("large")]
         public string large { get; set; }
     }
 
     public class MetaPagesImageUrls : ImageUrls
     {
-        public string square_medium { get; set; }
-        public string large { get; set; }
-        public string original { get; set; }
+        [JsonProperty("square_medium")]
+        public string SquareMedium { get; set; }
+        
+        [JsonProperty("large")]
+        public string Large { get; set; }
+        
+        [JsonProperty("original")]
+        public string Original { get; set; }
     }
     
     public class MetaPages
     {
-        public MetaPagesImageUrls image_urls { get; set; }
+        [JsonProperty("image_urls")]
+        public MetaPagesImageUrls ImageUrls { get; set; }
     }
     
     public class Tag

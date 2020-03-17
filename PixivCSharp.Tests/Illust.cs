@@ -32,8 +32,8 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Illust ID: {0}", illust.ID.ToString());
             Console.WriteLine("Illust title: {0}", illust.Title);
             Console.WriteLine("Illust type: {0}", illust.Type);
-            Console.WriteLine("Illust medium image url: {0}", illust.ImageUrls.medium);
-            Console.WriteLine("Illust square medium url: {0}", illust.ImageUrls.square_medium);
+            Console.WriteLine("Illust medium image url: {0}", illust.ImageUrls.Medium);
+            Console.WriteLine("Illust square medium url: {0}", illust.ImageUrls.SquareMedium);
             Console.WriteLine("Illust large image url: {0}", illust.ImageUrls.large);
             Console.WriteLine("Illust caption: {0}", illust.Caption);
             Console.WriteLine("Illust restrict: {0}", illust.Restrict.ToString());
@@ -43,7 +43,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("User id: {0}", illust.User.id.ToString());
             Console.WriteLine("User name: {0}", illust.User.name);
             Console.WriteLine("User account: {0}", illust.User.account);
-            Console.WriteLine("User profile picture url: {0}", illust.User.profile_image_urls.medium);
+            Console.WriteLine("User profile picture url: {0}", illust.User.profile_image_urls.Medium);
             Console.WriteLine("Is user followed: {0}", illust.User.is_followed);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Illust tag: {0} | Illust translated tag: {1}", illust.Tags[0].name, illust.Tags[0].translated_name);
@@ -69,11 +69,11 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             if (illust.MetaSinglePage != null)
             {
-                Console.WriteLine("Page url: {0}", illust.MetaSinglePage.original_image_url);
+                Console.WriteLine("Page url: {0}", illust.MetaSinglePage.OriginalImageUrl);
             }
             else if (illust.MetaSinglePage == null)
             {
-                Console.WriteLine("First page url: {0}", illust.MetaPages[0].image_urls.original);
+                Console.WriteLine("First page url: {0}", illust.MetaPages[0].ImageUrls.Original);
             }
             Console.WriteLine("Illust view count: {0}", illust.TotalView.ToString());
             Console.WriteLine("Illust bookmarks: {0}", illust.TotalBookmarks.ToString());
@@ -93,8 +93,8 @@ namespace PixivCSharp.Tests
             
             for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine(list.illusts[i].ImageUrls.square_medium);
-                taskArray[i] = Client.GetImageAsync(list.illusts[i].ImageUrls.square_medium);
+                Console.WriteLine(list.illusts[i].ImageUrls.SquareMedium);
+                taskArray[i] = Client.GetImageAsync(list.illusts[i].ImageUrls.SquareMedium);
             }
 
             for (int i = 0; i < 10; i++)
@@ -115,7 +115,7 @@ namespace PixivCSharp.Tests
         static async Task DownloadImageTest()
         {
             IllustSearchResult list = await Client.WalkthoughIllustsAsync();
-            Stream imageStream = await Client.GetImageAsync(list.illusts[0].ImageUrls.medium);
+            Stream imageStream = await Client.GetImageAsync(list.illusts[0].ImageUrls.Medium);
             using (FileStream fileStream = new FileStream("test.jpg", FileMode.OpenOrCreate, FileAccess.Write))
             {
                 imageStream.Seek(0, SeekOrigin.Begin);
@@ -160,7 +160,7 @@ namespace PixivCSharp.Tests
                 Console.WriteLine("User id: {0}", comment.user.id.ToString());
                 Console.WriteLine("User name: {0}", comment.user.name);
                 Console.WriteLine("User account: {0}", comment.user.account);
-                Console.WriteLine("User profile picture url: {0}", comment.user.profile_image_urls.medium);
+                Console.WriteLine("User profile picture url: {0}", comment.user.profile_image_urls.Medium);
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("Comment has replies: {0}", comment.has_replies);
                 Console.WriteLine("-------------------------------------------------------------------------------");
