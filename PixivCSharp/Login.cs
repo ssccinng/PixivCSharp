@@ -87,7 +87,7 @@ namespace PixivCSharp
             HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.Login, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             LoginResponse result = json["response"].ToObject<LoginResponse>();
-            SetTokens(result.access_token, result.refresh_token, result.device_token);
+            SetTokens(result.AccessToken, result.RefreshToken, result.DeviceToken);
             return result;
             
           
@@ -112,7 +112,7 @@ namespace PixivCSharp
             HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.Login, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
             LoginResponse result = json["response"].ToObject<LoginResponse>();
-            SetTokens(result.access_token, result.refresh_token, result.device_token);
+            SetTokens(result.AccessToken, result.RefreshToken, result.DeviceToken);
             return result;
         }
     }

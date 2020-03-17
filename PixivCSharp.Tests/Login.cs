@@ -118,30 +118,30 @@ namespace PixivCSharp.Tests
 
             Console.WriteLine("Login respones");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Access token: {0}", response.access_token);
-            Console.WriteLine("expires in: {0}", response.expires_in);
-            Console.WriteLine("token_type: {0}", response.token_type);
-            Console.WriteLine("scope: {0}", response.scope);
-            Console.WriteLine("refresh_token: {0}", response.refresh_token);
+            Console.WriteLine("Access token: {0}", response.AccessToken);
+            Console.WriteLine("expires in: {0}", response.ExpiresIn);
+            Console.WriteLine("token_type: {0}", response.TokenType);
+            Console.WriteLine("scope: {0}", response.Scope);
+            Console.WriteLine("refresh_token: {0}", response.RefreshToken);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("User: ");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("profile_image_url: {0}", response.user.ProfileImageUrls.Px170x170);
-            Console.WriteLine("User ID: {0}", response.user.ID);
-            Console.WriteLine("Username: {0}", response.user.Name);
-            Console.WriteLine("User account: {0}", response.user.Account);
-            Console.WriteLine("Mail address: {0}", response.user.MailAddress);
-            Console.WriteLine("Is premium: {0}", response.user.IsPremium);
-            Console.WriteLine("X restrict: {0}", response.user.XRestrict);
-            Console.WriteLine("Is mail authorised: {0}", response.user.IsMailAuthorized);
-            Console.WriteLine("Require policy agreement: {0}", response.user.RequirePolicyAggreement);
+            Console.WriteLine("profile_image_url: {0}", response.User.ProfileImageUrls.Px170x170);
+            Console.WriteLine("User ID: {0}", response.User.ID);
+            Console.WriteLine("Username: {0}", response.User.Name);
+            Console.WriteLine("User account: {0}", response.User.Account);
+            Console.WriteLine("Mail address: {0}", response.User.MailAddress);
+            Console.WriteLine("Is premium: {0}", response.User.IsPremium);
+            Console.WriteLine("X restrict: {0}", response.User.XRestrict);
+            Console.WriteLine("Is mail authorised: {0}", response.User.IsMailAuthorized);
+            Console.WriteLine("Require policy agreement: {0}", response.User.RequirePolicyAggreement);
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Device token: {0}", response.device_token);
+            Console.WriteLine("Device token: {0}", response.DeviceToken);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
             
             // Stores tokens in local storage
-            string[] tokens = new string[3] { response.access_token, response.refresh_token, response.device_token };
+            string[] tokens = new string[3] { response.AccessToken, response.RefreshToken, response.DeviceToken };
             string tokenSring = String.Join(",", tokens);
             StoreTokens(tokenSring);
         }
@@ -170,30 +170,30 @@ namespace PixivCSharp.Tests
             
             Console.WriteLine("Login respones");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Access token: {0}", response.access_token);
-            Console.WriteLine("expires in: {0}", response.expires_in);
-            Console.WriteLine("token_type: {0}", response.token_type);
-            Console.WriteLine("scope: {0}", response.scope);
-            Console.WriteLine("refresh_token: {0}", response.refresh_token);
+            Console.WriteLine("Access token: {0}", response.AccessToken);
+            Console.WriteLine("expires in: {0}", response.ExpiresIn);
+            Console.WriteLine("token_type: {0}", response.TokenType);
+            Console.WriteLine("scope: {0}", response.Scope);
+            Console.WriteLine("refresh_token: {0}", response.RefreshToken);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("User: ");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("profile_image_url: {0}", response.user.ProfileImageUrls.Px170x170);
-            Console.WriteLine("User ID: {0}", response.user.ID);
-            Console.WriteLine("Username: {0}", response.user.Name);
-            Console.WriteLine("User account: {0}", response.user.Account);
-            Console.WriteLine("Mail address: {0}", response.user.MailAddress);
-            Console.WriteLine("Is premium: {0}", response.user.IsPremium);
-            Console.WriteLine("X restrict: {0}", response.user.XRestrict);
-            Console.WriteLine("Is mail authorised: {0}", response.user.IsMailAuthorized);
-            Console.WriteLine("Require policy agreement: {0}", response.user.RequirePolicyAggreement);
+            Console.WriteLine("profile_image_url: {0}", response.User.ProfileImageUrls.Px170x170);
+            Console.WriteLine("User ID: {0}", response.User.ID);
+            Console.WriteLine("Username: {0}", response.User.Name);
+            Console.WriteLine("User account: {0}", response.User.Account);
+            Console.WriteLine("Mail address: {0}", response.User.MailAddress);
+            Console.WriteLine("Is premium: {0}", response.User.IsPremium);
+            Console.WriteLine("X restrict: {0}", response.User.XRestrict);
+            Console.WriteLine("Is mail authorised: {0}", response.User.IsMailAuthorized);
+            Console.WriteLine("Require policy agreement: {0}", response.User.RequirePolicyAggreement);
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Device token: {0}", response.device_token);
+            Console.WriteLine("Device token: {0}", response.DeviceToken);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("\n\n\n");
             
             // Stores tokens in local storage
-            string[] tokens = new string[3] { response.access_token, response.refresh_token, response.device_token };
+            string[] tokens = new string[3] { response.AccessToken, response.RefreshToken, response.DeviceToken };
             string tokenSring = String.Join(",", tokens);
             StoreTokens(tokenSring);
         }

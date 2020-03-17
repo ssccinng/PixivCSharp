@@ -367,12 +367,25 @@ namespace PixivCSharp
     // Login class
     public class LoginResponse
     {
-        public string access_token { get; set; }
-        public int expires_in { get; set; }
-        public string token_type { get; set; }
-        public string scope { get; set; }
-        public string refresh_token { get; set; }
-        public ClientUser user { get; set; }
-        public string device_token { get; set; }
+        [JsonProperty("access_token")]
+        public string AccessToken { get; set; }
+        
+        [JsonProperty("expires_in")]
+        public int ExpiresIn { get; set; }
+        
+        [JsonProperty("token_type")]
+        public string TokenType { get; set; }
+        
+        [JsonProperty("scope")]
+        public string Scope { get; set; }
+        
+        [JsonProperty("refresh_token")]
+        public string RefreshToken { get; set; }
+        
+        [JsonProperty("user")]
+        public ClientUser User { get; set; }
+        
+        [JsonProperty("device_token")]
+        public string DeviceToken { get; set; }
     }
 }
