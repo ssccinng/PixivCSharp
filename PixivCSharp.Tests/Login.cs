@@ -48,8 +48,8 @@ namespace PixivCSharp.Tests
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 if (illust.Series != null)
                 {
-                    Console.WriteLine("Series ID: {0}", illust.Series.id);
-                    Console.WriteLine("Series title: {0}", illust.Series.title);
+                    Console.WriteLine("Series ID: {0}", illust.Series.ID);
+                    Console.WriteLine("Series title: {0}", illust.Series.Title);
                 }
                 else
                 {

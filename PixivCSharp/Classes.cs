@@ -232,24 +232,39 @@ namespace PixivCSharp
 
     public class Series
     {
-        public int? id { get; set; }
-        public string title { get; set; }
+        [JsonProperty("id")]
+        public int? ID { get; set; }
+        
+        [JsonProperty("title")]
+        public string Title { get; set; }
     }
 
     // Comment classes
     public class Comment
     {
-        public int id { get; set; }
-        public string comment { get; set; }
-        public string date { get; set; }
-        public User user { get; set; }
-        public bool has_replies { get; set; }
+        [JsonProperty("id")]
+        public int ID { get; set; }
+        
+        [JsonProperty("comment")]
+        public string Content { get; set; }
+        
+        [JsonProperty("date")]
+        public string Date { get; set; }
+        
+        [JsonProperty("user")]
+        public User User { get; set; }
+        
+        [JsonProperty("has_replies")]
+        public bool HasReplies { get; set; }
     }
 
     public class CommentList
     {
-        public List<Comment> comments { get; set; }
-        public string next_url { get; set; }
+        [JsonProperty("comments")]
+        public List<Comment> Comments { get; set; }
+        
+        [JsonProperty("next_url")]
+        public string NextUrl { get; set; }
     }
 
     // Search results classes

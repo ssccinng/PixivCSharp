@@ -59,8 +59,8 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             if (illust.Series != null)
             {
-                Console.WriteLine("Series ID: {0}", illust.Series.id);
-                Console.WriteLine("Series title: {0}", illust.Series.title);
+                Console.WriteLine("Series ID: {0}", illust.Series.ID);
+                Console.WriteLine("Series title: {0}", illust.Series.Title);
             }
             else
             {
@@ -149,23 +149,23 @@ namespace PixivCSharp.Tests
             
             Console.WriteLine("Comments:");
             Console.WriteLine("-------------------------------------------------------------------------------");
-            foreach (Comment comment in list.comments)
+            foreach (Comment comment in list.Comments)
             {
                 Console.WriteLine("Comment:");
                 Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine("Comment ID: {0}", comment.id);
-                Console.WriteLine("Comment: {0}", comment.comment);
-                Console.WriteLine("Comment date: {0}", comment.date);
+                Console.WriteLine("Comment ID: {0}", comment.ID);
+                Console.WriteLine("Comment: {0}", comment.Content);
+                Console.WriteLine("Comment date: {0}", comment.Date);
                 Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine("User id: {0}", comment.user.ID.ToString());
-                Console.WriteLine("User name: {0}", comment.user.Name);
-                Console.WriteLine("User account: {0}", comment.user.Account);
-                Console.WriteLine("User profile picture url: {0}", comment.user.ProfileImageUrls.Medium);
+                Console.WriteLine("User id: {0}", comment.User.ID.ToString());
+                Console.WriteLine("User name: {0}", comment.User.Name);
+                Console.WriteLine("User account: {0}", comment.User.Account);
+                Console.WriteLine("User profile picture url: {0}", comment.User.ProfileImageUrls.Medium);
                 Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine("Comment has replies: {0}", comment.has_replies);
+                Console.WriteLine("Comment has replies: {0}", comment.HasReplies);
                 Console.WriteLine("-------------------------------------------------------------------------------");
             }
-            Console.WriteLine("Next url: {0}", list.next_url);
+            Console.WriteLine("Next url: {0}", list.NextUrl);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
