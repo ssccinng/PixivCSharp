@@ -67,7 +67,7 @@ namespace PixivCSharp.Tests
             Console.Write("Please enter the ID of the novel to view\n> ");
             NovelText noveltext = await Client.ViewNovelTextAsync(Console.ReadLine());
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine(noveltext.novel_text);
+            Console.WriteLine(noveltext.Content);
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
 

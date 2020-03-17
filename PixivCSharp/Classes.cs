@@ -7,103 +7,108 @@ namespace PixivCSharp
     // Works base class
     public abstract class Works
     {
-        [JsonProperty(PropertyName = "id")]
+        [JsonProperty("id")]
         public int ID { get; set; }
         
-        [JsonProperty(PropertyName = "title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
         
-        [JsonProperty(PropertyName = "type")]
+        [JsonProperty("type")]
         public string Type { get; set; }
         
-        [JsonProperty(PropertyName = "image_urls")]
+        [JsonProperty("image_urls")]
         public IllustImageUrls ImageUrls { get; set; }
         
-        [JsonProperty(PropertyName = "caption")]
+        [JsonProperty("caption")]
         public string Caption { get; set; }
         
-        [JsonProperty(PropertyName = "restrict")]
+        [JsonProperty("restrict")]
         public int Restrict { get; set; }
         
-        [JsonProperty(PropertyName = "x_restrict")]
+        [JsonProperty("x_restrict")]
         public int XRestrict { get; set; }
         
-        [JsonProperty(PropertyName = "user")]
+        [JsonProperty("user")]
         public User User { get; set; }
         
-        [JsonProperty(PropertyName = "tags")]
+        [JsonProperty("tags")]
         public Tag[] Tags { get; set; }
         
-        [JsonProperty(PropertyName = "create_date")]
+        [JsonProperty("create_date")]
         public string CreateDate { get; set; }
         
-        [JsonProperty(PropertyName = "page_count")]
+        [JsonProperty("page_count")]
         public int PageCount { get; set; }
         
-        [JsonProperty(PropertyName = "series")]
+        [JsonProperty("series")]
         public Series Series { get; set; }
         
-        [JsonProperty(PropertyName = "total_view")]
+        [JsonProperty("total_view")]
         public int TotalView { get; set; }
         
-        [JsonProperty(PropertyName = "total_bookmarks")]
+        [JsonProperty("total_bookmarks")]
         public int TotalBookmarks { get; set; }
         
-        [JsonProperty(PropertyName = "is_bookmarked")]
+        [JsonProperty("is_bookmarked")]
         public bool IsBookmarked { get; set; }
         
-        [JsonProperty(PropertyName = "visible")]
+        [JsonProperty("visible")]
         public bool Visible { get; set; }
         
-        [JsonProperty(PropertyName = "is_muted")]
+        [JsonProperty("is_muted")]
         public bool IsMuted { get; set; }
     }
     
     // Main works classes
     public class Illust : Works
     {
-        [JsonProperty(PropertyName = "tools")]
+        [JsonProperty("tools")]
         public string[] Tools { get; set; }
         
-        [JsonProperty(PropertyName = "width")]
+        [JsonProperty("width")]
         public int Width { get; set; }
         
-        [JsonProperty(PropertyName = "Height")]
+        [JsonProperty("Height")]
         public int Height { get; set; }
         
-        [JsonProperty(PropertyName = "sanity_level")]
+        [JsonProperty("sanity_level")]
         public int SanityLevel { get; set; }
         
-        [JsonProperty(PropertyName = "meta_single_page")]
+        [JsonProperty("meta_single_page")]
         public MetaSinglePage MetaSinglePage { get; set; }
         
-        [JsonProperty(PropertyName = "meta_pages")]
+        [JsonProperty("meta_pages")]
         public MetaPages[] MetaPages { get; set; }
     }
 
     public class Novel : Works
     {
-        [JsonProperty(PropertyName = "is_original")]
+        [JsonProperty("is_original")]
         public bool IsOriginal { get; set; }
         
-        [JsonProperty(PropertyName = "text_length")]
+        [JsonProperty("text_length")]
         public int TextLength { get; set; }
         
-        [JsonProperty(PropertyName = "is_mypixiv_only")]
+        [JsonProperty("is_mypixiv_only")]
         public bool IsMyPixivOnly { get; set; }
         
-        [JsonProperty(PropertyName = "is_x_restricted")]
+        [JsonProperty("is_x_restricted")]
         public bool IsXRestricted { get; set; }
 
-        [JsonProperty(PropertyName = "total_comments")]
+        [JsonProperty("total_comments")]
         public int total_comments { get; set; }
     }
 
     public class NovelText : Novel
     {
-        public string novel_text { get; set; }
-        public Novel series_prev { get; set; }
-        public Novel series_next { get; set; }
+        [JsonProperty("novel_text")]
+        public string Content { get; set; }
+        
+        [JsonProperty("series_prev")]
+        public Novel SeriesPrev { get; set; }
+        
+        [JsonProperty("series_next")]
+        public Novel SeriesNext { get; set; }
     }
 
     // Works helper classes
