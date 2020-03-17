@@ -181,28 +181,53 @@ namespace PixivCSharp
 
     public class User
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string account { get; set; }
-        public ImageUrls profile_image_urls { get; set; }
-        public bool is_followed { get; set; }
+        [JsonProperty("id")]
+        public int ID { get; set; }
+        
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        
+        [JsonProperty("account")]
+        public string Account { get; set; }
+        
+        [JsonProperty("profile_image_urls")]
+        public ImageUrls ProfileImageUrls { get; set; }
+        
+        [JsonProperty("is_followed")]
+        public bool IsFollowed { get; set; }
     }
 
     public class ClientUser : User
     {
-        public new UserImageUrls profile_image_urls { get; set; }
-        public string mail_address { get; set; }
-        public bool is_premium { get; set; }
-        public int x_restrict { get; set; }
-        public bool is_mail_authorizde { get; set; }
-        public bool require_policy_agreement { get; set; }
+        [JsonProperty("profile_image_urls")]
+        public new UserImageUrls ProfileImageUrls { get; set; }
+        
+        [JsonProperty("mail_address")]
+        public string MailAddress { get; set; }
+        
+        [JsonProperty("is_premium")]
+        public bool IsPremium { get; set; }
+        
+        [JsonProperty("x_restrict")]
+        public int XRestrict { get; set; }
+        
+        [JsonProperty("is_mail_authorized")]
+        public bool IsMailAuthorized { get; set; }
+        
+        [JsonProperty("require_policy_agreement")]
+        public bool RequirePolicyAggreement { get; set; }
     }
     
     public class UserImageUrls
     {
-        public string px_16x16 { get; set; }
-        public string px_50x50 { get; set; }
-        public string px_170x170 { get; set; }
+        [JsonProperty("px_16x16")]
+        public string Px16x16 { get; set; }
+        
+        [JsonProperty("px_50x50")]
+        public string Px50x50 { get; set; }
+        
+        [JsonProperty("px_170x170")]
+        public string Px170x170 { get; set; }
     }
 
     public class Series
