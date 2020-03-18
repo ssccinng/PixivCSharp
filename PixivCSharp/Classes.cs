@@ -270,8 +270,11 @@ namespace PixivCSharp
     // Search results classes
     public class IllustSearchResult
     {
-        public List<Illust> illusts { get; set; }
-        public string next_url { get; set; }
+        [JsonProperty("illusts")]
+        public List<Illust> Illusts { get; set; }
+        
+        [JsonProperty("next_url")]
+        public string NextUrl { get; set; }
     }
 
     public class NovelSearchResult

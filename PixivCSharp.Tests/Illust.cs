@@ -93,8 +93,8 @@ namespace PixivCSharp.Tests
             
             for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine(list.illusts[i].ImageUrls.SquareMedium);
-                taskArray[i] = Client.GetImageAsync(list.illusts[i].ImageUrls.SquareMedium);
+                Console.WriteLine(list.Illusts[i].ImageUrls.SquareMedium);
+                taskArray[i] = Client.GetImageAsync(list.Illusts[i].ImageUrls.SquareMedium);
             }
 
             for (int i = 0; i < 10; i++)
@@ -115,7 +115,7 @@ namespace PixivCSharp.Tests
         static async Task DownloadImageTest()
         {
             IllustSearchResult list = await Client.WalkthoughIllustsAsync();
-            Stream imageStream = await Client.GetImageAsync(list.illusts[0].ImageUrls.Medium);
+            Stream imageStream = await Client.GetImageAsync(list.Illusts[0].ImageUrls.Medium);
             using (FileStream fileStream = new FileStream("test.jpg", FileMode.OpenOrCreate, FileAccess.Write))
             {
                 imageStream.Seek(0, SeekOrigin.Begin);

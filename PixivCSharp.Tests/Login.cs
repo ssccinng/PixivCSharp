@@ -13,7 +13,7 @@ namespace PixivCSharp.Tests
 
             Console.WriteLine("Walkthough Illusts: ");
 
-            foreach (Illust illust in walkthough.illusts)
+            foreach (Illust illust in walkthough.Illusts)
             {
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("Illust:");
@@ -72,7 +72,7 @@ namespace PixivCSharp.Tests
                 Console.WriteLine("-------------------------------------------------------------------------------");
             }
 
-            Console.WriteLine("Next url: {0}", walkthough.next_url);
+            Console.WriteLine("Next url: {0}", walkthough.NextUrl);
             Console.WriteLine("\n\n\n");
         }
 
