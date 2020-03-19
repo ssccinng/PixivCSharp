@@ -54,7 +54,7 @@ namespace PixivCSharp
         }
         
         // Gets a list of recommended novels
-        public async Task<RecommendedNovels> RecommendedNovelAsync(bool RankingIllusts = true, bool PrivacyPolicy = true)
+        public async Task<RecommendedNovels> RecommendedNovelsAsync(bool RankingIllusts = true, bool PrivacyPolicy = true)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {

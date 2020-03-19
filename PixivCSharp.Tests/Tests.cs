@@ -86,10 +86,10 @@ namespace PixivCSharp.Tests
                         await ViewRecommendedIllusts();
                         break;
                     case "16":
-                        
+                        await ViewRecommendedManga();    
                         break;
                     case "17":
-
+                        await ViewRecommendedNovels();
                         break;
                     case "18":
 

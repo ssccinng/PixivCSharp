@@ -111,7 +111,6 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Is my pixiv only: {0}", novel.IsMyPixivOnly);
             Console.WriteLine("Is x restricted: {0}", novel.IsXRestricted);
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("\n\n\n");
         }
 
         public static void TestComment(Comment comment)

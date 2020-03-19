@@ -47,5 +47,88 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Next Url: " + recIllusts.NextUrl);
         }
+        
+        // View recommended manga test
+        private static async Task ViewRecommendedManga()
+        {
+            RecommendedIllusts recommendedManga;
+            
+            // Error handling
+            try
+            {
+                recommendedManga = await Client.RecommendedMangaAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+
+            Console.WriteLine("Recommended manga");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            
+            foreach (Illust illust in recommendedManga.Illusts)
+            {
+                Output.TestIllust(illust);
+            }
+            
+            Console.WriteLine("Ranking manga");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Illust illust in recommendedManga.RankingIllusts)
+            {
+                Output.TestIllust(illust);
+            }
+            
+            Console.WriteLine("Content exists: " + recommendedManga.ContentExists);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Privacy Policy");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Version: " + recommendedManga.PrivacyPolicy.Version);
+            Console.WriteLine("Message: " + recommendedManga.PrivacyPolicy.Message);
+            Console.WriteLine("URL: " + recommendedManga.PrivacyPolicy.URL);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Next Url: " + recommendedManga.NextUrl);
+        }
+
+        private static async Task ViewRecommendedNovels()
+        {
+            RecommendedNovels novels;
+
+            try
+            {
+                novels = await Client.RecommendedNovelsAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("Recommended novels");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            
+            foreach (Novel novel in novels.Novels)
+            {
+                Output.TestNovel(novel);
+            }
+            
+            Console.WriteLine("Ranking novels");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Novel novel in novels.RankingNovels)
+            {
+                Output.TestNovel(novel);
+            }
+            
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Privacy Policy");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Version: " + novels.PrivacyPolicy.Version);
+            Console.WriteLine("Message: " + novels.PrivacyPolicy.Message);
+            Console.WriteLine("URL: " + novels.PrivacyPolicy.URL);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("Next Url: " + novels.NextUrl);
+        }
     }
 }
