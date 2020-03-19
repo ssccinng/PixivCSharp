@@ -28,68 +28,71 @@ namespace PixivCSharp.Tests
                                   "12 - View novel text\n" +
                                   "13 - Add/remove novel bookmark\n" +
                                   "14 - View novel comments\n" +
+                                  "15 - View recommended illusts\n" +
+                                  "16 - View recommended manga\n" +
+                                  "17 - View recommended novels\n" +
+                                  "18 - View recommended users\n" +
                                   "0 - Exit");
             
                 // User choice
                 Console.Write("> ");
                 choice = Console.ReadLine();
+                Console.Clear();
                 switch (choice)
                 {
                     case "1":
-                        Console.Clear();
                         await Walkthrough();
                         break;
                     case "2":
-                        Console.Clear();
                         await EmojiList();
                         break;
                     case "3":
-                        Console.Clear();
                         await FirstLogin();
                         break;
                     case "4":
-                        Console.Clear();
                         await RefreshToken();
                         break;
                     case "5" :
-                        Console.Clear();
                         await ViewIllust();
                         break;
                     case "6":
-                        Console.Clear();
                         await TimeTest();
                         break;
                     case "7" :
-                        Console.Clear();
                         await DownloadImageTest();
                         break;
                     case "8":
-                        Console.Clear();
                         await ViewComments();
                         break;
                     case "9":
-                        Console.Clear();
                         ReadTokens();
                         break;
                     case "10":
-                        Console.Clear();
                         await BookmarkIllust();
                         break;
                     case "11":
-                        Console.Clear();
                         await ViewNovel();
                         break;
                     case "12":
-                        Console.Clear();
                         await ViewNovelText();
                         break;
                     case "13" :
-                        Console.Clear();
                         await BookmarkNovel();
                         break;
                     case "14":
-                        Console.Clear();
                         await ViewNovelComments();
+                        break;
+                    case "15":
+                        await ViewRecommendedIllusts();
+                        break;
+                    case "16":
+                        
+                        break;
+                    case "17":
+
+                        break;
+                    case "18":
+
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
