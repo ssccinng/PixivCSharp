@@ -62,7 +62,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
 
-        public static Void TestNovel(Novel novel)
+        public static void TestNovel(Novel novel)
         {
             Console.WriteLine("Novel:");
             Console.WriteLine("-------------------------------------------------------------------------------");
