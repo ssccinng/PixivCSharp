@@ -10,55 +10,8 @@ namespace PixivCSharp.Tests
         {
             Console.Write("Please enter the id of the novel to view\n> ");
             Novel novel = await Client.ViewNovelAsync(Console.ReadLine());
-            
-            Console.WriteLine("Novel:");
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Novel ID: {0}", novel.ID);
-            Console.WriteLine("Novel title: {0}", novel.Title);
-            Console.WriteLine("Novel caption: {0}", novel.Caption);
-            Console.WriteLine("Novel restrict: {0}", novel.Restrict);
-            Console.WriteLine("Novel x-restrict: {0}", novel.XRestrict);
-            Console.WriteLine("Is original: {0}", novel.IsOriginal);
-            Console.WriteLine("Novel medium image url: {0}", novel.ImageUrls.Medium);
-            Console.WriteLine("Novel square medium url: {0}", novel.ImageUrls.SquareMedium);
-            Console.WriteLine("Novel large image url: {0}", novel.ImageUrls.large);
-            Console.WriteLine("Novel create date: {0}", novel.CreateDate);
-            Console.WriteLine("Tags:");
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            foreach (Tag tag in novel.Tags)
-            {
-                Console.WriteLine("Tag name: {0}", tag.Name);
-                Console.WriteLine("Translated name: {0}", tag.TranslatedName);
-                Console.WriteLine("Added by uploader: {0}", tag.AddedByUploader);
-                Console.WriteLine("-------------------------------------------------------------------------------");
-            }
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Page count: {0}", novel.PageCount);
-            Console.WriteLine("Text count: {0}", novel.TextLength);
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("User:");
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("User id: {0}", novel.User.ID.ToString());
-            Console.WriteLine("User name: {0}", novel.User.Name);
-            Console.WriteLine("User account: {0}", novel.User.Account);
-            Console.WriteLine("User profile picture url: {0}", novel.User.ProfileImageUrls.Medium);
-            Console.WriteLine("Is user followed: {0}", novel.User.IsFollowed);
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Series:");
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Series ID: {0}", novel.Series.ID);
-            Console.WriteLine("Series Title: {0}", novel.Series.Title);
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("Is bookmarked: {0}", novel.IsBookmarked);
-            Console.WriteLine("Total bookmarks: {0}", novel.TotalBookmarks);
-            Console.WriteLine("Total views: {0}", novel.TotalView);
-            Console.WriteLine("Visible: {0}", novel.Visible);
-            Console.WriteLine("Total comments: {0}", novel.total_comments);
-            Console.WriteLine("Is muted: {0}", novel.IsMuted);
-            Console.WriteLine("Is my pixiv only: {0}", novel.IsMyPixivOnly);
-            Console.WriteLine("Is x restricted: {0}", novel.IsXRestricted);
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("\n\n\n");
+
+            Output.TestNovel(novel);
         }
         
         // Tests novel bookmarks
@@ -98,22 +51,9 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             foreach (Comment comment in list.Comments)
             {
-                Console.WriteLine("Comment:");
-                Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine("Comment ID: {0}", comment.ID);
-                Console.WriteLine("Comment: {0}", comment.Content);
-                Console.WriteLine("Comment date: {0}", comment.Date);
-                Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine("User id: {0}", comment.User.ID.ToString());
-                Console.WriteLine("User name: {0}", comment.User.Name);
-                Console.WriteLine("User account: {0}", comment.User.Account);
-                Console.WriteLine("User profile picture url: {0}", comment.User.ProfileImageUrls.Medium);
-                Console.WriteLine("-------------------------------------------------------------------------------");
-                Console.WriteLine("Comment has replies: {0}", comment.HasReplies);
-                Console.WriteLine("-------------------------------------------------------------------------------");
+                Output.TestComment(comment);
             }
             Console.WriteLine("Next url: {0}", list.NextUrl);
-            Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
             
