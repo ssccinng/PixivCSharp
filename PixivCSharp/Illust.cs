@@ -13,9 +13,16 @@ namespace PixivCSharp
             // Sets parameters
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
-                { "filter", filter ?? Filter },
                 { "illust_id", id}
             };
+            
+            // Adds filter if required
+            string filterText = filter ?? Filter;
+            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            {
+                parameters.Add("filter", filter ?? Filter);
+            }
+            
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             
             // Sends request and retrieves illust

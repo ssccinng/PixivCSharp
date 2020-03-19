@@ -10,7 +10,7 @@ namespace PixivCSharp
         private WebRequests RequestClient;
 
         // Creates instance of WebRequests
-        public PixivClient(string filterSetting = "none")
+        public PixivClient(string filterSetting = "for_android")
         {
             RequestClient = new WebRequests();
             Filter = filterSetting;
@@ -24,14 +24,14 @@ namespace PixivCSharp
             RequestClient.device_token = device;
         }
 
-        private string _Filter = "none";
+        private string _Filter = "for_android";
 
         public string Filter
         {
             get => _Filter;
             set
             {
-                if (value == "for_android" || value == "none") { _Filter = value; }
+                if (value == "for_android" || value == "for_ios" || value == "none") { _Filter = value; }
             }
         }
 
