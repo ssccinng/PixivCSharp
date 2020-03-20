@@ -345,7 +345,7 @@ namespace PixivCSharp
         public string Message { get; set; }
         
         [JsonProperty("url")]
-        public string URL { get; set; }
+        public string Url { get; set; }
     }
 
     // Emoji classes
@@ -358,7 +358,7 @@ namespace PixivCSharp
         public string Slug { get; set; }
         
         [JsonProperty("image_url_medium")]
-        public string ImageURLMedium { get; set; }
+        public string ImageUrlMedium { get; set; }
     }
     
     public class EmojiList

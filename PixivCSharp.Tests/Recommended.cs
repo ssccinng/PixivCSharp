@@ -43,7 +43,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Version: " + recIllusts.PrivacyPolicy.Version);
             Console.WriteLine("Message: " + recIllusts.PrivacyPolicy.Message);
-            Console.WriteLine("URL: " + recIllusts.PrivacyPolicy.URL);
+            Console.WriteLine("URL: " + recIllusts.PrivacyPolicy.Url);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Next Url: " + recIllusts.NextUrl);
         }
@@ -86,7 +86,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Version: " + recommendedManga.PrivacyPolicy.Version);
             Console.WriteLine("Message: " + recommendedManga.PrivacyPolicy.Message);
-            Console.WriteLine("URL: " + recommendedManga.PrivacyPolicy.URL);
+            Console.WriteLine("URL: " + recommendedManga.PrivacyPolicy.Url);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Next Url: " + recommendedManga.NextUrl);
         }
@@ -126,7 +126,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Version: " + novels.PrivacyPolicy.Version);
             Console.WriteLine("Message: " + novels.PrivacyPolicy.Message);
-            Console.WriteLine("URL: " + novels.PrivacyPolicy.URL);
+            Console.WriteLine("URL: " + novels.PrivacyPolicy.Url);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Next Url: " + novels.NextUrl);
         }
@@ -146,6 +146,10 @@ namespace PixivCSharp.Tests
                 Console.WriteLine(e.Message);
                 return;
             }
+            
+            Console.WriteLine("RecommendedUsers");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
             
             foreach (UserPreview userPreview in recommendedUsers.UserPreviews)
             {

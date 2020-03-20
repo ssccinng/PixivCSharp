@@ -34,7 +34,7 @@ namespace PixivCSharp.Tests
                 Console.WriteLine("-------------------------------------------------------------------------------");
                 Console.WriteLine("Emoji ID: {0}", emoji.ID.ToString());
                 Console.WriteLine("Emoji slug: {0}", emoji.Slug);
-                Console.WriteLine("Emoji image url: {0}", emoji.ImageURLMedium);
+                Console.WriteLine("Emoji image url: {0}", emoji.ImageUrlMedium);
                 Console.WriteLine("-------------------------------------------------------------------------------");
             }
             
