@@ -32,6 +32,8 @@ namespace PixivCSharp.Tests
                                   "16 - View recommended manga\n" +
                                   "17 - View recommended novels\n" +
                                   "18 - View recommended users\n" +
+                                  "19 - View new illusts\n" +
+                                  "20 - View new illust from followed\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -93,6 +95,12 @@ namespace PixivCSharp.Tests
                         break;
                     case "18":
                         await ViewRecommendedUsers();
+                        break;
+                    case "19":
+                        await ViewNewIllusts();
+                        break;
+                    case "20":
+                        await ViewNewFollowIllusts();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
