@@ -17,14 +17,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Illust caption: {0}", illust.Caption);
             Console.WriteLine("Illust restrict: {0}", illust.Restrict.ToString());
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("User:");
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("User id: {0}", illust.User.ID.ToString());
-            Console.WriteLine("User name: {0}", illust.User.Name);
-            Console.WriteLine("User account: {0}", illust.User.Account);
-            Console.WriteLine("User profile picture url: {0}", illust.User.ProfileImageUrls.Medium);
-            Console.WriteLine("Is user followed: {0}", illust.User.IsFollowed);
-            Console.WriteLine("-------------------------------------------------------------------------------");
+            TestUser(illust.User);
             Console.WriteLine("Illust tag: {0} | Illust translated tag: {1}", illust.Tags[0].Name, illust.Tags[0].TranslatedName);
             if (illust.Tools.Length != 0) Console.WriteLine("Illust tools: {0}", illust.Tools[0]);
             Console.WriteLine("Illust creation date: {0}", illust.CreateDate);
@@ -89,14 +82,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Page count: {0}", novel.PageCount);
             Console.WriteLine("Text count: {0}", novel.TextLength);
             Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("User:");
-            Console.WriteLine("-------------------------------------------------------------------------------");
-            Console.WriteLine("User id: {0}", novel.User.ID.ToString());
-            Console.WriteLine("User name: {0}", novel.User.Name);
-            Console.WriteLine("User account: {0}", novel.User.Account);
-            Console.WriteLine("User profile picture url: {0}", novel.User.ProfileImageUrls.Medium);
-            Console.WriteLine("Is user followed: {0}", novel.User.IsFollowed);
-            Console.WriteLine("-------------------------------------------------------------------------------");
+            TestUser(novel.User);
             Console.WriteLine("Series:");
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Series ID: {0}", novel.Series.ID);
@@ -127,6 +113,18 @@ namespace PixivCSharp.Tests
             Console.WriteLine("User profile picture url: {0}", comment.User.ProfileImageUrls.Medium);
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Comment has replies: {0}", comment.HasReplies);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+        }
+
+        public static void TestUser(User user)
+        {
+            Console.WriteLine("User:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("User id: {0}", user.ID.ToString());
+            Console.WriteLine("User name: {0}", user.Name);
+            Console.WriteLine("User account: {0}", user.Account);
+            Console.WriteLine("User profile picture url: {0}", user.ProfileImageUrls.Medium);
+            Console.WriteLine("Is user followed: {0}", user.IsFollowed);
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
     }
