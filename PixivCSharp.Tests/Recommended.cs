@@ -130,5 +130,30 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Next Url: " + novels.NextUrl);
         }
+
+        // Tests recommended users
+        private static async Task ViewRecommendedUsers()
+        {
+            RecommendedUsers recommendedUsers;
+            
+            // Error handling
+            try
+            {
+                recommendedUsers = await Client.RecommendedUsersAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            foreach (UserPreview userPreview in recommendedUsers.UserPreviews)
+            {
+                Output.TestUser(userPreview.User);
+                Output.TestIllust(userPreview.Illusts[0]);
+            }
+            
+            Console.WriteLine("Next URL: " + recommendedUsers.NextUrl);
+        }
     }
 }

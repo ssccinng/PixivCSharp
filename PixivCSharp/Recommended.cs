@@ -71,10 +71,15 @@ namespace PixivCSharp
         // Gets a list of recommended users
         public async Task<RecommendedUsers> RecommendedUsersAsync(string filter = null)
         {
-            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            
+            // Adds filter if required
+            string filterText = filter ?? Filter;
+            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
             {
-                { "filter", filter ?? Filter }
-            };
+                parameters.Add("filter", filter ?? Filter);
+            }
+            
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.RecommendedUsers, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));

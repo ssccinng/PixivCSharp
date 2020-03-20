@@ -92,7 +92,7 @@ namespace PixivCSharp.Tests
                         await ViewRecommendedNovels();
                         break;
                     case "18":
-
+                        await ViewRecommendedUsers();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
