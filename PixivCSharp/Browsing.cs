@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace PixivCSharp
@@ -45,6 +46,20 @@ namespace PixivCSharp
             HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.NewFollowIllusts, encodedParams)
                 .ConfigureAwait(false);
             
+            // Converts response into an object and returns
+            IllustSearchResult result =
+                Json.DeserializeJson<IllustSearchResult>(await response.Content.ReadAsStringAsync()
+                    .ConfigureAwait(false));
+            return result;
+        }
+        
+        // Gets a list of new illusts from users added to my pixiv
+        public async Task<IllustSearchResult> NewMyPixivIllustsAsync()
+        {
+            // Sends request
+            HttpResponseMessage response =
+                await RequestClient.RequestAsync(PixivUrls.NewMyPixivIllusts).ConfigureAwait(false);
+
             // Converts response into an object and returns
             IllustSearchResult result =
                 Json.DeserializeJson<IllustSearchResult>(await response.Content.ReadAsStringAsync()

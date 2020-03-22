@@ -22,7 +22,7 @@ namespace PixivCSharp.Tests
                 return;
             }
             
-            Console.WriteLine("Illusts");
+            Console.WriteLine("New illusts");
             Console.WriteLine("-------------------------------------------------------------------------------");
 
             foreach (Illust illust in result.Illusts)
@@ -49,7 +49,34 @@ namespace PixivCSharp.Tests
                 return;
             }
 
-            Console.WriteLine("Illusts");
+            Console.WriteLine("New illusts from following");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Illust illust in result.Illusts)
+            {
+                Output.TestIllust(illust);
+            }
+            
+            Console.WriteLine("Next URL: " + result.NextUrl);
+        }
+        
+        // Tests viewing new illusts from my pixiv accounts
+        private static async Task ViewNewMyPixivIllusts()
+        {
+            IllustSearchResult result;
+            
+            // Error handling
+            try
+            {
+                result = await Client.NewMyPixivIllustsAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("New illusts from my pixiv");
             Console.WriteLine("-------------------------------------------------------------------------------");
 
             foreach (Illust illust in result.Illusts)

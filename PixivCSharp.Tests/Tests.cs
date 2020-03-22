@@ -33,7 +33,8 @@ namespace PixivCSharp.Tests
                                   "17 - View recommended novels\n" +
                                   "18 - View recommended users\n" +
                                   "19 - View new illusts\n" +
-                                  "20 - View new illust from followed\n" +
+                                  "20 - View new illusts from followed\n" +
+                                  "21 - View new illusts from my pixiv\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -101,6 +102,9 @@ namespace PixivCSharp.Tests
                         break;
                     case "20":
                         await ViewNewFollowIllusts();
+                        break;
+                    case "21":
+                        await ViewNewMyPixivIllusts();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
