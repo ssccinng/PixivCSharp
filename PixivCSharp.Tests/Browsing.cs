@@ -86,5 +86,86 @@ namespace PixivCSharp.Tests
             
             Console.WriteLine("Next URL: " + result.NextUrl);
         }
+        
+        // Tests viewing new novels
+        private static async Task ViewNewNovels()
+        {
+            NovelSearchResult result;
+            
+            // Error handling
+            try
+            {
+                result = await Client.NewNovelsAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("New novels");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Novel novel in result.Novels)
+            {
+                Output.TestNovel(novel);
+            }
+            
+            Console.WriteLine("Next URL: " + result.NextUrl);
+        }
+        
+        // Tests viewing novels from following
+        private static async Task ViewNewFollowNovels()
+        {
+            NovelSearchResult result;
+            
+            // Error handling
+            try
+            {
+                result = await Client.NewFollowNovelsAsync("public");
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("New novels from following");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Novel novel in result.Novels)
+            {
+                Output.TestNovel(novel);
+            }
+            
+            Console.WriteLine("Next URL: " + result.NextUrl);
+        }
+        
+        // Tests new viewing novels from mypixiv
+        private static async Task ViewNewMyPixivNovels()
+        {
+            NovelSearchResult result;
+            
+            // Error handling
+            try
+            {
+                result = await Client.NewMyPixivNovelsAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("New novels from my pixiv");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Novel novel in result.Novels)
+            {
+                Output.TestNovel(novel);
+            }
+            
+            Console.WriteLine("Next URL: " + result.NextUrl);
+        }
     }
 }

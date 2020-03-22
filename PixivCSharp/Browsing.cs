@@ -66,5 +66,52 @@ namespace PixivCSharp
                     .ConfigureAwait(false));
             return result;
         }
+        
+        // Gets a list of new novels
+        public async Task<NovelSearchResult> NewNovelsAsync()
+        {
+            // Sends request
+            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.NewNovels).ConfigureAwait(false);
+
+            // Converts response into an object and returns
+            NovelSearchResult result =
+                Json.DeserializeJson<NovelSearchResult>(
+                    await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            return result;
+        }
+        
+        // Gets a list of new novels from followed
+        public async Task<NovelSearchResult> NewFollowNovelsAsync(string restrict)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                { "restrict", restrict }
+            };
+            
+            // Encodeds parameters and sends request
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+            HttpResponseMessage repsonse = await RequestClient.RequestAsync(PixivUrls.NewFollowNovels, encodedParams)
+                .ConfigureAwait(false);
+            
+            // Converts response into object and returns it
+            NovelSearchResult result =
+                Json.DeserializeJson<NovelSearchResult>(
+                    await repsonse.Content.ReadAsStringAsync().ConfigureAwait(false));
+            return result;
+        }
+        
+        // Gets a list of new novels from my pixiv
+        public async Task<NovelSearchResult> NewMyPixivNovelsAsync()
+        {
+            // Sends request
+            HttpResponseMessage response =
+                await RequestClient.RequestAsync(PixivUrls.NewMyPixivNovels).ConfigureAwait(false);
+            
+            // Converts response into object and returns it
+            NovelSearchResult result =
+                Json.DeserializeJson<NovelSearchResult>(
+                    await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            return result;
+        }
     }
 }
