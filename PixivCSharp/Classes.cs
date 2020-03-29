@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Newtonsoft.Json;
 
 namespace PixivCSharp
@@ -182,10 +183,10 @@ namespace PixivCSharp
     public class TrendTag : Tag
     {
         [JsonProperty("tag")]
-        public new string Name;
+        public new string Name { get; set; }
         
         [JsonProperty("illust")]
-        public Illust Illust;
+        public Illust Illust { get; set; }
     }
 
     public class User
@@ -204,6 +205,159 @@ namespace PixivCSharp
         
         [JsonProperty("is_followed")]
         public bool IsFollowed { get; set; }
+    }
+
+    public class Profile
+    {
+        [JsonProperty("webpage")]
+        public string WebPage { get; set; }
+        
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
+        
+        [JsonProperty("birth")]
+        public string Birth { get; set; }
+        
+        [JsonProperty("birth_day")]
+        public string BirthDay { get; set; }
+        
+        [JsonProperty("birth_year")]
+        public int BirthYear { get; set; }
+        
+        [JsonProperty("region")]
+        public string Region { get; set; }
+        
+        [JsonProperty("address_id")]
+        public int AddressID { get; set; }
+        
+        [JsonProperty("country")]
+        public string CountryCode { get; set; }
+        
+        [JsonProperty("job")]
+        public string job { get; set; }
+        
+        [JsonProperty("job_id")]
+        public int JobID { get; set; }
+
+        [JsonProperty("total_follow_users")]
+        public int Followers { get; set; }
+
+        [JsonProperty("total_mypixiv_users")]
+        public int MyPixivUsers { get; set; }
+        
+        [JsonProperty("total_illusts")]
+        public int Illusts { get; set; }
+        
+        [JsonProperty("total_manga")]
+        public int Manga { get; set; }
+        
+        [JsonProperty("total_novels")]
+        public int Novels { get; set; }
+        
+        [JsonProperty("total_illust_bookmarks_public")]
+        public int IllustBookmarks { get; set; }
+        
+        [JsonProperty("total_illust_series")]
+        public int IllustSeries { get; set; }
+        
+        [JsonProperty("total_novel_series")]
+        public int NovelSeries { get; set; }
+        
+        [JsonProperty("background_image_url")]
+        public string BackgroundUrl { get; set; }
+        
+        [JsonProperty("twitter_account")]
+        public string TwitterAccount { get; set; }
+        
+        [JsonProperty("twitter_url")]
+        public string TwitterUrl { get; set; }
+
+        [JsonProperty("pawoo_url")]
+        public string PawooUrl { get; set; }
+
+        [JsonProperty("is_premium")]
+        public bool IsPremium { get; set; }
+        
+        [JsonProperty("is_using_custom_profile_image")]
+        public bool CustomProfileImage { get; set; }
+    }
+
+    public class ProfilePublicity
+    {
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
+        
+        [JsonProperty("region")]
+        public string Region { get; set; }
+        
+        [JsonProperty("birth_day")]
+        public string BirthDay { get; set; }
+        
+        [JsonProperty("birth_year")]
+        public string BirthYear { get; set; }
+        
+        [JsonProperty("job")]
+        public string Job { get; set; }
+        
+        [JsonProperty("pawoo")]
+        public string Pawoo { get; set; }
+    }
+
+    public class Workspace
+    {
+        [JsonProperty("pc")]
+        public string PC { get; set; }
+        
+        [JsonProperty("monitor")]
+        public string Monitor { get; set; }
+        
+        [JsonProperty("tool")]
+        public string Tool { get; set; }
+        
+        [JsonProperty("scanner")]
+        public string Scanner { get; set; }
+        
+        [JsonProperty("tablet")]
+        public string Tablet { get; set; }
+        
+        [JsonProperty("mouse")]
+        public string Mouse { get; set; }
+        
+        [JsonProperty("printer")]
+        public string Printer { get; set; }
+        
+        [JsonProperty("desktop")]
+        public string Desktop { get; set; }
+        
+        [JsonProperty("music")]
+        public string Music { get; set; }
+        
+        [JsonProperty("desk")]
+        public string Desk { get; set; }
+        
+        [JsonProperty("Chair")]
+        public string Chair { get; set; }
+        
+        [JsonProperty("comment")]
+        public string Commment { get; set; }
+        
+        [JsonProperty("workspace_image_url")]
+        public string WorkspaceImageUrl { get; set; }
+    }
+
+    public class UserDetail
+    {
+        [JsonProperty("user")]
+        public User User { get; set; }
+        
+        [JsonProperty("profile")]
+        public Profile Profile { get; set; }
+        
+        [JsonProperty("profile_publicity")]
+        public ProfilePublicity ProfilePublicity { get; set; }
+        
+        [JsonProperty("workspace")]
+        public Workspace Workspace { get; set; }
     }
 
     public class ClientUser : User
