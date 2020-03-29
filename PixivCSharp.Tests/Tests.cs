@@ -38,6 +38,8 @@ namespace PixivCSharp.Tests
                                   "22 - View new novels\n" +
                                   "23 - View new novels from followed\n" +
                                   "24 - View new novels from my pixiv\n" +
+                                  "25 - Views trending illust tags\n" +
+                                  "26 - View trending novel tags\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -117,6 +119,12 @@ namespace PixivCSharp.Tests
                         break;
                     case "24":
                         await ViewNewMyPixivNovels();
+                        break;
+                    case "25":
+                        await ViewTrendingIllustTags();
+                        break;
+                    case "26":
+                        await ViewTrendingNovelTags();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");

@@ -179,6 +179,15 @@ namespace PixivCSharp
         public bool AddedByUploader { get; set; }
     }
 
+    public class TrendTag : Tag
+    {
+        [JsonProperty("tag")]
+        public new string Name;
+        
+        [JsonProperty("illust")]
+        public Illust Illust;
+    }
+
     public class User
     {
         [JsonProperty("id")]

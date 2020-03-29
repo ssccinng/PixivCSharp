@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace PixivCSharp
 {
@@ -111,6 +111,44 @@ namespace PixivCSharp
             NovelSearchResult result =
                 Json.DeserializeJson<NovelSearchResult>(
                     await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            return result;
+        }
+        
+        // Gets a list of trending illust tags
+        public async Task<TrendTag[]> TrendingIllustTags(string filter = null)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            
+            // Adds filter if required
+            string filterText = filter ?? Filter;
+            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            {
+                parameters.Add("filter", filter ?? Filter);
+            }
+            
+            FormUrlEncodedContent encodedParameters = new FormUrlEncodedContent(parameters);
+            HttpResponseMessage response = await RequestClient
+                .RequestAsync(PixivUrls.TrendingIllustTags, encodedParameters).ConfigureAwait(false);
+            
+            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            
+            // Converts response into object and returns it
+            TrendTag[] result = Json.DeserializeJson<TrendTag[]>((JArray)json["trend_tags"]);
+
+            return result;
+        }
+        
+        // Gets a list of trending tags
+        public async Task<TrendTag[]> TrendingNovelTags()
+        {
+            HttpResponseMessage response =
+                await RequestClient.RequestAsync(PixivUrls.TrendingNovelTags).ConfigureAwait(false);
+            
+            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            
+            // Converts response into object and returns it
+            TrendTag[] result = Json.DeserializeJson<TrendTag[]>((JArray)json["trend_tags"]);
+
             return result;
         }
     }

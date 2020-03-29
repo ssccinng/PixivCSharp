@@ -1,5 +1,6 @@
 using System;
 using System.Net.Http;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
@@ -166,6 +167,59 @@ namespace PixivCSharp.Tests
             }
             
             Console.WriteLine("Next URL: " + result.NextUrl);
+        }
+        
+        // Tests viewing trending illust tags
+        private static async Task ViewTrendingIllustTags()
+        {
+            TrendTag[] result;
+            
+            // Error handling
+            try
+            {
+                result = await Client.TrendingIllustTags();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+
+            Console.WriteLine("Trending illust tags");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (TrendTag tag in result)
+            {
+                Console.WriteLine("Tag name: {0}", tag.Name);
+                Console.WriteLine("Translated Name: {0}", tag.TranslatedName);
+                Output.TestIllust(tag.Illust);
+            }
+        }
+
+        private static async Task ViewTrendingNovelTags()
+        {
+            TrendTag[] result;
+            
+            // Error handling
+            try
+            {
+                result = await Client.TrendingNovelTags();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("Trending novel tags");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (TrendTag tag in result)
+            {
+                Console.WriteLine("Tag name: {0}", tag.Name);
+                Console.WriteLine("Translated Name: {0}", tag.TranslatedName);
+                Output.TestIllust(tag.Illust);
+            }
         }
     }
 }
