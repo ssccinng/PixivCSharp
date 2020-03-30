@@ -15,7 +15,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.ViewProfile(Console.ReadLine());
+                result = await Client.ViewProfileAsync(Console.ReadLine());
             }
             catch (HttpRequestException e)
             {
@@ -89,7 +89,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.UserIllusts(Console.ReadLine(), "illust");
+                result = await Client.UserIllustsAsync(Console.ReadLine(), "illust");
             }
             catch (HttpRequestException e)
             {
@@ -117,7 +117,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.UserNovels(Console.ReadLine());
+                result = await Client.UserNovelsAsync(Console.ReadLine());
             }
             catch (HttpRequestException e)
             {
@@ -145,7 +145,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.BookmarkedIllusts(Console.ReadLine());
+                result = await Client.BookmarkedIllustsAsync(Console.ReadLine());
             }
             catch (HttpRequestException e)
             {
@@ -173,7 +173,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.BookmarkedNovels(Console.ReadLine());
+                result = await Client.BookmarkedNovelsAsync(Console.ReadLine());
             }
             catch (HttpRequestException e)
             {

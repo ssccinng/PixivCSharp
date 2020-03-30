@@ -7,7 +7,7 @@ namespace PixivCSharp
     public partial class PixivClient
     {
         // Retrieves details of a user's profile
-        public async Task<UserDetail> ViewProfile(string UserID, string filter = null)
+        public async Task<UserDetail> ViewProfileAsync(string UserID, string filter = null)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
@@ -33,7 +33,7 @@ namespace PixivCSharp
         }
         
         // Retrieves a list of a user's illusts
-        public async Task<IllustSearchResult> UserIllusts(string UserID, string type, string filter = null)
+        public async Task<IllustSearchResult> UserIllustsAsync(string UserID, string type, string filter = null)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
@@ -58,7 +58,7 @@ namespace PixivCSharp
         }
         
         // Retrieves a list of a user's novels
-        public async Task<NovelSearchResult> UserNovels(string UserID)
+        public async Task<NovelSearchResult> UserNovelsAsync(string UserID)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
@@ -75,7 +75,7 @@ namespace PixivCSharp
         }
         
         // Retrieves a list of a user's bookmarked illusts
-        public async Task<IllustSearchResult> BookmarkedIllusts(string UserID, string restrict = "public")
+        public async Task<IllustSearchResult> BookmarkedIllustsAsync(string UserID, string restrict = "public")
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
@@ -93,7 +93,7 @@ namespace PixivCSharp
         }
         
         // Retrieves a list of a user's bookmarked novels
-        public async Task<NovelSearchResult> BookmarkedNovels(string UserID, string restrict = "public")
+        public async Task<NovelSearchResult> BookmarkedNovelsAsync(string UserID, string restrict = "public")
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {

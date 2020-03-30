@@ -176,7 +176,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.TrendingIllustTags();
+                result = await Client.TrendingIllustTagsAsync();
             }
             catch (HttpRequestException e)
             {
@@ -202,7 +202,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.TrendingNovelTags();
+                result = await Client.TrendingNovelTagsAsync();
             }
             catch (HttpRequestException e)
             {

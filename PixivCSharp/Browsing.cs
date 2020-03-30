@@ -115,7 +115,7 @@ namespace PixivCSharp
         }
         
         // Gets a list of trending illust tags
-        public async Task<TrendTag[]> TrendingIllustTags(string filter = null)
+        public async Task<TrendTag[]> TrendingIllustTagsAsync(string filter = null)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             
@@ -139,7 +139,7 @@ namespace PixivCSharp
         }
         
         // Gets a list of trending tags
-        public async Task<TrendTag[]> TrendingNovelTags()
+        public async Task<TrendTag[]> TrendingNovelTagsAsync()
         {
             HttpResponseMessage response =
                 await RequestClient.RequestAsync(PixivUrls.TrendingNovelTags).ConfigureAwait(false);
