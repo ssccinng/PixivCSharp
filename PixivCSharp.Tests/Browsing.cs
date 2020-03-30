@@ -1,6 +1,5 @@
 using System;
 using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
@@ -42,7 +41,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.NewFollowIllustsAsync("all");
+                result = await Client.NewFollowIllustsAsync();
             }
             catch (HttpRequestException e)
             {

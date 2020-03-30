@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 using Newtonsoft.Json;
 
 namespace PixivCSharp

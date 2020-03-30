@@ -87,7 +87,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("\n\n\n");
             
             // Stores tokens in local storage
-            string[] tokens = new string[3] { response.AccessToken, response.RefreshToken, response.DeviceToken };
+            string[] tokens = new string[] { response.AccessToken, response.RefreshToken, response.DeviceToken };
             string tokenSring = String.Join(",", tokens);
             StoreTokens(tokenSring);
         }
@@ -139,7 +139,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("\n\n\n");
             
             // Stores tokens in local storage
-            string[] tokens = new string[3] { response.AccessToken, response.RefreshToken, response.DeviceToken };
+            string[] tokens = new string[] { response.AccessToken, response.RefreshToken, response.DeviceToken };
             string tokenSring = String.Join(",", tokens);
             StoreTokens(tokenSring);
         }
