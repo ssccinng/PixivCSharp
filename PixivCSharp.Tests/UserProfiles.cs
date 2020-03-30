@@ -6,10 +6,11 @@ namespace PixivCSharp.Tests
 {
     public partial class Tests
     {
+        // Tests viewing user profiles
         private static async Task ViewProfile()
         {
             UserDetail result;
-            Console.WriteLine("Please enter the id of a user to view");
+            Console.Write("Please enter the id of a user to view\n> ");
             
             // Error handling
             try
@@ -77,6 +78,118 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Comment: {0}", result.Workspace.Commment);
             Console.WriteLine("Workspace image url: {0}", result.Workspace.WorkspaceImageUrl);
             Console.WriteLine("-------------------------------------------------------------------------------");
+        }
+        
+        // Tests viewing a user's illusts
+        private static async Task ViewUserIllusts()
+        {
+            IllustSearchResult result;
+            Console.Write("Please enter the ID of the user to view illusts from\n> ");
+            
+            // Error handling
+            try
+            {
+                result = await Client.UserIllusts(Console.ReadLine(), "illust");
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("User illusts:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Illust illust in result.Illusts)
+            {
+                Output.TestIllust(illust);
+            }
+            
+            Console.WriteLine("Next url: {0}", result.NextUrl);
+        }
+        
+        // Tests viewing a user's novels
+        private static async Task ViewUserNovels()
+        {
+            NovelSearchResult result;
+            Console.Write("Please enter the ID of the user to view novels from\n> ");
+            
+            // Error handling
+            try
+            {
+                result = await Client.UserNovels(Console.ReadLine());
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("User novels:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Novel novel in result.Novels)
+            {
+                Output.TestNovel(novel);
+            }
+            
+            Console.WriteLine("Next url: {0}", result.NextUrl);
+        }
+        
+        // Tests viewing a user's bookmarked illusts
+        private static async Task ViewBookmarkedIllusts()
+        {
+            IllustSearchResult result;
+            Console.Write("Please enter the id of the user to view bookmarked illusts of\n> ");
+            
+            // Error handling
+            try
+            {
+                result = await Client.BookmarkedIllusts(Console.ReadLine());
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+
+            Console.WriteLine("Bookmarked illusts:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Illust illust in result.Illusts)
+            {
+                Output.TestIllust(illust);
+            }
+
+            Console.WriteLine("Next url: {0}", result.NextUrl);
+        }
+        
+        // Tests viewing a user's bookmarked novels
+        private static async Task ViewBookmarkedNovels()
+        {
+            NovelSearchResult result;
+            Console.Write("Please enter the id of the user to view bookmarked novels of\n> ");
+            
+            // Error handling
+            try
+            {
+                result = await Client.BookmarkedNovels(Console.ReadLine());
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("Bookmarked novels:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Novel novel in result.Novels)
+            {
+                Output.TestNovel(novel);
+            }
+            
+            Console.WriteLine("Next url: {0}", result.NextUrl);
         }
     }
 }

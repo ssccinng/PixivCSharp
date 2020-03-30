@@ -40,7 +40,11 @@ namespace PixivCSharp.Tests
                                   "24 - View new novels from my pixiv\n" +
                                   "25 - Views trending illust tags\n" +
                                   "26 - View trending novel tags\n" +
-                                  "27 - View profile" +
+                                  "27 - View profile\n" +
+                                  "28 - View user illusts\n" +
+                                  "29 - View user novels\n" +
+                                  "30 - View user bookmared illusts\n" +
+                                  "31 - View user bookmarked novels\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -129,6 +133,18 @@ namespace PixivCSharp.Tests
                         break;
                     case "27":
                         await ViewProfile();
+                        break;
+                    case "28":
+                        await ViewUserIllusts();
+                        break;
+                    case "29":
+                        await ViewUserNovels();
+                        break;
+                    case "30":
+                        await ViewBookmarkedIllusts();
+                        break;
+                    case "31":
+                        await ViewBookmarkedNovels();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
