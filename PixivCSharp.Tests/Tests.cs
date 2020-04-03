@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
@@ -45,6 +46,9 @@ namespace PixivCSharp.Tests
                                   "29 - View user novels\n" +
                                   "30 - View user bookmared illusts\n" +
                                   "31 - View user bookmarked novels\n" +
+                                  "32 - View followers\n" +
+                                  "33 - View following\n" +
+                                  "34 - View my pixiv users\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -145,6 +149,15 @@ namespace PixivCSharp.Tests
                         break;
                     case "31":
                         await ViewBookmarkedNovels();
+                        break;
+                    case "32":
+                        await ViewFollowers();
+                        break;
+                    case "33":
+                        await ViewFollowing();
+                        break;
+                    case "34":
+                        await ViewMyPixiv();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");

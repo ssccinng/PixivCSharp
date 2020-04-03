@@ -109,5 +109,75 @@ namespace PixivCSharp
             NovelSearchResult result = Json.DeserializeJson<NovelSearchResult>(responseContent);
             return result;
         }
+
+        // Retrieves a list of the user's followers
+        public async Task<UserSearchResult> FollowersAsync(string filter = null)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            
+            // Adds filter if required
+            string filterText = filter ?? Filter;
+            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            {
+                parameters.Add("filter", filter ?? Filter);
+            }
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+
+            HttpResponseMessage repsonse = await RequestClient.RequestAsync(PixivUrls.ViewFollowers, encodedParams)
+                .ConfigureAwait(false);
+
+            string responseContent = await repsonse.Content.ReadAsStringAsync().ConfigureAwait(false);
+            UserSearchResult result = Json.DeserializeJson<UserSearchResult>(responseContent);
+            return result;
+        }
+
+        // Retrieves a list of the accounts followed by a user
+        public async Task<UserSearchResult> FollowingAsync(string UserID, string restrict = "public", string filter = null)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                { "user_id", UserID },
+                { "restrict", restrict }
+            };
+            
+            // Adds filter if required
+            string filterText = filter ?? Filter;
+            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            {
+                parameters.Add("filter", filter ?? Filter);
+            }
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+
+            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.ViewFollowing, encodedParams)
+                .ConfigureAwait(false);
+
+            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            UserSearchResult result = Json.DeserializeJson<UserSearchResult>(responseContent);
+            return result;
+        }
+         
+        // Retrieves a list of accounts from a user's my pixiv list
+        public async Task<UserSearchResult> MyPixivAsync(string UserID, string filter = null)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                { "user_id", UserID }
+            };
+            
+            // Adds filter if required
+            string filterText = filter ?? Filter;
+            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            {
+                parameters.Add("filter", filter ?? Filter);
+            }
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+
+            HttpResponseMessage response =
+                await RequestClient.RequestAsync(PixivUrls.MyPixiv, encodedParams).ConfigureAwait(false);
+
+            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            UserSearchResult result = Json.DeserializeJson<UserSearchResult>(responseContent);
+            return result;
+        }
     }
 }

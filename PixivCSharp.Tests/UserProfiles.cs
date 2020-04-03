@@ -191,5 +191,91 @@ namespace PixivCSharp.Tests
             
             Console.WriteLine("Next url: {0}", result.NextUrl);
         }
+        
+        // Tests viewing followers
+        private static async Task ViewFollowers()
+        {
+            UserSearchResult result;
+            
+            // Errror handling
+            try
+            {
+                result = await Client.FollowersAsync();
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("Followers:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (UserPreview userPreview in result.UserPreviews)
+            {
+                Output.TestUser(userPreview.User);
+                Output.TestIllust(userPreview.Illusts[0]);
+            }
+
+            Console.WriteLine("Next URL: {0}", result.NextUrl);
+        }
+        
+        // Tests viewing followed users
+        private static async Task ViewFollowing()
+        {
+            UserSearchResult result;
+            Console.WriteLine("Enter the user id of the user followed accounts of\n> ");
+            
+            // Error handling
+            try
+            {
+                result = await Client.FollowingAsync(Console.ReadLine());
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("Accounts followed by 30249784:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (UserPreview userPreview in result.UserPreviews)
+            {
+                Output.TestUser(userPreview.User);
+                Output.TestIllust(userPreview.Illusts[0]);
+            }
+            
+            Console.WriteLine("Next URL: {0}", result.NextUrl);
+        }
+
+        // Tests viewing users on a profile's my pixiv list
+        private static async Task ViewMyPixiv()
+        {
+            UserSearchResult result;
+            Console.WriteLine("Please enter the user view my pixiv users of\n> ");
+            
+            // Error handling
+            try
+            {
+                result = await Client.MyPixivAsync(Console.ReadLine());
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("My Pixiv Accounts:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (UserPreview userPreview in result.UserPreviews)
+            {
+                Output.TestUser(userPreview.User);
+                Output.TestIllust(userPreview.Illusts[0]);
+            }
+            
+            Console.WriteLine("Next URL: {0}", result.NextUrl);
+        }
     }
 }
