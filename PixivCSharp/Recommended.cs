@@ -69,7 +69,7 @@ namespace PixivCSharp
         }
         
         // Gets a list of recommended users
-        public async Task<RecommendedUsers> RecommendedUsersAsync(string filter = null)
+        public async Task<UserSearchResult> RecommendedUsersAsync(string filter = null)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             
@@ -83,7 +83,7 @@ namespace PixivCSharp
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.RecommendedUsers, encodedParams).ConfigureAwait(false);
             JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-            RecommendedUsers result = json.ToObject<RecommendedUsers>();
+            UserSearchResult result = json.ToObject<UserSearchResult>();
             return result;
         }
     }

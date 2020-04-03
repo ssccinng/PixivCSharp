@@ -134,7 +134,7 @@ namespace PixivCSharp.Tests
         // Tests recommended users
         private static async Task ViewRecommendedUsers()
         {
-            RecommendedUsers recommendedUsers;
+            UserSearchResult recommendedUsers;
             
             // Error handling
             try

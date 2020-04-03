@@ -448,10 +448,19 @@ namespace PixivCSharp
         public string NextUrl { get; set; }
     }
 
+    public class UserPreview
+    {
+        [JsonProperty("user")]
+        public User User { get; set; }
+        
+        [JsonProperty("illusts")]
+        public List<Illust> Illusts { get; set; }
+    }
+    
     public class UserSearchResult
     {
         [JsonProperty("user_previews")]
-        public List<User> UserPreviews { get; set; }
+        public List<UserPreview> UserPreviews { get; set; }
         
         [JsonProperty("next_url")]
         public string NextUrl { get; set; }
@@ -477,24 +486,6 @@ namespace PixivCSharp
         
         [JsonProperty("privacy_policy")]
         public PrivacyPolicy PrivacyPolicy { get; set; }
-    }
-
-    public class UserPreview
-    {
-        [JsonProperty("user")]
-        public User User { get; set; }
-        
-        [JsonProperty("illusts")]
-        public List<Illust> Illusts { get; set; }
-    }
-
-    public class RecommendedUsers
-    {
-        [JsonProperty("user_previews")]
-        public List<UserPreview> UserPreviews { get; set; }
-        
-        [JsonProperty("next_url")]
-        public string NextUrl { get; set; }
     }
 
     //Privacy policy class
