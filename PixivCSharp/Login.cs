@@ -1,19 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using TimeZoneConverter;
 
 namespace PixivCSharp
 {
     public partial class PixivClient
     {
         private WebRequests RequestClient;
+        private TimeZoneInfo JapanTimeZone;
 
         // Creates instance of WebRequests
         public PixivClient(string filterSetting = "for_android")
         {
             RequestClient = new WebRequests();
             Filter = filterSetting;
+            JapanTimeZone = TZConvert.GetTimeZoneInfo("Tokyo Standard Time");
         }
         
         // Sets access tokens
