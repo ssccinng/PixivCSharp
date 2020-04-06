@@ -49,6 +49,8 @@ namespace PixivCSharp.Tests
                                   "32 - View followers\n" +
                                   "33 - View following\n" +
                                   "34 - View my pixiv users\n" +
+                                  "35 - Follow user\n" +
+                                  "36 - Unfollow user\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -158,6 +160,12 @@ namespace PixivCSharp.Tests
                         break;
                     case "34":
                         await ViewMyPixiv();
+                        break;
+                    case "35":
+                        await FollowUser();
+                        break;
+                    case "36":
+                        await UnFollowUser();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");

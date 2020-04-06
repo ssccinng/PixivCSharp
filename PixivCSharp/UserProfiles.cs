@@ -179,5 +179,28 @@ namespace PixivCSharp
             UserSearchResult result = Json.DeserializeJson<UserSearchResult>(responseContent);
             return result;
         }
+        
+        // Follows a user
+        public async Task FollowAsync(string UserID, string restrict = "public")
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                { "user_id", UserID },
+                { "restrict", restrict }
+            };
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+            await RequestClient.RequestAsync(PixivUrls.FollowProfile, encodedParams).ConfigureAwait(false);
+        }
+
+        // Unfollows a user
+        public async Task RemoveFollowAsync(string UserID)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                { "user_id", UserID }
+            };
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+            await RequestClient.RequestAsync(PixivUrls.UnfollowProfile, encodedParams).ConfigureAwait(false);
+        }
     }
 }

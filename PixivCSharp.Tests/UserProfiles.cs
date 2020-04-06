@@ -277,5 +277,37 @@ namespace PixivCSharp.Tests
             
             Console.WriteLine("Next URL: {0}", result.NextUrl);
         }
+        
+        // Tests following a user
+        private static async Task FollowUser()
+        {
+            Console.WriteLine("Please enter the ID of the user to follow");
+            
+            // Error handling
+            try
+            {
+                await Client.FollowAsync(Console.ReadLine());
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        
+        // Tests unfollowing a user
+        private static async Task UnFollowUser()
+        {
+            Console.WriteLine("Please enter the ID of the user to unfollow");
+            
+            // Error handling
+            try
+            {
+                await Client.RemoveFollowAsync(Console.ReadLine());
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
     }
 }
