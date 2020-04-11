@@ -52,6 +52,9 @@ namespace PixivCSharp.Tests
                                   "36 - Unfollow user\n" +
                                   "37 - View ranking illusts\n" +
                                   "38 - View ranking novels\n" +
+                                  "39 - View illust search results\n" +
+                                  "40 - View novel search results\n" +
+                                  "41 - View user search results\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -173,6 +176,15 @@ namespace PixivCSharp.Tests
                         break;
                     case "38":
                         await ViewRankingNovels();
+                        break;
+                    case "39":
+                        await ViewIllustSearch();
+                        break;
+                    case "40":
+                        await ViewNovelSearch();
+                        break;
+                    case "41":
+                        await ViewUserSearch();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
