@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace PixivCSharp.Tests
@@ -49,6 +48,10 @@ namespace PixivCSharp.Tests
                                   "32 - View followers\n" +
                                   "33 - View following\n" +
                                   "34 - View my pixiv users\n" +
+                                  "35 - Follow user\n" +
+                                  "36 - Unfollow user\n" +
+                                  "37 - View ranking illusts\n" +
+                                  "38 - View ranking novels\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -158,6 +161,18 @@ namespace PixivCSharp.Tests
                         break;
                     case "34":
                         await ViewMyPixiv();
+                        break;
+                    case "35":
+                        await FollowUser();
+                        break;
+                    case "36":
+                        await UnFollowUser();
+                        break;
+                    case "37":
+                        await ViewRankingIllusts();
+                        break;
+                    case "38":
+                        await ViewRankingNovels();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
