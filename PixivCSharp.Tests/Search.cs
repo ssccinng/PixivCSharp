@@ -90,5 +90,33 @@ namespace PixivCSharp.Tests
             
             Console.WriteLine("Next URL: {0}", result.NextUrl);
         }
+        
+        // Tests viewing autocomplete tags
+        private static async Task ViewAutocompleteTags()
+        {
+            Tag[] result;
+            Console.Write("Please enter input to produce autocomplete tags for\n> ");
+            
+            // Error handling
+            try
+            {
+                result = await Client.AutocompleteTagAsync(Console.ReadLine());
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("Autocomplete tags:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Tag tag in result)
+            {
+                Console.WriteLine("-------------------------------------------------------------------------------");
+                Console.WriteLine("Name: {0}", tag.Name);
+                Console.WriteLine("Translated name: {0}", tag.TranslatedName);
+            }
+        }
     }
 }

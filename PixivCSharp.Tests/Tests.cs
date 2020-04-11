@@ -55,6 +55,7 @@ namespace PixivCSharp.Tests
                                   "39 - View illust search results\n" +
                                   "40 - View novel search results\n" +
                                   "41 - View user search results\n" +
+                                  "42 - View autcomplete tags\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -185,6 +186,9 @@ namespace PixivCSharp.Tests
                         break;
                     case "41":
                         await ViewUserSearch();
+                        break;
+                    case "42":
+                        await ViewAutocompleteTags();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");

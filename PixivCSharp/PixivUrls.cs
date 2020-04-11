@@ -62,6 +62,9 @@ namespace PixivCSharp
         public static URL IllustSearch = new URL() {Address = "https://app-api.pixiv.net/v1/search/illust", Type = "GET"};
         public static URL NovelSearch = new URL() {Address = "https://app-api.pixiv.net/v1/search/novel", Type = "GET"};
         public static URL UserSearch = new URL() {Address = "https://app-api.pixiv.net/v1/search/user", Type = "GET"};
+        public static URL AutocompleteTag = new URL() {Address = "https://app-api.pixiv.net/v2/search/autocomplete", Type = "GET"};
+        public static URL PopularIllustsPreview = new URL() {Address = "https://app-api.pixiv.net/v1/search/popular-preview/illust", Type = "GET"};
+        public static URL PopularNovelsPreview = new URL() {Address = "https://app-api.pixiv.net/v1/search/popular-preview/novel", Type = "GET"};
         
         // Trending tag urls
         public static URL TrendingIllustTags = new URL() {Address = "https://app-api.pixiv.net/v1/trending-tags/illust", Type = "GET"};

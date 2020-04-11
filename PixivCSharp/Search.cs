@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace PixivCSharp
 {
@@ -79,6 +80,25 @@ namespace PixivCSharp
 
             string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             UserSearchResult result = Json.DeserializeJson<UserSearchResult>(responseContent);
+            return result;
+        }
+        
+        // Returns a list of potential tags to autocomplete the given input
+        public async Task<Tag[]> AutocompleteTagAsync(string searchTerm, bool mergePlainKeywordResults = true)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                { "word", searchTerm },
+                { "merge_plain_keyword_results", mergePlainKeywordResults.ToString().ToLower() }
+            };
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+
+            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.AutocompleteTag, encodedParams)
+                .ConfigureAwait(false);
+
+            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            JObject json = JObject.Parse(responseContent);
+            Tag[] result = Json.DeserializeJson<Tag[]>((JArray)json["tags"]);
             return result;
         }
     }
