@@ -101,5 +101,58 @@ namespace PixivCSharp
             Tag[] result = Json.DeserializeJson<Tag[]>((JArray)json["tags"]);
             return result;
         }
+        
+        // Returns a list of popular illusts for the given search term, limited to a single page
+        public async Task<IllustSearchResult> PopularIllustsPreviewAsync(string searchTerm, string sort = "date_desc",
+            string searchTarget = "partial_match_for_tags", bool includeTranslatedTags = true,
+            bool mergePlainKeywordResults = true, string filter = null)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                {"word", searchTerm},
+                {"sort", sort},
+                {"search_target", searchTarget},
+                {"include_translated_tags", includeTranslatedTags.ToString().ToLower()},
+                {"merge_plain_keyword_results", mergePlainKeywordResults.ToString().ToLower()}
+            };
+            
+            // Adds filter if required
+            string filterText = filter ?? Filter;
+            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            {
+                parameters.Add("filter", filter ?? Filter);
+            }
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+
+            HttpResponseMessage response = await RequestClient
+                .RequestAsync(PixivUrls.PopularIllustsPreview, encodedParams).ConfigureAwait(false);
+
+            string resposneContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            IllustSearchResult result = Json.DeserializeJson<IllustSearchResult>(resposneContent);
+            return result;
+        }
+        
+        // Returns a list of popular novels for the given search term, limied to a single page
+        public async Task<NovelSearchResult> PopularNovelsPreviewAsync(string searchTerm, string sort = "date_desc",
+            string searchTarget = "partial_match_for_tags", bool includeTranslatedTags = true,
+            bool mergePlainKeywordResults = true)
+        {
+            Dictionary<string, string> parameters = new Dictionary<string, string>()
+            {
+                { "word", searchTerm },
+                { "sort", sort },
+                { "search_target", searchTarget},
+                { "include_translated_tags", includeTranslatedTags.ToString().ToLower() },
+                { "merge_plain_keyword_results", mergePlainKeywordResults.ToString().ToLower() }
+            };
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
+
+            HttpResponseMessage response = await RequestClient
+                .RequestAsync(PixivUrls.PopularNovelsPreview, encodedParams).ConfigureAwait(false);
+
+            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            NovelSearchResult result = Json.DeserializeJson<NovelSearchResult>(responseContent);
+            return result;
+        }
     }
 }

@@ -56,6 +56,8 @@ namespace PixivCSharp.Tests
                                   "40 - View novel search results\n" +
                                   "41 - View user search results\n" +
                                   "42 - View autcomplete tags\n" +
+                                  "43 - View popular illusts preview\n" +
+                                  "44 - View popular novels preview\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -189,6 +191,12 @@ namespace PixivCSharp.Tests
                         break;
                     case "42":
                         await ViewAutocompleteTags();
+                        break;
+                    case "43":
+                        await ViewPopularIllustPreview();
+                        break;
+                    case "44":
+                        await ViewPopularNovelsPreview();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");

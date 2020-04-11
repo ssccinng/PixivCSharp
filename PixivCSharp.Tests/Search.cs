@@ -118,5 +118,58 @@ namespace PixivCSharp.Tests
                 Console.WriteLine("Translated name: {0}", tag.TranslatedName);
             }
         }
+        
+        // Tests viewing popular illust previews
+        private static async Task ViewPopularIllustPreview()
+        {
+            IllustSearchResult result;
+            Console.Write("Please enter the term to search\n> ");
+            
+            // Error handling
+            try
+            {
+                result = await Client.PopularIllustsPreviewAsync(Console.ReadLine());
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("Popular illusts preview:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Illust illust in result.Illusts)
+            {
+                Output.TestIllust(illust);
+            }
+        }
+        
+        // Tests viewing popular novel previews
+        private static async Task ViewPopularNovelsPreview()
+        {
+            NovelSearchResult result;
+            Console.Write("Please enter the term to search\n> ");
+            
+            // Error handling
+            try
+            {
+                result = await Client.PopularNovelsPreviewAsync(Console.ReadLine());
+            }
+
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            Console.WriteLine("Popular novels preview:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+
+            foreach (Novel novel in result.Novels)
+            {
+                Output.TestNovel(novel);
+            }
+        }
     }
 }
