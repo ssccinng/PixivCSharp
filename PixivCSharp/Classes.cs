@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace PixivCSharp
 {
     // Works base class
-    public abstract class Works
+    public abstract class Work
     {
         [JsonProperty("id")]
         public int ID { get; set; }
@@ -60,7 +60,7 @@ namespace PixivCSharp
     }
     
     // Main works classes
-    public class Illust : Works
+    public class Illust : Work
     {
         [JsonProperty("tools")]
         public string[] Tools { get; set; }
@@ -81,7 +81,7 @@ namespace PixivCSharp
         public MetaPages[] MetaPages { get; set; }
     }
 
-    public class Novel : Works
+    public class Novel : Work
     {
         [JsonProperty("is_original")]
         public bool IsOriginal { get; set; }
