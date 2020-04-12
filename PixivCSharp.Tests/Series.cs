@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -99,6 +100,55 @@ namespace PixivCSharp.Tests
             }
             
             Console.WriteLine("Next URL: {0}", result.NextUrl);
+        }
+        
+        // Tests viewing all works in a series
+        private static async Task ViewAllSeriesIllustsTest()
+        {
+            IllustSeriesInfo result;
+            Console.Write("Please enter the ID of the series to view\n> ");
+            string ID = Console.ReadLine();
+            bool allFound = false;
+            List<Illust> works = new List<Illust>();
+
+            try
+            {
+                result = await Client.IllustSeriesInfoAsync(ID, filter:"none");
+                if (result.NextUrl == null) allFound = true;
+                works.AddRange(result.Illusts);
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
+            while (!allFound)
+            {
+                try
+                {
+                    result = await Client.RequestAsync<IllustSeriesInfo>(result.NextUrl);
+                }
+                catch (HttpRequestException e)
+                {
+                    Console.WriteLine(e.Message);
+                    return;
+                }
+                
+                works.AddRange(result.Illusts);
+
+                if (result.NextUrl == null)
+                {
+                    allFound = true;
+                }
+            }
+
+            works.Reverse();
+
+            foreach (Illust illust in works)
+            {
+                Console.WriteLine(illust.Title);
+            }
         }
     }
 }

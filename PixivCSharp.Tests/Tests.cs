@@ -62,6 +62,7 @@ namespace PixivCSharp.Tests
                                   "46 - View illust series info\n" +
                                   "47 - View novel series info\n" +
                                   "48 - View generic request\n" +
+                                  "49 - Tests viewing all\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -213,6 +214,9 @@ namespace PixivCSharp.Tests
                         break;
                     case "48":
                         await ViewGenericRequest();
+                        break;
+                    case "49":
+                        await ViewAllSeriesIllustsTest();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");
