@@ -32,7 +32,7 @@ namespace PixivCSharp
             md5 = MD5.Create();
         }
 
-        public async Task<HttpResponseMessage> RequestAsync(URL url, FormUrlEncodedContent parameters = null, bool multipart = false)
+        public async Task<HttpResponseMessage> RequestAsync(URL url, FormUrlEncodedContent parameters = null)
         {
             // Creates http request and uribuilder
             HttpResponseMessage response = null;
@@ -68,7 +68,7 @@ namespace PixivCSharp
             else if (url.Type == "POST")
             {
                 // Adds parameters in the correct Content-Type header
-                if (multipart)
+                if (url.Multipart)
                 {
                     // multipart code
                 }
