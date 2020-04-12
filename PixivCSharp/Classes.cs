@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace PixivCSharp
 {
@@ -391,14 +392,114 @@ namespace PixivCSharp
         [JsonProperty("px_170x170")]
         public string Px170x170 { get; set; }
     }
-
+    
+    // Series classes
     public class Series
     {
         [JsonProperty("id")]
-        public int? ID { get; set; }
+        public int ID { get; set; }
         
         [JsonProperty("title")]
         public string Title { get; set; }
+    }
+
+    public class IllustSeries : Series
+    {
+       [JsonProperty("caption")]
+       public string Caption { get; set; }
+       
+       [JsonProperty("cover_image_urls")]
+       public ImageUrls CoverImageUrls { get; set; }
+       
+       [JsonProperty("series_work_count")]
+       public int SeriesWorkCount { get; set; }
+       
+       [JsonProperty("create_date")]
+       public string CreateDate { get; set; }
+       
+       [JsonProperty("width")]
+       public int Width { get; set; }
+       
+       [JsonProperty("height")]
+       public int Height { get; set; }
+       
+       [JsonProperty("user")]
+       public User User { get; set; }
+    }
+
+    public class NovelSeries : Series
+    {
+        [JsonProperty("caption")]
+        public string Caption { get; set; }
+        
+        [JsonProperty("is_original")]
+        public bool IsOriginal { get; set; }
+        
+        [JsonProperty("is_concluded")]
+        public bool IsConcluded { get; set; }
+        
+        [JsonProperty("content_count")]
+        public int NovelCount { get; set; }
+        
+        [JsonProperty("total_character_count")]
+        public int CharacterCount { get; set; }
+        
+        [JsonProperty("user")]
+        public User User { get; set; }
+        
+        [JsonProperty("display_text")]
+        public string DisplayText { get; set; }
+    }
+
+    public class SeriesContext
+    {
+        [JsonProperty("content_order")]
+        public int ContentOrder { get; set; }
+        
+        [JsonProperty("prev")]
+        public Illust Prev { get; set; }
+        
+        [JsonProperty("next")]
+        public Illust Next { get; set; }
+    }
+
+    public class IllustSeriesContext
+    {
+        [JsonProperty("illust_series_detail")]
+        public IllustSeries SeriesDetail { get; set; }
+        
+        [JsonProperty("illust_series_context")]
+        public SeriesContext SeriesContext { get; set; }
+    }
+
+    public class IllustSeriesInfo
+    {
+        [JsonProperty("illust_series_detail")]
+        public IllustSeries SeriesDetail { get; set; }
+        
+        [JsonProperty("illust_series_first_illust")]
+        public Illust FirstIllust { get; set; }
+        
+        [JsonProperty("illusts")]
+        public Illust[] Illusts { get; set; }
+        
+        [JsonProperty("next_url")]
+        public string NextUrl { get; set; }
+    }
+
+    public class NovelSeriesInfo
+    {
+        [JsonProperty("novel_series_detail")]
+        public NovelSeries SeriesDetail { get; set; }
+        
+        [JsonProperty("novel_series_first_novel")]
+        public Novel FirstNovel { get; set; }
+        
+        [JsonProperty("novels")]
+        public Novel[] Novels { get; set; }
+        
+        [JsonProperty("next_url")]
+        public string NextUrl { get; set; }
     }
 
     // Comment classes

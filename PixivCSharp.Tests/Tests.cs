@@ -58,6 +58,9 @@ namespace PixivCSharp.Tests
                                   "42 - View autcomplete tags\n" +
                                   "43 - View popular illusts preview\n" +
                                   "44 - View popular novels preview\n" +
+                                  "45 - View illust series context\n" +
+                                  "46 - View illust series info\n" +
+                                  "47 - View novel series info\n" +
                                   "0 - Exit");
             
                 // User choice
@@ -197,6 +200,15 @@ namespace PixivCSharp.Tests
                         break;
                     case "44":
                         await ViewPopularNovelsPreview();
+                        break;
+                    case "45":
+                        await ViewIllustSeriesContext();
+                        break;
+                    case "46":
+                        await ViewIllustSeriesInfo();
+                        break;
+                    case "47":
+                        await ViewNovelSeriesInfo();
                         break;
                 }
                 Console.WriteLine("Press enter to continue");

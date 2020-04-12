@@ -127,5 +127,36 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Is user followed: {0}", user.IsFollowed);
             Console.WriteLine("-------------------------------------------------------------------------------");
         }
+
+        public static void TestIllustSeries(IllustSeries series)
+        {
+            Console.WriteLine("Illust series info:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("ID: {0}", series.ID);
+            Console.WriteLine("Title: {0}", series.Title);
+            Console.WriteLine("Caption: {0}", series.Caption);
+            Console.WriteLine("Cover image url: {0}", series.CoverImageUrls.Medium);
+            Console.WriteLine("Work count: {0}", series.SeriesWorkCount);
+            Console.WriteLine("Create date: {0}", series.CreateDate);
+            Console.WriteLine("Width: {0}", series.Width);
+            Console.WriteLine("Height: {0}", series.Height);
+            TestUser(series.User);
+        }
+
+        public static void TestNovelSeries(NovelSeries series)
+        {
+            Console.WriteLine("Novel series info:");
+            Console.WriteLine("-------------------------------------------------------------------------------");
+            Console.WriteLine("ID: {0}", series.ID);
+            Console.WriteLine("Title: {0}", series.Title);
+            Console.WriteLine("Caption: {0}", series.Caption);
+            Console.WriteLine("Is original: {0}", series.IsOriginal);
+            Console.WriteLine("Is concluded: {0}", series.IsConcluded);
+            Console.WriteLine("Novel count: {0}", series.NovelCount);
+            Console.WriteLine("Character count: {0}", series.CharacterCount);
+            TestUser(series.User);
+            Console.WriteLine("Display text: {0}", series.DisplayText);
+            Console.WriteLine("-------------------------------------------------------------------------------");
+        }
     }
 }
