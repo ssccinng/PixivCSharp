@@ -18,7 +18,10 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Illust restrict: {0}", illust.Restrict.ToString());
             Console.WriteLine("-------------------------------------------------------------------------------");
             TestUser(illust.User);
-            Console.WriteLine("Illust tag: {0} | Illust translated tag: {1}", illust.Tags[0].Name, illust.Tags[0].TranslatedName);
+            if (illust.Tags.Length != 0)
+            {
+                Console.WriteLine("Illust tag: {0} | Illust translated tag: {1}", illust.Tags[0].Name, illust.Tags[0].TranslatedName);
+            }
             if (illust.Tools.Length != 0) Console.WriteLine("Illust tools: {0}", illust.Tools[0]);
             Console.WriteLine("Illust creation date: {0}", illust.CreateDate);
             Console.WriteLine("Illust page count: {0}", illust.PageCount.ToString());

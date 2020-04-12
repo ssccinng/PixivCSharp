@@ -1,57 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using TimeZoneConverter;
+
 
 namespace PixivCSharp
 {
     public partial class PixivClient
     {
-        private WebRequests RequestClient;
-        private TimeZoneInfo JapanTimeZone;
-
-        // Creates instance of WebRequests
-        public PixivClient(string filterSetting = "for_android")
-        {
-            RequestClient = new WebRequests();
-            Filter = filterSetting;
-            JapanTimeZone = TZConvert.GetTimeZoneInfo("Tokyo Standard Time");
-        }
-        
-        // Sets access tokens
-        public void SetTokens(string access, string refresh, string device)
-        {
-            RequestClient.access_token = access;
-            RequestClient.refresh_token = refresh;
-            RequestClient.device_token = device;
-        }
-
-        private string _Filter = "for_android";
-
-        public string Filter
-        {
-            get => _Filter;
-            set
-            {
-                if (value == "for_android" || value == "for_ios" || value == "none") { _Filter = value; }
-            }
-        }
-
-        public bool CheckTokens()
-        {
-            if (RequestClient.access_token == null || RequestClient.refresh_token == null ||
-                RequestClient.device_token == null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        
         public async Task<IllustSearchResult> WalkthoughIllustsAsync()
         {
             // Retrieves walkthrough illusts and converts to json, and then returns it as IllustSearchResult
