@@ -8,6 +8,10 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
+        /// <summary>
+        /// Gets a list of illusts for the welcome screen.
+        /// </summary>
+        /// <returns><seealso cref="IllustSearchResult"/></returns>
         public async Task<IllustSearchResult> WalkthoughIllustsAsync()
         {
             // Retrieves walkthrough illusts and converts to json, and then returns it as IllustSearchResult
@@ -16,6 +20,10 @@ namespace PixivCSharp
             return Json.DeserializeJson<IllustSearchResult>(response);
         }
 
+        /// <summary>
+        /// Gets a list of available emoji.
+        /// </summary>
+        /// <returns><seealso cref="EmojiList"/></returns>
         public async Task<EmojiList> EmojiListAsync()
         {
             // Retrieves emoji list, converts to json, and returns as search result object
@@ -24,7 +32,12 @@ namespace PixivCSharp
             return Json.DeserializeJson<EmojiList>(response);
         }
 
-        // Login/refresh method
+        /// <summary>
+        /// Gets access tokens for the provided login information.
+        /// </summary>
+        /// <param name="username">The username to login with.</param>
+        /// <param name="password">The accompanying password.</param>
+        /// <returns><seealso cref="LoginResponse"/></returns>
         public async Task<LoginResponse> LoginAsync(string username, string password)
         {
             // Parameter dictionary
@@ -49,6 +62,10 @@ namespace PixivCSharp
             return result;
         }
 
+        /// <summary>
+        /// Refreshes the user's login.
+        /// </summary>
+        /// <returns><seealso cref="LoginResponse"/></returns>
         public async Task<LoginResponse> RefreshLoginAsync()
         {
             // Parameter dictionary
