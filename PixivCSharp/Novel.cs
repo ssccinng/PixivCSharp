@@ -8,6 +8,11 @@ namespace PixivCSharp
     public partial class PixivClient
     {
         // Views a novel
+        /// <summary>
+        /// Gets information about a novel.
+        /// </summary>
+        /// <param name="id">The ID of the novel to view.</param>
+        /// <returns><seealso cref="Novel"/></returns>
         public async Task<Novel> ViewNovelAsync(string id)
         {
             Stream response;
@@ -21,6 +26,11 @@ namespace PixivCSharp
         }
 
         // Retrieves novel text
+        /// <summary>
+        /// View the full contents of a novel.
+        /// </summary>
+        /// <param name="id">The ID of the novel to view.</param>
+        /// <returns><seealso cref="NovelText"/></returns>
         public async Task<NovelText> ViewNovelTextAsync(string id)
         {
             Stream response;
@@ -33,7 +43,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<NovelText>(response);
         }
 
-        // Retrieves comments of a novel
+        /// <summary>
+        /// Gets comments of a novel.
+        /// </summary>
+        /// <param name="id">The ID of the novel to get comments for.</param>
+        /// <returns><seealso cref="CommentList"/></returns>
         public async Task<CommentList> NovelCommentsAsync(string id)
         {
             Stream response;
@@ -46,7 +60,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<CommentList>(response);
         }
         
-        // Retrieves replies to a comment on a novel
+        /// <summary>
+        /// Gets a list of replies to a comment.
+        /// </summary>
+        /// <param name="id">The ID of the comment to get replies for.</param>
+        /// <returns><seealso cref="CommentList"/></returns>
         public async Task<CommentList> NovelCommentRepliesAsync(string id)
         {
             Stream response;
@@ -59,7 +77,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<CommentList>(response);
         }
         
-        // Bookmarks a novel
+        /// <summary>
+        /// Bookmarks a novel.
+        /// </summary>
+        /// <param name="id">The novel to bookmark.</param>
+        /// <param name="restrict">The publicity at which to bookmark the novel. 'public' or 'private'.</param>
         public async Task AddBookmarkNovelAsync(string id, string restrict)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -71,7 +93,10 @@ namespace PixivCSharp
             await RequestClient.RequestAsync(PixivUrls.NovelBookmarkAdd, encodedParams).ConfigureAwait(false);
         }
 
-        // Removes a novel bookmark
+        /// <summary>
+        /// Unbookmarks a novel.
+        /// </summary>
+        /// <param name="id">The ID of the bookmark to remove.</param>
         public async Task RemoveBookmarkNovelAsync(string id)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
