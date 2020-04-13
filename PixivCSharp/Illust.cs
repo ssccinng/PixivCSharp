@@ -7,6 +7,12 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
+        /// <summary>
+        /// Gets information about an illust.
+        /// </summary>
+        /// <param name="id">Specifies the ID of the illut to search for.</param>
+        /// <param name="filter">Specifies whether to use a filter. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="Illust"/></returns>
         public async Task<Illust> ViewIllustAsync(string id, string filter = null)
         {
             // Sets parameters
@@ -29,13 +35,21 @@ namespace PixivCSharp
             return Json.DeserializeJson<Illust>(response, "illust");
         }
 
-        // Gets image from url and returns as stream
+        /// <summary>
+        /// Gets a stream of an image from a url.
+        /// </summary>
+        /// <param name="imageUrl">The URL of the image to get.</param>
+        /// <returns><seealso cref="Stream"/> of the image.</returns>
         public async Task<Stream> GetImageAsync(string imageUrl)
         {
             return await RequestClient.GetImageAsync(imageUrl).ConfigureAwait(false);
         }
 
-        // Retrieves a list of comments for an illust
+        /// <summary>
+        /// Retrieves a list of comments for an illust.
+        /// </summary>
+        /// <param name="id">The ID of the illust to get comments for.</param>
+        /// <returns><seealso cref="CommentList"/></returns>
         public async Task<CommentList> IllustCommentsAsync(string id)
         {
             Stream response;
@@ -48,7 +62,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<CommentList>(response);
         }
 
-        // Retrieves a list of replies to a comment
+        /// <summary>
+        /// Gets a list of replies to a comment.
+        /// </summary>
+        /// <param name="id">The ID of the comment to get replies to.</param>
+        /// <returns><seealso cref="CommentList"/></returns>
         public async Task<CommentList> IllustCommentRepliesAsync(string id)
         {
             Stream response;
@@ -61,7 +79,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<CommentList>(response);
         }
         
-        // Bookmarks an illust
+        /// <summary>
+        /// Bookmarks the illust.
+        /// </summary>
+        /// <param name="id">The illust to bookmarks.</param>
+        /// <param name="restrict">The publicity for the bookmark - 'public' or 'private'</param>
         public async Task AddBookmarkIllustAsync(string id, string restrict)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -73,7 +95,10 @@ namespace PixivCSharp
             await RequestClient.RequestAsync(PixivUrls.IllustBookmarkAdd, encodedParams).ConfigureAwait(false);
         }
 
-        // Removes illust bookmark
+        /// <summary>
+        /// Removes an illust bookmark.
+        /// </summary>
+        /// <param name="id">The ID of the illust to unbookmark.</param>
         public async Task RemoveBookmarkIllustAsync(string id)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
