@@ -7,7 +7,13 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
-        // Gets a list of recommended illusts
+        /// <summary>
+        /// Gets a list of recommended illusts.
+        /// </summary>
+        /// <param name="RankingIllusts">Whether to include ranking illusts.</param>
+        /// <param name="PrivacyPolicy">Whether to include a link to the privacy policy.</param>
+        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="RecommendedIllusts"/></returns>
         public async Task<RecommendedIllusts> RecommendedIllustsAsync(bool RankingIllusts = true, bool PrivacyPolicy = true, string filter = null)
         {
             Stream response;
@@ -29,7 +35,13 @@ namespace PixivCSharp
             return Json.DeserializeJson<RecommendedIllusts>(response);
         }
         
-        // Gets a list of recommended manga
+        /// <summary>
+        /// Gets a list of recommneded manga.
+        /// </summary>
+        /// <param name="RankingIllusts">Whether to include ranking illusts.</param>
+        /// <param name="PrivacyPolicy"></param>
+        /// <param name="filter"></param>
+        /// <returns><seealso cref="RecommendedIllusts"/></returns>
         public async Task<RecommendedIllusts> RecommendedMangaAsync(bool RankingIllusts = true, bool PrivacyPolicy = true, string filter = null)
         {
             Stream response;
@@ -51,13 +63,18 @@ namespace PixivCSharp
             return Json.DeserializeJson<RecommendedIllusts>(response);
         }
         
-        // Gets a list of recommended novels
-        public async Task<RecommendedNovels> RecommendedNovelsAsync(bool RankingIllusts = true, bool PrivacyPolicy = true)
+        /// <summary>
+        /// Gets a list of recommended novels.
+        /// </summary>
+        /// <param name="RankingNovels">Whether to include ranking novels.</param>
+        /// <param name="PrivacyPolicy"></param>
+        /// <returns><seealso cref="RecommendedNovels"/></returns>
+        public async Task<RecommendedNovels> RecommendedNovelsAsync(bool RankingNovels = true, bool PrivacyPolicy = true)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
-                { "include_ranking_illusts", RankingIllusts.ToString().ToLower() },
+                { "include_ranking_novels", RankingNovels.ToString().ToLower() },
                 { "include_privacy_policy", PrivacyPolicy.ToString().ToLower() }
             };
             FormUrlEncodedContent encodedParmas = new FormUrlEncodedContent(parameters);
@@ -65,7 +82,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<RecommendedNovels>(response);
         }
         
-        // Gets a list of recommended users
+        /// <summary>
+        /// Gets a list of recommended users.
+        /// </summary>
+        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="UserSearchResult"/></returns>
         public async Task<UserSearchResult> RecommendedUsersAsync(string filter = null)
         {
             Stream response;

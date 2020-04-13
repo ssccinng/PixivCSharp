@@ -8,7 +8,16 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
-        // Gets a list of ranking illusts or manga
+        /// <summary>
+        /// Gets a list of ranking illusts.
+        /// </summary>
+        /// <param name="mode">
+        /// The mode to use. Can be: 'day', 'week', 'month', 'day_male', 'day_female', 'week_original', 'week_rookie',
+        /// 'day_manga', 'week_rookie_manga', 'week_manga' or 'month_manga'.
+        /// </param>
+        /// <param name="date">The date to get ranking illusts for.</param>
+        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="IllustSearchResult"/> for ranking illusts.</returns>
         public async Task<IllustSearchResult> RankingIllustsAsync(string mode = "day", DateTime? date = null,
             string filter = null)
         {
@@ -38,7 +47,12 @@ namespace PixivCSharp
             return Json.DeserializeJson<IllustSearchResult>(response);
         }
         
-        // Gets a list of ranking novels
+        /// <summary>
+        /// Gets a list of ranking novels
+        /// </summary>
+        /// <param name="mode">The mode to use. Can be: 'day', 'week','day_male', 'day_female' or 'week_rookie'.</param>
+        /// <param name="date">The date to get ranking novels for.</param>
+        /// <returns><seealso cref="NovelSearchResult"/> for ranking novels.</returns>
         public async Task<NovelSearchResult> RankingNovelsAsync(string mode = "day", DateTime? date = null)
         {
             // Converts time to the correct timezone and produces a date string in correct format
