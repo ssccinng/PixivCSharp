@@ -1,6 +1,6 @@
 namespace PixivCSharp
 {
-    public static class PixivUrls
+    static class PixivUrls
     {
         // Login urls
         public static URL Login = new URL() {Address = "https://oauth.secure.pixiv.net/auth/token", Type = "POST"};
@@ -92,7 +92,7 @@ namespace PixivCSharp
     }
 
     // Url class
-    public class URL
+    class URL
     {
         public string Address { get; set; }
         public string Type { get; set; }
