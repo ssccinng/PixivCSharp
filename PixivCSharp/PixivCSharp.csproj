@@ -2,7 +2,14 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <PackageVersion>0.1.0</PackageVersion>
+        <PackageVersion>0.4.5</PackageVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>PixivCSharp</Title>
+        <Authors>An-Owlbear</Authors>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\PixivCSharp.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>

@@ -30,7 +30,7 @@ namespace PixivCSharp.Tests
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Webpage: {0}", result.Profile.WebPage);
             Console.WriteLine("Gender: {0}", result.Profile.Gender);
-            Console.WriteLine("Birth: {0}", result.Profile.Birth);
+            Console.WriteLine("Birth date: {0}", result.Profile.BirthDate);
             Console.WriteLine("Birthday: {0}", result.Profile.BirthDay);
             Console.WriteLine("Birth year: {0}", result.Profile.BirthYear);
             Console.WriteLine("Region: {0}", result.Profile.Region);
