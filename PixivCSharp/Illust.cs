@@ -32,8 +32,7 @@ namespace PixivCSharp
         // Gets image from url and returns as stream
         public async Task<Stream> GetImageAsync(string imageUrl)
         {
-            HttpResponseMessage response = await RequestClient.GetImageAsync(imageUrl).ConfigureAwait(false);
-            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            return await RequestClient.GetImageAsync(imageUrl).ConfigureAwait(false);
         }
 
         // Retrieves a list of comments for an illust
