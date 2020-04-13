@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 namespace PixivCSharp
 {
@@ -11,6 +10,7 @@ namespace PixivCSharp
         public async Task<Illust> ViewIllustAsync(string id, string filter = null)
         {
             // Sets parameters
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "illust_id", id}
@@ -22,14 +22,11 @@ namespace PixivCSharp
             {
                 parameters.Add("filter", filter ?? Filter);
             }
-            
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             
             // Sends request and retrieves illust
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.ViewIllust, encodedParams).ConfigureAwait(false);
-            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-            Illust result = json["illust"].ToObject<Illust>();
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.ViewIllust, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<Illust>(response, "illust");
         }
 
         // Gets image from url and returns as stream
@@ -42,29 +39,27 @@ namespace PixivCSharp
         // Retrieves a list of comments for an illust
         public async Task<CommentList> IllustCommentsAsync(string id)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "illust_id", id}
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.IllustComments, encodedParams).ConfigureAwait(false);
-            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-            CommentList result = json.ToObject<CommentList>();
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.IllustComments, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<CommentList>(response);
         }
 
         // Retrieves a list of replies to a comment
         public async Task<CommentList> IllustCommentRepliesAsync(string id)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "comment_id", id}
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.IllustCommentReplies, encodedParams).ConfigureAwait(false);
-            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-            CommentList result = json.ToObject<CommentList>();
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.IllustCommentReplies, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<CommentList>(response);
         }
         
         // Bookmarks an illust

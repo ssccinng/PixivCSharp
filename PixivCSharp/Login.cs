@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
 
 namespace PixivCSharp
@@ -11,25 +11,24 @@ namespace PixivCSharp
         public async Task<IllustSearchResult> WalkthoughIllustsAsync()
         {
             // Retrieves walkthrough illusts and converts to json, and then returns it as IllustSearchResult
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.WalkthroughIllusts).ConfigureAwait(false);
-            string responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            IllustSearchResult result = Json.DeserializeJson<IllustSearchResult>(responseText);
-            return result;
+            Stream response;
+            response = await RequestClient.RequestAsync(PixivUrls.WalkthroughIllusts).ConfigureAwait(false);
+            return Json.DeserializeJson<IllustSearchResult>(response);
         }
 
         public async Task<EmojiList> EmojiListAsync()
         {
             // Retrieves emoji list, converts to json, and returns as search result object
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.GetEmoji).ConfigureAwait(false);
-            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-            EmojiList result = json.ToObject<EmojiList>();
-            return result;
+            Stream response;
+            response = await RequestClient.RequestAsync(PixivUrls.GetEmoji).ConfigureAwait(false);
+            return Json.DeserializeJson<EmojiList>(response);
         }
 
         // Login/refresh method
         public async Task<LoginResponse> LoginAsync(string username, string password)
         {
             // Parameter dictionary
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "client_id", "MOBrBDS8blbauoSck0ZfDbtuzpyT" },
@@ -44,18 +43,16 @@ namespace PixivCSharp
 
             // Login request is sent, converted to json and returned
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.Login, encodedParams).ConfigureAwait(false);
-            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-            LoginResponse result = json["response"].ToObject<LoginResponse>();
+            response = await RequestClient.RequestAsync(PixivUrls.Login, encodedParams).ConfigureAwait(false);
+            LoginResponse result = Json.DeserializeJson<LoginResponse>(response, "response");
             SetTokens(result.AccessToken, result.RefreshToken, result.DeviceToken);
             return result;
-            
-          
         }
 
         public async Task<LoginResponse> RefreshLoginAsync()
         {
             // Parameter dictionary
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "client_id", "MOBrBDS8blbauoSck0ZfDbtuzpyT" },
@@ -69,9 +66,8 @@ namespace PixivCSharp
             
             // Refresh request is sent, and new token is retrieved
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.Login, encodedParams).ConfigureAwait(false);
-            JObject json = JObject.Parse(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-            LoginResponse result = json["response"].ToObject<LoginResponse>();
+            response = await RequestClient.RequestAsync(PixivUrls.Login, encodedParams).ConfigureAwait(false);
+            LoginResponse result = Json.DeserializeJson<LoginResponse>(response, "response");
             SetTokens(result.AccessToken, result.RefreshToken, result.DeviceToken);
             return result;
         }

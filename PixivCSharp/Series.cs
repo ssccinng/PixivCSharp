@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace PixivCSharp
         // Returns a series context of an illust
         public async Task<IllustSeriesContext> IllustSeriesContextAsync(string illustID, string filter = null)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "illust_id", illustID }
@@ -21,18 +23,14 @@ namespace PixivCSharp
                 parameters.Add("filter", filter ?? Filter);
             }
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.SeriesFromIllust, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            IllustSeriesContext result = Json.DeserializeJson<IllustSeriesContext>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.SeriesFromIllust, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<IllustSeriesContext>(response);
         }
         
         // Returns information about an illust series
         public async Task<IllustSeriesInfo> IllustSeriesInfoAsync(string illustSeriesID, string filter = null)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "illust_series_id", illustSeriesID }
@@ -45,30 +43,22 @@ namespace PixivCSharp
                 parameters.Add("filter", filter ?? Filter);
             }
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
-
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.IllustSeries, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            IllustSeriesInfo result = Json.DeserializeJson<IllustSeriesInfo>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.IllustSeries, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<IllustSeriesInfo>(response);
         }
         
         // Returns information about a novel series
         public async Task<NovelSeriesInfo> NovelSeriesInfoAsync(string novelSeriesID)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "series_id", novelSeriesID }
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.NovelSeries, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            NovelSeriesInfo result = Json.DeserializeJson<NovelSeriesInfo>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.NovelSeries, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<NovelSeriesInfo>(response);
         }
     }
 }

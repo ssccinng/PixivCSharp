@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -32,7 +33,7 @@ namespace PixivCSharp
             md5 = MD5.Create();
         }
 
-        public async Task<HttpResponseMessage> RequestAsync(URL url, FormUrlEncodedContent parameters = null)
+        public async Task<Stream> RequestAsync(URL url, FormUrlEncodedContent parameters = null)
         {
             // Creates http request and uribuilder
             HttpResponseMessage response = null;
@@ -85,8 +86,9 @@ namespace PixivCSharp
             {
                 throw new HttpRequestException(((int)response.StatusCode).ToString());
             }
-            
-            return response;
+
+            Stream responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            return responseStream;
         }
 
         public async Task<HttpResponseMessage> GetImageAsync(string ImageUrl)

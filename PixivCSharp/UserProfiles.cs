@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -9,6 +10,7 @@ namespace PixivCSharp
         // Retrieves details of a user's profile
         public async Task<UserDetail> ViewProfileAsync(string UserID, string filter = null)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID }
@@ -20,21 +22,16 @@ namespace PixivCSharp
             {
                 parameters.Add("filter", filter ?? Filter);
             }
-            
             FormUrlEncodedContent encodedParameters = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.ViewProfile, encodedParameters)
-                .ConfigureAwait(false);
-
-            UserDetail result =
-                Json.DeserializeJson<UserDetail>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
-
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.ViewProfile, encodedParameters).ConfigureAwait(false);
+            return Json.DeserializeJson<UserDetail>(response);
         }
         
         // Retrieves a list of a user's illusts
         public async Task<IllustSearchResult> UserIllustsAsync(string UserID, string type, string filter = null)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID },
@@ -49,34 +46,28 @@ namespace PixivCSharp
             }
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.ProfileIllusts, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            IllustSearchResult result = Json.DeserializeJson<IllustSearchResult>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.ProfileIllusts, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<IllustSearchResult>(response);
         }
         
         // Retrieves a list of a user's novels
         public async Task<NovelSearchResult> UserNovelsAsync(string UserID)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID }
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage repsonse = await RequestClient.RequestAsync(PixivUrls.ProfileNovels, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseContent = await repsonse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            NovelSearchResult result = Json.DeserializeJson<NovelSearchResult>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.ProfileNovels, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<NovelSearchResult>(response);
         }
         
         // Retrieves a list of a user's bookmarked illusts
         public async Task<IllustSearchResult> BookmarkedIllustsAsync(string UserID, string restrict = "public")
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID },
@@ -84,17 +75,14 @@ namespace PixivCSharp
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage repsonse = await RequestClient.RequestAsync(PixivUrls.BookmarkedIllusts, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseContent = await repsonse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            IllustSearchResult result = Json.DeserializeJson<IllustSearchResult>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.BookmarkedIllusts, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<IllustSearchResult>(response);
         }
         
         // Retrieves a list of a user's bookmarked novels
         public async Task<NovelSearchResult> BookmarkedNovelsAsync(string UserID, string restrict = "public")
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID },
@@ -102,17 +90,14 @@ namespace PixivCSharp
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.BookmarkedNovels, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            NovelSearchResult result = Json.DeserializeJson<NovelSearchResult>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.BookmarkedNovels, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<NovelSearchResult>(response);
         }
 
         // Retrieves a list of the user's followers
         public async Task<UserSearchResult> FollowersAsync(string filter = null)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             
             // Adds filter if required
@@ -123,17 +108,14 @@ namespace PixivCSharp
             }
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage repsonse = await RequestClient.RequestAsync(PixivUrls.ViewFollowers, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseContent = await repsonse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            UserSearchResult result = Json.DeserializeJson<UserSearchResult>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.ViewFollowers, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<UserSearchResult>(response);
         }
 
         // Retrieves a list of the accounts followed by a user
         public async Task<UserSearchResult> FollowingAsync(string UserID, string restrict = "public", string filter = null)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID },
@@ -148,17 +130,14 @@ namespace PixivCSharp
             }
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.ViewFollowing, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            UserSearchResult result = Json.DeserializeJson<UserSearchResult>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.ViewFollowing, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<UserSearchResult>(response);
         }
          
         // Retrieves a list of accounts from a user's my pixiv list
         public async Task<UserSearchResult> MyPixivAsync(string UserID, string filter = null)
         {
+            Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID }
@@ -172,12 +151,8 @@ namespace PixivCSharp
             }
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage response =
-                await RequestClient.RequestAsync(PixivUrls.MyPixiv, encodedParams).ConfigureAwait(false);
-
-            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            UserSearchResult result = Json.DeserializeJson<UserSearchResult>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.MyPixiv, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<UserSearchResult>(response);
         }
         
         // Follows a user

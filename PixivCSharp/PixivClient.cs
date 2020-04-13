@@ -1,5 +1,5 @@
 using System;
-using System.Net.Http;
+using System.IO;
 using System.Threading.Tasks;
 using TimeZoneConverter;
 
@@ -53,6 +53,7 @@ namespace PixivCSharp
         public async Task<T> RequestAsync<T>(string urlString,  string type = "GET", bool authReqired = true,
             bool multipart = false)
         {
+            Stream response;
             URL url = new URL()
             {
                 Address = urlString,
@@ -61,10 +62,8 @@ namespace PixivCSharp
                 Multipart = multipart
             };
 
-            HttpResponseMessage response = await RequestClient.RequestAsync(url).ConfigureAwait(false);
-            string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            T result = Json.DeserializeJson<T>(responseContent);
-            return result;
+            response = await RequestClient.RequestAsync(url).ConfigureAwait(false);
+            return Json.DeserializeJson<T>(response);
         }
     }
 }

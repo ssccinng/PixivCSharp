@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace PixivCSharp
             string filter = null)
         {
             // Converts time to the correct timezone and produces a date string in correct format
+            Stream response;
             DateTime dateValue = date ?? TimeZoneInfo.ConvertTime(DateTime.Now, JapanTimeZone).AddDays(-1);
             string dateString = dateValue.Year.ToString("0000") + "-" + dateValue.Month.ToString("00")
                                 + "-" + dateValue.Day.ToString("00");
@@ -30,18 +32,17 @@ namespace PixivCSharp
             }
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.RankingIllusts, encodedParams)
+            response = await RequestClient.RequestAsync(PixivUrls.RankingIllusts, encodedParams)
                 .ConfigureAwait(false);
 
-            string resposneString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            IllustSearchResult result = Json.DeserializeJson<IllustSearchResult>(resposneString);
-            return result;
+            return Json.DeserializeJson<IllustSearchResult>(response);
         }
         
         // Gets a list of ranking novels
         public async Task<NovelSearchResult> RankingNovelsAsync(string mode = "day", DateTime? date = null)
         {
             // Converts time to the correct timezone and produces a date string in correct format
+            Stream response;
             DateTime dateValue = date ?? TimeZoneInfo.ConvertTime(DateTime.Now, JapanTimeZone).AddDays(-1);
             string dateString = dateValue.Year.ToString("0000") + "-" + dateValue.Month.ToString("00")
                                 + "-" + dateValue.Day.ToString("00");
@@ -53,13 +54,8 @@ namespace PixivCSharp
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
-            HttpResponseMessage response = await RequestClient.RequestAsync(PixivUrls.RankingNovels, encodedParams)
-                .ConfigureAwait(false);
-
-            string responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            
-            NovelSearchResult result = Json.DeserializeJson<NovelSearchResult>(responseString);
-            return result;
+            response = await RequestClient.RequestAsync(PixivUrls.RankingNovels, encodedParams).ConfigureAwait(false);
+            return Json.DeserializeJson<NovelSearchResult>(response);
         }
     }
 }
