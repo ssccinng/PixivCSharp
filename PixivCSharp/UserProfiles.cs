@@ -7,7 +7,12 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
-        // Retrieves details of a user's profile
+        /// <summary>
+        /// Gets information about a user.
+        /// </summary>
+        /// <param name="UserID">The ID of the user to get view.</param>
+        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="UserDetail"/></returns>
         public async Task<UserDetail> ViewProfileAsync(string UserID, string filter = null)
         {
             Stream response;
@@ -28,7 +33,13 @@ namespace PixivCSharp
             return Json.DeserializeJson<UserDetail>(response);
         }
         
-        // Retrieves a list of a user's illusts
+        /// <summary>
+        /// Gets a list of illusts by the specified user.
+        /// </summary>
+        /// <param name="UserID">The ID of the user to view illusts of.</param>
+        /// <param name="type">The type of illusts to view. Can be: 'illust' or 'manga'</param>
+        /// <param name="filter"></param>
+        /// <returns><seealso cref="IllustSearchResult"/></returns>
         public async Task<IllustSearchResult> UserIllustsAsync(string UserID, string type, string filter = null)
         {
             Stream response;
@@ -50,7 +61,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<IllustSearchResult>(response);
         }
         
-        // Retrieves a list of a user's novels
+        /// <summary>
+        /// Gets a list of novels by the specified user.
+        /// </summary>
+        /// <param name="UserID">The ID of the user to view novels of.</param>
+        /// <returns><seealso cref="NovelSearchResult"/></returns>
         public async Task<NovelSearchResult> UserNovelsAsync(string UserID)
         {
             Stream response;
@@ -64,7 +79,15 @@ namespace PixivCSharp
             return Json.DeserializeJson<NovelSearchResult>(response);
         }
         
-        // Retrieves a list of a user's bookmarked illusts
+        /// <summary>
+        /// View bookmarked illusts of the given user.
+        /// </summary>
+        /// <remarks>
+        /// The request accepts no filter parameter, therefore any filtering must be done manually.
+        /// </remarks>
+        /// <param name="UserID">The ID of the user to view bookmarks of.</param>
+        /// <param name="restrict">The publicity of bookmarks to view. Can be: 'all', 'public' or 'private'.</param>
+        /// <returns><seealso cref="IllustSearchResult"/></returns>
         public async Task<IllustSearchResult> BookmarkedIllustsAsync(string UserID, string restrict = "public")
         {
             Stream response;
@@ -79,7 +102,12 @@ namespace PixivCSharp
             return Json.DeserializeJson<IllustSearchResult>(response);
         }
         
-        // Retrieves a list of a user's bookmarked novels
+        /// <summary>
+        /// Gets a list of novels bookmarked by the given user.
+        /// </summary>
+        /// <param name="UserID">The ID of the user to view novel bookmarks of.</param>
+        /// <param name="restrict">The publicity of bookmarks to view. Can be: 'all', 'public' or 'private'.</param>
+        /// <returns><seealso cref="NovelSearchResult"/></returns>
         public async Task<NovelSearchResult> BookmarkedNovelsAsync(string UserID, string restrict = "public")
         {
             Stream response;
@@ -94,7 +122,15 @@ namespace PixivCSharp
             return Json.DeserializeJson<NovelSearchResult>(response);
         }
 
-        // Retrieves a list of the user's followers
+        /// <summary>
+        /// Gets a list of of followers of the logged in user.
+        /// </summary>
+        /// <remarks>
+        /// This method can only be used to view the followers of the signed in user. There is no way to view the
+        /// followers of another user.
+        /// </remarks>
+        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="UserSearchResult"/></returns>
         public async Task<UserSearchResult> FollowersAsync(string filter = null)
         {
             Stream response;
@@ -112,7 +148,13 @@ namespace PixivCSharp
             return Json.DeserializeJson<UserSearchResult>(response);
         }
 
-        // Retrieves a list of the accounts followed by a user
+        /// <summary>
+        /// Gets a list of the users followed by the given user.
+        /// </summary>
+        /// <param name="UserID">The ID of the user to view following accounts from.</param>
+        /// <param name="restrict">The publicity of follows to view. Can be: 'all', 'public' or 'private'.</param>
+        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="UserSearchResult"/></returns>
         public async Task<UserSearchResult> FollowingAsync(string UserID, string restrict = "public", string filter = null)
         {
             Stream response;
@@ -134,7 +176,12 @@ namespace PixivCSharp
             return Json.DeserializeJson<UserSearchResult>(response);
         }
          
-        // Retrieves a list of accounts from a user's my pixiv list
+        /// <summary>
+        /// Gets a list of users on the specified user's my pixiv list.
+        /// </summary>
+        /// <param name="UserID">The ID of the user to view my pixiv users of.</param>
+        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="UserSearchResult"/></returns>
         public async Task<UserSearchResult> MyPixivAsync(string UserID, string filter = null)
         {
             Stream response;
@@ -155,7 +202,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<UserSearchResult>(response);
         }
         
-        // Follows a user
+        /// <summary>
+        /// Follows a user.
+        /// </summary>
+        /// <param name="UserID">The ID of the user to follow.</param>
+        /// <param name="restrict">The publicity at which to follow. Can be: 'all', 'public' or 'private'.</param>
         public async Task FollowAsync(string UserID, string restrict = "public")
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -167,7 +218,10 @@ namespace PixivCSharp
             await RequestClient.RequestAsync(PixivUrls.FollowProfile, encodedParams).ConfigureAwait(false);
         }
 
-        // Unfollows a user
+        /// <summary>
+        /// Unfollows a user.
+        /// </summary>
+        /// <param name="UserID">The ID of the user to unfollow.</param>
         public async Task RemoveFollowAsync(string UserID)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()

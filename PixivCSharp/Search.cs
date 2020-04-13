@@ -158,7 +158,7 @@ namespace PixivCSharp
         /// <param name="searchTarget">The method of search. Can be: 'partial_match_for_tags', 'exact_match_for_tags' or 'title_and_caption'.</param>
         /// <param name="includeTranslatedTags">Whether to include tag translations.</param>
         /// <param name="mergePlainKeywordResults">Currently unknown.</param>
-        /// <returns></returns>
+        /// <returns><seealso cref="NovelSearchResult"/></returns>
         public async Task<NovelSearchResult> PopularNovelsPreviewAsync(string searchTerm, string sort = "date_desc",
             string searchTarget = "partial_match_for_tags", bool includeTranslatedTags = true,
             bool mergePlainKeywordResults = true)
