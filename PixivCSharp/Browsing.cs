@@ -8,7 +8,12 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
-        // Gets a list of new illusts
+        /// <summary>
+        /// Gets a list of new illusts
+        /// </summary>
+        /// <param name="ContentType">Specifies the type of content to search for: illust/manga.</param>
+        /// <param name="filter">Specifies whether to use a filter. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="IllustSearchResult"/> for new illusts.</returns>
         public async Task<IllustSearchResult> NewIllustsAsync(string ContentType, string filter = null)
         {
             Stream response;
@@ -31,7 +36,14 @@ namespace PixivCSharp
             return Json.DeserializeJson<IllustSearchResult>(response);
         }
         
-        // Gets a list of new illusts from followed account
+        /// <summary>
+        /// Gets a list of new illusts from followed accounts.
+        /// </summary>
+        /// <remarks>
+        /// This request does accept the 'filter' parameters, therefore results must be filtered manually if required.
+        /// </remarks>
+        /// <param name="restrict">Specifies of what restrict to search for: 'all', 'public' or 'private'.</param>
+        /// <returns><seealso cref="IllustSearchResult"/> for new illusts from following.</returns>
         public async Task<IllustSearchResult> NewFollowIllustsAsync(string restrict = "all")
         {
             Stream response;
@@ -47,7 +59,10 @@ namespace PixivCSharp
             return Json.DeserializeJson<IllustSearchResult>(response);
         }
         
-        // Gets a list of new illusts from users added to my pixiv
+        /// <summary>
+        /// Gets a list of illusts from my pixiv users.
+        /// </summary>
+        /// <returns><seealso cref="IllustSearchResult"/> for new illusts from my pixiv users.</returns>
         public async Task<IllustSearchResult> NewMyPixivIllustsAsync()
         {
             Stream response;
@@ -57,7 +72,10 @@ namespace PixivCSharp
             return Json.DeserializeJson<IllustSearchResult>(response);
         }
         
-        // Gets a list of new novels
+        /// <summary>
+        /// Gets a list of new novels.
+        /// </summary>
+        /// <returns><seealso cref="NovelSearchResult"/> for new novels.</returns>
         public async Task<NovelSearchResult> NewNovelsAsync()
         {
             Stream response;
@@ -67,7 +85,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<NovelSearchResult>(response);
         }
         
-        // Gets a list of new novels from followed
+        /// <summary>
+        /// Gets a list of new novels from followed accounts.
+        /// </summary>
+        /// <param name="restrict">Specifies of what restrict to search for: 'public', 'private' or 'mypixiv'.</param>
+        /// <returns><seealso cref="NovelSearchResult"/> for new novels from followed accounts.</returns>
         public async Task<NovelSearchResult> NewFollowNovelsAsync(string restrict)
         {
             Stream response;
@@ -84,7 +106,10 @@ namespace PixivCSharp
             return Json.DeserializeJson<NovelSearchResult>(response);
         }
         
-        // Gets a list of new novels from my pixiv
+        /// <summary>
+        /// Gets a list of new novels from my pixiv users.
+        /// </summary>
+        /// <returns><seealso cref="NovelSearchResult"/> for new novels from my pixiv users.</returns>
         public async Task<NovelSearchResult> NewMyPixivNovelsAsync()
         {
             Stream response;
@@ -94,7 +119,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<NovelSearchResult>(response);
         }
         
-        // Gets a list of trending illust tags
+        /// <summary>
+        /// Gets a list of currently trending illust tags.
+        /// </summary>
+        /// <param name="filter">Specifies whether to use a filter. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="TrendTag"/>[] for trending illust tags.</returns>
         public async Task<TrendTag[]> TrendingIllustTagsAsync(string filter = null)
         {
             Stream response;
@@ -113,7 +142,10 @@ namespace PixivCSharp
             return Json.DeserializeJson<TrendTag[]>(response, "trend_tags");
         }
         
-        // Gets a list of trending tags
+        /// <summary>
+        /// Gets a list of currently trending novel tags.
+        /// </summary>
+        /// <returns><seealso cref="TrendTag"/>[] for trending novel tags.</returns>
         public async Task<TrendTag[]> TrendingNovelTagsAsync()
         {
             Stream response;
