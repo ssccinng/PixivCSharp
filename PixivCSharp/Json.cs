@@ -6,12 +6,6 @@ namespace PixivCSharp
 {
     internal static class Json
     {
-        public static T DeserializeJson<T>(string json)
-        {
-            T result = JsonConvert.DeserializeObject<T>(json);
-            return result;
-        }
-
         public static T DeserializeJson<T>(Stream json)
         {
             using (StreamReader sr = new StreamReader(json))
@@ -29,18 +23,6 @@ namespace PixivCSharp
                 JObject jObject = JObject.Parse(reader.ReadToEnd());
                 return jObject[target].ToObject<T>();
             }
-        }
-
-        public static T DeserializeJson<T>(JObject json)
-        {
-            T result = json.ToObject<T>();
-            return result;
-        }
-
-        public static T DeserializeJson<T>(JArray json)
-        {
-            T result = json.ToObject<T>();
-            return result;
         }
     }
 }
