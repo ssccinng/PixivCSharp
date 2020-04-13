@@ -30,8 +30,8 @@ namespace PixivCSharp.Tests
             Console.WriteLine("Illust context:");
             Console.WriteLine("-------------------------------------------------------------------------------");
             Console.WriteLine("Content order: {0}", result.SeriesContext.ContentOrder);
-            Output.TestIllust(result.SeriesContext.Prev);
-            Output.TestIllust(result.SeriesContext.Next);
+            if (result.SeriesContext.Prev != null) Output.TestIllust(result.SeriesContext.Prev);
+            if (result.SeriesContext.Next != null) Output.TestIllust(result.SeriesContext.Next);
         }
 
         // Tests viewing information of an illust series

@@ -107,7 +107,7 @@ namespace PixivCSharp.Tests
         // Tests bookmarks
         static async Task BookmarkIllust()
         {
-            Console.Write("Enter 1 to add a bookmark, enter 0 to remove a bookmark\n> ");
+            Console.Write("Enter 1 to add a bookmark, enter 2 to remove a bookmark\n> ");
             string choice = Console.ReadLine();
 
             if (choice == "1")
@@ -117,7 +117,7 @@ namespace PixivCSharp.Tests
             }
             else if (choice == "2")
             {
-                Console.Write("Enter the id of illust to remove from bookmarks");
+                Console.Write("Enter the id of illust to remove from bookmarks\n> ");
                 await Client.RemoveBookmarkIllustAsync(Console.ReadLine());
             }
         }

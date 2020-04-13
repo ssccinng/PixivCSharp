@@ -224,7 +224,7 @@ namespace PixivCSharp.Tests
         private static async Task ViewFollowing()
         {
             UserSearchResult result;
-            Console.WriteLine("Enter the user id of the user followed accounts of\n> ");
+            Console.Write("Enter the user id of the user followed accounts of\n> ");
             
             // Error handling
             try
@@ -253,7 +253,7 @@ namespace PixivCSharp.Tests
         private static async Task ViewMyPixiv()
         {
             UserSearchResult result;
-            Console.WriteLine("Please enter the user view my pixiv users of\n> ");
+            Console.Write("Please enter the user view my pixiv users of\n> ");
             
             // Error handling
             try
@@ -281,7 +281,7 @@ namespace PixivCSharp.Tests
         // Tests following a user
         private static async Task FollowUser()
         {
-            Console.WriteLine("Please enter the ID of the user to follow");
+            Console.Write("Please enter the ID of the user to follow\n> ");
             
             // Error handling
             try
@@ -297,7 +297,7 @@ namespace PixivCSharp.Tests
         // Tests unfollowing a user
         private static async Task UnFollowUser()
         {
-            Console.WriteLine("Please enter the ID of the user to unfollow");
+            Console.Write("Please enter the ID of the user to unfollow\n> ");
             
             // Error handling
             try

@@ -85,7 +85,7 @@ namespace PixivCSharp.Tests
             foreach (UserPreview user in result.UserPreviews)
             {
                 Output.TestUser(user.User);
-                Output.TestIllust(user.Illusts[0]);
+                if (user.Illusts.Count != 0) Output.TestIllust(user.Illusts[0]);
             }
             
             Console.WriteLine("Next URL: {0}", result.NextUrl);
