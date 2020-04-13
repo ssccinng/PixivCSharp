@@ -7,7 +7,12 @@ namespace PixivCSharp
 {
     public partial class PixivClient
     {
-        // Returns a series context of an illust
+        /// <summary>
+        /// Gets the context of an illust within a series.
+        /// </summary>
+        /// <param name="illustID">The ID of the illust to view the context of.</param>
+        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="IllustSeriesContext"/></returns>
         public async Task<IllustSeriesContext> IllustSeriesContextAsync(string illustID, string filter = null)
         {
             Stream response;
@@ -27,7 +32,12 @@ namespace PixivCSharp
             return Json.DeserializeJson<IllustSeriesContext>(response);
         }
         
-        // Returns information about an illust series
+        /// <summary>
+        /// Gets information about an illust series.
+        /// </summary>
+        /// <param name="illustSeriesID">The illust series ID to get information for.</param>
+        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <returns><seealso cref="IllustSeriesInfo"/></returns>
         public async Task<IllustSeriesInfo> IllustSeriesInfoAsync(string illustSeriesID, string filter = null)
         {
             Stream response;
@@ -47,7 +57,11 @@ namespace PixivCSharp
             return Json.DeserializeJson<IllustSeriesInfo>(response);
         }
         
-        // Returns information about a novel series
+        /// <summary>
+        /// Gets information about a novel series.
+        /// </summary>
+        /// <param name="novelSeriesID">The novel series ID to get information for.</param>
+        /// <returns><seealso cref="NovelSeriesInfo"/></returns>
         public async Task<NovelSeriesInfo> NovelSeriesInfoAsync(string novelSeriesID)
         {
             Stream response;
