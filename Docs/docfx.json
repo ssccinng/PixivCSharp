@@ -3,19 +3,20 @@
     {
       "src": [
         {
-	  "src": "../PixivCSharp",
+	  "src": "../PixivCSharp/bin/Release",
           "files": [
-            "**.csproj"
+            "**.dll"
           ],
 	  "exclude": [
-            "**/bin/**",
-            "**/obj/**"
+          "**/bin/**",
+          "**/obj/**"
           ]
         }
       ],
       "dest": "api",
-      "disableGitFeatures": false,
-      "disableDefaultFilter": false
+      "properties": {
+        "TargetFramework": "netstandard2.1"
+      }
     }
   ],
   "build": {
@@ -62,9 +63,6 @@
     ],
     "postProcessors": [],
     "markdownEngineName": "markdig",
-    "noLangKeyword": false,
-    "keepFileLink": false,
-    "cleanupCacheHistory": false,
-    "disableGitFeatures": false
+    "noLangKeyword": false
   }
 }
