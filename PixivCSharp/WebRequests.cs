@@ -81,6 +81,11 @@ namespace PixivCSharp
                     response = await Client.SendAsync(request).ConfigureAwait(false);
                 }
             }
+            // Throws an exception if URL is invalid.
+            else
+            {
+                throw new ArgumentException("URL type must be GET or POST.");
+            }
             
             if (response != null && !response.IsSuccessStatusCode)
             {
