@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -34,39 +36,48 @@ namespace PixivCSharp.Tests
         static async Task TimeTest()
         {
             IllustSearchResult list = await Client.WalkthoughIllustsAsync();
-            Task<Stream>[] taskArray = new Task<Stream>[10];
             Stopwatch timer = new Stopwatch();
             timer.Start();
-            
-            for (int i = 0; i < 10; i++)
-            {
-                Console.WriteLine(list.Illusts[i].ImageUrls.SquareMedium);
-                taskArray[i] = Client.GetImageAsync(list.Illusts[i].ImageUrls.SquareMedium);
-            }
 
-            for (int i = 0; i < 10; i++)
+            List<Illust> illusts = list.Illusts.GetRange(0, 10);
+            var tasks = illusts.Select(async x =>
             {
-                Stream image = await taskArray[i];
-                using (FileStream filestream = new FileStream((i + ".jpg"), FileMode.OpenOrCreate, FileAccess.Write))
-                {
-                    image.Seek(0, SeekOrigin.Begin);
-                    await image.CopyToAsync(filestream);
-                }
-            }
+                string filename = x.MetaSinglePage.OriginalImageUrl.Split("/").Last();
+                Stream image = await Client.GetImageAsync(x.ImageUrls.SquareMedium);
+                FileStream file = File.Open(filename, FileMode.OpenOrCreate);
+                await image.CopyToAsync(file);
+            });
+
+            await Task.WhenAll(tasks);
             
             timer.Stop();
-            Console.WriteLine(timer.Elapsed.Seconds);
+            Console.WriteLine(timer.Elapsed.TotalMilliseconds);
         }
 
         // Download image test
         static async Task DownloadImageTest()
         {
-            IllustSearchResult list = await Client.WalkthoughIllustsAsync();
-            Stream imageStream = await Client.GetImageAsync(list.Illusts[0].ImageUrls.Medium);
-            using (FileStream fileStream = new FileStream("test.jpg", FileMode.OpenOrCreate, FileAccess.Write))
+            Console.Write("Enter the ID of the image to download\n> ");
+            
+            // Error handling
+            try
             {
-                imageStream.Seek(0, SeekOrigin.Begin);
-                imageStream.CopyTo(fileStream);
+                Stopwatch timer = new Stopwatch();
+                timer.Start();
+                Illust result = await Client.ViewIllustAsync(Console.ReadLine());
+                string url = result.MetaSinglePage.OriginalImageUrl ?? result.MetaPages[0].ImageUrls.Original;
+                Stream image = await Client.GetImageAsync(url);
+                using (FileStream file = File.Open(url.Split("/").Last(), FileMode.OpenOrCreate))
+                {
+                    await image.CopyToAsync(file);
+                }
+
+                timer.Stop();
+                Console.WriteLine(timer.Elapsed.TotalMilliseconds);
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 

@@ -33,7 +33,7 @@ namespace PixivCSharp
             Client.DefaultRequestHeaders.Add("Accept-Language", "en_US");
             Client.DefaultRequestHeaders.Add("App-OS", "android");
             Client.DefaultRequestHeaders.Add("App-OS-Version", "5.1");
-            Client.DefaultRequestHeaders.Add("Connection", "close");
+            Client.DefaultRequestHeaders.Add("Connection", "keep-alive");
             md5 = MD5.Create();
         }
 
