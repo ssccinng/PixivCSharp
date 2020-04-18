@@ -10,6 +10,10 @@ namespace PixivCSharp
 {
     class WebRequests
     {
+        private string authErrorText = "{\"error\":{\"user_message\":\"\",\"message\":\"Error occurred at the OAuth " +
+                                       "process. Please check your Access Token to fix this. Error Message: " +
+                                       "invalid_request\",\"reason\":\"\",\"user_message_details\":{}}}";
+        
         // Access tokens
         public string access_token;
         public string refresh_token;
@@ -89,7 +93,14 @@ namespace PixivCSharp
             
             if (response != null && !response.IsSuccessStatusCode)
             {
-                throw new HttpRequestException(((int)response.StatusCode).ToString());
+                if (await response.Content.ReadAsStringAsync() == authErrorText)
+                {
+                    throw new HttpRequestException("Authentication error");
+                }
+                else
+                {
+                    throw new HttpRequestException(((int)response.StatusCode).ToString());
+                }
             }
 
             Stream responseStream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);

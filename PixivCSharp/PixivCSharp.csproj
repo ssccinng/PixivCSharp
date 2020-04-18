@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <PackageVersion>0.5.0</PackageVersion>
+        <PackageVersion>0.6.0</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>PixivCSharp</Title>
         <Authors>An-Owlbear</Authors>
