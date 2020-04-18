@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -10,9 +11,14 @@ namespace PixivCSharp
 {
     class WebRequests
     {
-        private string authErrorText = "{\"error\":{\"user_message\":\"\",\"message\":\"Error occurred at the OAuth " +
-                                       "process. Please check your Access Token to fix this. Error Message: " +
-                                       "invalid_request\",\"reason\":\"\",\"user_message_details\":{}}}";
+        private List<string> authErrors = new List<string>()
+        {
+            "{\"error\":{\"user_message\":\"\",\"message\":\"Error occurred at the OAuth " +
+            "process. Please check your Access Token to fix this. Error Message: " +
+            "invalid_request\",\"reason\":\"\",\"user_message_details\":{}}}",
+            "{\"error\":{\"user_message\":\"\",\"message\":\"Error occurred at the OAuth process. Please check your " +
+            "Access Token to fix this. Error Message: invalid_grant\",\"reason\":\"\",\"user_message_details\":{}}}"
+        };
         
         // Access tokens
         public string access_token;
@@ -93,7 +99,7 @@ namespace PixivCSharp
             
             if (response != null && !response.IsSuccessStatusCode)
             {
-                if (await response.Content.ReadAsStringAsync() == authErrorText)
+                if (authErrors.Contains(await response.Content.ReadAsStringAsync()))
                 {
                     throw new HttpRequestException("Authentication error");
                 }
