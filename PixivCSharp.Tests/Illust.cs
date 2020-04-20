@@ -65,7 +65,11 @@ namespace PixivCSharp.Tests
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
                 Illust result = await Client.ViewIllustAsync(Console.ReadLine());
+                timer.Stop();
+                Console.WriteLine("Getting info - {0} milliseconds", timer.Elapsed.TotalMilliseconds);
+                timer.Reset();
                 string url = result.MetaSinglePage.OriginalImageUrl ?? result.MetaPages[0].ImageUrls.Original;
+                timer.Start();
                 Stream image = await Client.GetImageAsync(url);
                 using (FileStream file = File.Open(url.Split("/").Last(), FileMode.OpenOrCreate))
                 {
@@ -73,7 +77,7 @@ namespace PixivCSharp.Tests
                 }
 
                 timer.Stop();
-                Console.WriteLine(timer.Elapsed.TotalMilliseconds);
+                Console.WriteLine("Downloading - {0} milliseconds", timer.Elapsed.TotalMilliseconds);
             }
             catch (HttpRequestException e)
             {
