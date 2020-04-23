@@ -1,7 +1,5 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
-using TimeZoneConverter;
 
 namespace PixivCSharp
 {
@@ -11,7 +9,6 @@ namespace PixivCSharp
     public partial class PixivClient
     {
         private WebRequests RequestClient;
-        private TimeZoneInfo JapanTimeZone;
 
         /// <summary>
         /// Creates an instance of the Pixiv Client
@@ -21,7 +18,6 @@ namespace PixivCSharp
         {
             RequestClient = new WebRequests();
             Filter = filterSetting;
-            JapanTimeZone = TZConvert.GetTimeZoneInfo("Tokyo Standard Time");
         }
         
         /// <summary>

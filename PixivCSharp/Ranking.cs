@@ -23,7 +23,7 @@ namespace PixivCSharp
         {
             // Converts time to the correct timezone and produces a date string in correct format
             Stream response;
-            DateTime dateValue = date ?? TimeZoneInfo.ConvertTime(DateTime.Now, JapanTimeZone).AddDays(-1);
+            DateTime dateValue = date ?? DateTime.Now.AddDays(-1);
             string dateString = dateValue.Year.ToString("0000") + "-" + dateValue.Month.ToString("00")
                                 + "-" + dateValue.Day.ToString("00");
 
@@ -57,7 +57,7 @@ namespace PixivCSharp
         {
             // Converts time to the correct timezone and produces a date string in correct format
             Stream response;
-            DateTime dateValue = date ?? TimeZoneInfo.ConvertTime(DateTime.Now, JapanTimeZone).AddDays(-1);
+            DateTime dateValue = date ?? DateTime.Now.AddDays(-1);
             string dateString = dateValue.Year.ToString("0000") + "-" + dateValue.Month.ToString("00")
                                 + "-" + dateValue.Day.ToString("00");
             

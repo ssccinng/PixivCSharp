@@ -11,7 +11,6 @@ PixivCSharp is a cross-platform .NET library that aims to fully implement the An
 
 Libraries used:<br>
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
-* [TimeZoneConverter](https://github.com/mj1856/TimeZoneConverter)
 
-Documentation generated using [DocFX](https://dotnet.github.io/docfx/).<br>
+Documentation generated using [DocFX](https://dotnet.github.io/docfx/). <br>
 DocFx templete: [mathew](https://github.com/MathewSachin/docfx-tmpl).
