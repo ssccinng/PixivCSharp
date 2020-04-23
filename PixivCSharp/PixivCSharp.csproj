@@ -2,10 +2,13 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <PackageVersion>0.6.5</PackageVersion>
+        <PackageVersion>0.6.7</PackageVersion>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>PixivCSharp</Title>
         <Authors>An-Owlbear</Authors>
+        <Description>An .NET library aiming to fully implement the pixiv.net android API.</Description>
+        <PackageProjectUrl>https://github.com/An-Owlbear/PixivCSharp</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/An-Owlbear/PixivCSharp/blob/master/LICENSE</PackageLicenseUrl>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
