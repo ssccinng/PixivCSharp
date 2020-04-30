@@ -51,7 +51,7 @@ namespace PixivCSharp
             UriBuilder address = new UriBuilder(url.Address);
 
             // Creates and adds X-Client headers
-            string time = DateTime.UtcNow.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:sszzz");
+            string time = DateTime.Now.ToString(@"yyyy-MM-ddTHH\:mm\:sszzz");
             byte[] hashBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(time + "28c1fdd170a5204386cb1313c7077b34f83e4aaf4aa829ce78c231e05b0bae2c"));
             StringBuilder sb = new StringBuilder();
             foreach (byte b in hashBytes)
