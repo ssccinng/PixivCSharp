@@ -13,22 +13,21 @@ namespace PixivCSharp
         /// <param name="UserID">The ID of the user to get view.</param>
         /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
         /// <returns><seealso cref="UserDetail"/></returns>
-        public async Task<UserDetail> ViewProfileAsync(string UserID, string filter = null)
+        public async Task<UserDetail> ViewProfileAsync(string UserID, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID }
             };
-            
-            // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
-            {
-                parameters.Add("filter", filter ?? Filter);
-            }
-            FormUrlEncodedContent encodedParameters = new FormUrlEncodedContent(parameters);
 
+            // Adds filter if required
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
+            {
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
+            }
+
+            FormUrlEncodedContent encodedParameters = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.ViewProfile, encodedParameters).ConfigureAwait(false);
             return Json.DeserializeJson<UserDetail>(response);
         }
@@ -40,7 +39,7 @@ namespace PixivCSharp
         /// <param name="type">The type of illusts to view. Can be: 'illust' or 'manga'</param>
         /// <param name="filter"></param>
         /// <returns><seealso cref="IllustSearchResult"/></returns>
-        public async Task<IllustSearchResult> UserIllustsAsync(string UserID, IllustType type, string filter = null)
+        public async Task<IllustSearchResult> UserIllustsAsync(string UserID, IllustType type, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -48,15 +47,14 @@ namespace PixivCSharp
                 { "user_id", UserID },
                 { "type", type.JsonValue() },
             };
-            
-            // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
-            {
-                parameters.Add("filter", filter ?? Filter);
-            }
-            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
+            // Adds filter if required
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
+            {
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
+            }
+
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.ProfileIllusts, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<IllustSearchResult>(response);
         }
@@ -96,8 +94,8 @@ namespace PixivCSharp
                 { "user_id", UserID },
                 { "restrict", restrict.JsonValue() }
             };
-            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.BookmarkedIllusts, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<IllustSearchResult>(response);
         }
@@ -131,19 +129,18 @@ namespace PixivCSharp
         /// </remarks>
         /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
         /// <returns><seealso cref="UserSearchResult"/></returns>
-        public async Task<UserSearchResult> FollowersAsync(string filter = null)
+        public async Task<UserSearchResult> FollowersAsync(FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            
-            // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
-            {
-                parameters.Add("filter", filter ?? Filter);
-            }
-            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
+            // Adds filter if required
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
+            {
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
+            }
+
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.ViewFollowers, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<UserSearchResult>(response);
         }
@@ -155,7 +152,7 @@ namespace PixivCSharp
         /// <param name="restrict">The publicity of follows to view. Can be: 'all', 'public' or 'private'.</param>
         /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
         /// <returns><seealso cref="UserSearchResult"/></returns>
-        public async Task<UserSearchResult> FollowingAsync(string UserID, Publicity restrict = Publicity.Public, string filter = null)
+        public async Task<UserSearchResult> FollowingAsync(string UserID, Publicity restrict = Publicity.Public, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -163,15 +160,14 @@ namespace PixivCSharp
                 { "user_id", UserID },
                 { "restrict", restrict.JsonValue() }
             };
-            
-            // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
-            {
-                parameters.Add("filter", filter ?? Filter);
-            }
-            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
+            // Adds filter if required
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
+            {
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
+            }
+
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.ViewFollowing, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<UserSearchResult>(response);
         }
@@ -182,22 +178,21 @@ namespace PixivCSharp
         /// <param name="UserID">The ID of the user to view my pixiv users of.</param>
         /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
         /// <returns><seealso cref="UserSearchResult"/></returns>
-        public async Task<UserSearchResult> MyPixivAsync(string UserID, string filter = null)
+        public async Task<UserSearchResult> MyPixivAsync(string UserID, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID }
             };
-            
-            // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
-            {
-                parameters.Add("filter", filter ?? Filter);
-            }
-            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
+            // Adds filter if required
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
+            {
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
+            }
+
+            FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.MyPixiv, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<UserSearchResult>(response);
         }

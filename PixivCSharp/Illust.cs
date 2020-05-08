@@ -13,7 +13,7 @@ namespace PixivCSharp
         /// <param name="id">Specifies the ID of the illut to search for.</param>
         /// <param name="filter">Specifies whether to use a filter.</param>
         /// <returns><seealso cref="Illust"/></returns>
-        public async Task<Illust> ViewIllustAsync(string id, string filter = null)
+        public async Task<Illust> ViewIllustAsync(string id, FilterType filter = FilterType.None)
         {
             // Sets parameters
             Stream response;
@@ -21,13 +21,13 @@ namespace PixivCSharp
             {
                 { "illust_id", id}
             };
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
+
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             
             // Sends request and retrieves illust

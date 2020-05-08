@@ -13,19 +13,18 @@ namespace PixivCSharp
         /// <param name="ContentType">Specifies the type of content to search for.</param>
         /// <param name="filter">Specifies whether to use a filter.</param>
         /// <returns><seealso cref="IllustSearchResult"/> for new illusts.</returns>
-        public async Task<IllustSearchResult> NewIllustsAsync(string ContentType, string filter = null)
+        public async Task<IllustSearchResult> NewIllustsAsync(string ContentType, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string ,string> parameters = new Dictionary<string, string>()
             {
                 { "content_type", ContentType }
             };
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
             
             // Encodes parameters and sends request
@@ -123,18 +122,17 @@ namespace PixivCSharp
         /// </summary>
         /// <param name="filter">Specifies whether to use a filter.</param>
         /// <returns><seealso cref="TrendTag"/>[] for trending illust tags.</returns>
-        public async Task<TrendTag[]> TrendingIllustTagsAsync(string filter = null)
+        public async Task<TrendTag[]> TrendingIllustTagsAsync(FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
-            
+
             FormUrlEncodedContent encodedParameters = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.TrendingIllustTags, encodedParameters).ConfigureAwait(false);
 

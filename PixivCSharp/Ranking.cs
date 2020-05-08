@@ -16,7 +16,7 @@ namespace PixivCSharp
         /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="IllustSearchResult"/> for ranking illusts.</returns>
         public async Task<IllustSearchResult> RankingIllustsAsync(RankingMode mode = RankingMode.Day, DateTime? date = null,
-            string filter = null)
+            FilterType? filter = null)
         {
             // Converts time to the correct timezone and produces a date string in correct format
             Stream response;
@@ -29,13 +29,13 @@ namespace PixivCSharp
                 { "mode", mode.JsonValue() },
                 { "date", dateString }
             };
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter ?? Filter) != FilterType.None)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
+
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
             response = await RequestClient.RequestAsync(PixivUrls.RankingIllusts, encodedParams)

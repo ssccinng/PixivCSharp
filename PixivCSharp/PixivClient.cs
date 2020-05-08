@@ -14,10 +14,10 @@ namespace PixivCSharp
         /// Creates an instance of the Pixiv Client
         /// </summary>
         /// <param name="filterSetting">the default settings for the filter. 'none', 'for_android' or 'for_ios'.</param>
-        public PixivClient(string filterSetting = "for_android")
+        public PixivClient(FilterType filter = FilterType.Android)
         {
             RequestClient = new WebRequests();
-            Filter = filterSetting;
+            Filter = filter;
         }
         
         /// <summary>
@@ -33,16 +33,7 @@ namespace PixivCSharp
             RequestClient.device_token = device;
         }
 
-        private string _Filter = "for_android";
-
-        private string Filter
-        {
-            get => _Filter;
-            set
-            {
-                if (value == "for_android" || value == "for_ios" || value == "none") { _Filter = value; }
-            }
-        }
+        private FilterType Filter { get; set; }
 
         /// <summary>
         /// Checks whether the tokens are set.

@@ -14,7 +14,7 @@ namespace PixivCSharp
         /// <param name="PrivacyPolicy">Whether to include a link to the privacy policy.</param>
         /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="RecommendedIllusts"/></returns>
-        public async Task<RecommendedIllusts> RecommendedIllustsAsync(bool RankingIllusts = true, bool PrivacyPolicy = true, string filter = null)
+        public async Task<RecommendedIllusts> RecommendedIllustsAsync(bool RankingIllusts = true, bool PrivacyPolicy = true, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -22,14 +22,13 @@ namespace PixivCSharp
                 { "include_ranking_illusts", RankingIllusts.ToString().ToLower() },
                 { "include_privacy_policy" , PrivacyPolicy.ToString().ToLower() }
             };
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
-            
+
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.RecommendedIllusts, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<RecommendedIllusts>(response);
@@ -42,7 +41,7 @@ namespace PixivCSharp
         /// <param name="PrivacyPolicy"></param>
         /// <param name="filter"></param>
         /// <returns><seealso cref="RecommendedIllusts"/></returns>
-        public async Task<RecommendedIllusts> RecommendedMangaAsync(bool RankingIllusts = true, bool PrivacyPolicy = true, string filter = null)
+        public async Task<RecommendedIllusts> RecommendedMangaAsync(bool RankingIllusts = true, bool PrivacyPolicy = true, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -50,14 +49,13 @@ namespace PixivCSharp
                 { "include_ranking_illusts", RankingIllusts.ToString().ToLower() },
                 { "include_privacy_policy", PrivacyPolicy.ToString().ToLower() }
             };
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
-            
+
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.RecommendedManga, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<RecommendedIllusts>(response);
@@ -87,18 +85,17 @@ namespace PixivCSharp
         /// </summary>
         /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="UserSearchResult"/></returns>
-        public async Task<UserSearchResult> RecommendedUsersAsync(string filter = null)
+        public async Task<UserSearchResult> RecommendedUsersAsync(FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
-            
+
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.RecommendedUsers, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<UserSearchResult>(response);

@@ -19,7 +19,7 @@ namespace PixivCSharp
         /// <returns><seealso cref="IllustSearchResult"/></returns>
         public async Task<IllustSearchResult> SearchIllustsAsync(string searchTerm, Sort sort = Sort.DateDesc,
             SearchTarget searchTarget = SearchTarget.PartialTagMatch, bool includeTranslatedTags = true,
-            bool mergePlainKeywordResults = true, string filter = null)
+            bool mergePlainKeywordResults = true, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -30,13 +30,13 @@ namespace PixivCSharp
                 { "include_translated_tags", includeTranslatedTags.ToString().ToLower() },
                 { "merge_plain_keywork_results", mergePlainKeywordResults.ToString().ToLower() }
             };
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
+
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.IllustSearch, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<IllustSearchResult>(response);
@@ -75,20 +75,20 @@ namespace PixivCSharp
         /// <param name="searchTerm">The search term to use. Tags should be seperated with a space.</param>
         /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="UserSearchResult"/></returns>
-        public async Task<UserSearchResult> SearchUsersAsync(string searchTerm, string filter = null)
+        public async Task<UserSearchResult> SearchUsersAsync(string searchTerm, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "word", searchTerm }
             };
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
+
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.UserSearch, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<UserSearchResult>(response);
@@ -125,7 +125,7 @@ namespace PixivCSharp
         /// <returns><seealso cref="IllustSearchResult"/></returns>
         public async Task<IllustSearchResult> PopularIllustsPreviewAsync(string searchTerm, Sort sort = Sort.DateDesc,
             SearchTarget searchTarget = SearchTarget.PartialTagMatch, bool includeTranslatedTags = true,
-            bool mergePlainKeywordResults = true, string filter = null)
+            bool mergePlainKeywordResults = true, FilterType filter = FilterType.None)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
@@ -136,13 +136,13 @@ namespace PixivCSharp
                 {"include_translated_tags", includeTranslatedTags.ToString().ToLower()},
                 {"merge_plain_keyword_results", mergePlainKeywordResults.ToString().ToLower()}
             };
-            
+
             // Adds filter if required
-            string filterText = filter ?? Filter;
-            if (filterText != "none" && (filterText == "for_android" || filterText == "for_ios"))
+            if ((filter.JsonValue() ?? Filter.JsonValue()) != null)
             {
-                parameters.Add("filter", filter ?? Filter);
+                parameters.Add("filter", filter.JsonValue() ?? Filter.JsonValue());
             }
+
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             response = await RequestClient.RequestAsync(PixivUrls.PopularIllustsPreview, encodedParams).ConfigureAwait(false);
             return Json.DeserializeJson<IllustSearchResult>(response);
