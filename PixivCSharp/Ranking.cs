@@ -11,12 +11,9 @@ namespace PixivCSharp
         /// <summary>
         /// Gets a list of ranking illusts.
         /// </summary>
-        /// <param name="mode">
-        /// The mode to use. Can be: 'day', 'week', 'month', 'day_male', 'day_female', 'week_original', 'week_rookie',
-        /// 'day_manga', 'week_rookie_manga', 'week_manga' or 'month_manga'.
-        /// </param>
+        /// <param name="mode">The ranking mode to use.</param>
         /// <param name="date">The date to get ranking illusts for.</param>
-        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="IllustSearchResult"/> for ranking illusts.</returns>
         public async Task<IllustSearchResult> RankingIllustsAsync(RankingMode mode = RankingMode.Day, DateTime? date = null,
             string filter = null)
@@ -50,7 +47,7 @@ namespace PixivCSharp
         /// <summary>
         /// Gets a list of ranking novels
         /// </summary>
-        /// <param name="mode">The mode to use. Can be: 'day', 'week','day_male', 'day_female' or 'week_rookie'.</param>
+        /// <param name="mode">The ranking mode to use.</param>
         /// <param name="date">The date to get ranking novels for.</param>
         /// <returns><seealso cref="NovelSearchResult"/> for ranking novels.</returns>
         public async Task<NovelSearchResult> RankingNovelsAsync(RankingMode mode = RankingMode.Day, DateTime? date = null)

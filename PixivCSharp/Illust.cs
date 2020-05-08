@@ -11,7 +11,7 @@ namespace PixivCSharp
         /// Gets information about an illust.
         /// </summary>
         /// <param name="id">Specifies the ID of the illut to search for.</param>
-        /// <param name="filter">Specifies whether to use a filter. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <param name="filter">Specifies whether to use a filter.</param>
         /// <returns><seealso cref="Illust"/></returns>
         public async Task<Illust> ViewIllustAsync(string id, string filter = null)
         {
@@ -83,7 +83,7 @@ namespace PixivCSharp
         /// Bookmarks the illust.
         /// </summary>
         /// <param name="id">The illust to bookmarks.</param>
-        /// <param name="restrict">The publicity for the bookmark - 'public' or 'private'</param>
+        /// <param name="restrict">The publicity for the bookmark.</param>
         public async Task AddBookmarkIllustAsync(string id, Publicity restrict = Publicity.Public)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()

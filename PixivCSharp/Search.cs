@@ -11,13 +11,11 @@ namespace PixivCSharp
         /// Gets a list of illusts for the given search term.
         /// </summary>
         /// <param name="searchTerm">The search term to use. Tags should be seperated with a space.</param>
-        /// <param name="sort">How to sort the results. Can be: 'date_desc' or 'date_asc'.</param>
-        /// <param name="searchTarget">
-        /// The method of search. Can be: 'partial_match_for_tags', 'exact_match_for_tags' or 'title_and_caption'.
-        /// </param>
+        /// <param name="sort">How to sort the results.</param>
+        /// <param name="searchTarget">The method of search.</param>
         /// <param name="includeTranslatedTags">Whether to include tag translations.</param>
         /// <param name="mergePlainKeywordResults">Currnetly unknown.</param>
-        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="IllustSearchResult"/></returns>
         public async Task<IllustSearchResult> SearchIllustsAsync(string searchTerm, Sort sort = Sort.DateDesc,
             SearchTarget searchTarget = SearchTarget.PartialTagMatch, bool includeTranslatedTags = true,
@@ -48,8 +46,8 @@ namespace PixivCSharp
         /// Gets a list of novels for the give search term.
         /// </summary>
         /// <param name="searchTerm">The search term to use. Tags should be seperated with a space.</param>
-        /// <param name="sort">How to sort the results. Can be: 'date_desc' or 'date_asc'.</param>
-        /// <param name="searchTarget">The method of search. Can be: 'partial_match_for_tags', 'exact_match_for_tags' or 'title_and_caption'.</param>
+        /// <param name="sort">How to sort the results.</param>
+        /// <param name="searchTarget">The method of search.</param>
         /// <param name="includeTranslatedTags">Whether to include tag translations.</param>
         /// <param name="mergePlainKeywordResults">Currently unknown.</param>
         /// <returns><seealso cref="NovelSearchResult"/></returns>
@@ -75,7 +73,7 @@ namespace PixivCSharp
         /// Gets a list of users for the given search term.
         /// </summary>
         /// <param name="searchTerm">The search term to use. Tags should be seperated with a space.</param>
-        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="UserSearchResult"/></returns>
         public async Task<UserSearchResult> SearchUsersAsync(string searchTerm, string filter = null)
         {
@@ -119,11 +117,11 @@ namespace PixivCSharp
         /// Gets a list of the first 30 popular illusts for a given search term.
         /// </summary>
         /// <param name="searchTerm">The search term to use. Tags should be seperated with a space.</param>
-        /// <param name="sort">How to sort the results. Can be: 'date_desc' or 'date_asc'.</param>
-        /// <param name="searchTarget">The method of search. Can be: 'partial_match_for_tags', 'exact_match_for_tags' or 'title_and_caption'.</param>
+        /// <param name="sort">How to sort the results.</param>
+        /// <param name="searchTarget">The method of search.</param>
         /// <param name="includeTranslatedTags">Whether to include tag translations.</param>
         /// <param name="mergePlainKeywordResults">Currently unknown.</param>
-        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="IllustSearchResult"/></returns>
         public async Task<IllustSearchResult> PopularIllustsPreviewAsync(string searchTerm, Sort sort = Sort.DateDesc,
             SearchTarget searchTarget = SearchTarget.PartialTagMatch, bool includeTranslatedTags = true,
@@ -154,8 +152,8 @@ namespace PixivCSharp
         /// Gets a list of the first 30 popular novels for the given search term.
         /// </summary>
         /// <param name="searchTerm">The search term to use. Tags should be seperated with a space.</param>
-        /// <param name="sort">How to sort the results. Can be: 'date_desc' or 'date_asc'.</param>
-        /// <param name="searchTarget">The method of search. Can be: 'partial_match_for_tags', 'exact_match_for_tags' or 'title_and_caption'.</param>
+        /// <param name="sort">How to sort the results.</param>
+        /// <param name="searchTarget">The method of search.</param>
         /// <param name="includeTranslatedTags">Whether to include tag translations.</param>
         /// <param name="mergePlainKeywordResults">Currently unknown.</param>
         /// <returns><seealso cref="NovelSearchResult"/></returns>

@@ -81,7 +81,7 @@ namespace PixivCSharp
         /// Bookmarks a novel.
         /// </summary>
         /// <param name="id">The novel to bookmark.</param>
-        /// <param name="restrict">The publicity at which to bookmark the novel. 'public' or 'private'.</param>
+        /// <param name="restrict">The publicity at which to bookmark the novel.</param>
         public async Task AddBookmarkNovelAsync(string id, Publicity restrict = Publicity.Public)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()

@@ -10,8 +10,8 @@ namespace PixivCSharp
         /// <summary>
         /// Gets a list of new illusts
         /// </summary>
-        /// <param name="ContentType">Specifies the type of content to search for: illust/manga.</param>
-        /// <param name="filter">Specifies whether to use a filter. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <param name="ContentType">Specifies the type of content to search for.</param>
+        /// <param name="filter">Specifies whether to use a filter.</param>
         /// <returns><seealso cref="IllustSearchResult"/> for new illusts.</returns>
         public async Task<IllustSearchResult> NewIllustsAsync(string ContentType, string filter = null)
         {
@@ -41,7 +41,7 @@ namespace PixivCSharp
         /// <remarks>
         /// This request does accept the 'filter' parameters, therefore results must be filtered manually if required.
         /// </remarks>
-        /// <param name="restrict">Specifies of what restrict to search for: 'all', 'public' or 'private'.</param>
+        /// <param name="restrict">Specifies of what restrict to search for.</param>
         /// <returns><seealso cref="IllustSearchResult"/> for new illusts from following.</returns>
         public async Task<IllustSearchResult> NewFollowIllustsAsync(string restrict = "all")
         {
@@ -87,7 +87,7 @@ namespace PixivCSharp
         /// <summary>
         /// Gets a list of new novels from followed accounts.
         /// </summary>
-        /// <param name="restrict">Specifies of what restrict to search for: 'public', 'private' or 'mypixiv'.</param>
+        /// <param name="restrict">Specifies of what restrict to search for.</param>
         /// <returns><seealso cref="NovelSearchResult"/> for new novels from followed accounts.</returns>
         public async Task<NovelSearchResult> NewFollowNovelsAsync(Publicity restrict = Publicity.Public)
         {
@@ -121,7 +121,7 @@ namespace PixivCSharp
         /// <summary>
         /// Gets a list of currently trending illust tags.
         /// </summary>
-        /// <param name="filter">Specifies whether to use a filter. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <param name="filter">Specifies whether to use a filter.</param>
         /// <returns><seealso cref="TrendTag"/>[] for trending illust tags.</returns>
         public async Task<TrendTag[]> TrendingIllustTagsAsync(string filter = null)
         {

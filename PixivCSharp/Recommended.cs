@@ -12,7 +12,7 @@ namespace PixivCSharp
         /// </summary>
         /// <param name="RankingIllusts">Whether to include ranking illusts.</param>
         /// <param name="PrivacyPolicy">Whether to include a link to the privacy policy.</param>
-        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="RecommendedIllusts"/></returns>
         public async Task<RecommendedIllusts> RecommendedIllustsAsync(bool RankingIllusts = true, bool PrivacyPolicy = true, string filter = null)
         {
@@ -85,7 +85,7 @@ namespace PixivCSharp
         /// <summary>
         /// Gets a list of recommended users.
         /// </summary>
-        /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
+        /// <param name="filter">The filter to use.</param>
         /// <returns><seealso cref="UserSearchResult"/></returns>
         public async Task<UserSearchResult> RecommendedUsersAsync(string filter = null)
         {
