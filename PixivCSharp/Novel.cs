@@ -82,12 +82,12 @@ namespace PixivCSharp
         /// </summary>
         /// <param name="id">The novel to bookmark.</param>
         /// <param name="restrict">The publicity at which to bookmark the novel. 'public' or 'private'.</param>
-        public async Task AddBookmarkNovelAsync(string id, string restrict)
+        public async Task AddBookmarkNovelAsync(string id, Publicity restrict = Publicity.Public)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "novel_id", id },
-                { "restrict", restrict }
+                { "restrict", restrict.JsonValue() }
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             await RequestClient.RequestAsync(PixivUrls.NovelBookmarkAdd, encodedParams).ConfigureAwait(false);

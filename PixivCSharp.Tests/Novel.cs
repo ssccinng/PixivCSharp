@@ -65,7 +65,7 @@ namespace PixivCSharp.Tests
             if (choice == "1")
             {
                 Console.Write("Enter the id of the novel to bookmark\n> ");
-                await Client.AddBookmarkNovelAsync(Console.ReadLine(), "public");
+                await Client.AddBookmarkNovelAsync(Console.ReadLine());
             }
             else if (choice == "2")
             {
