@@ -89,7 +89,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.UserIllustsAsync(Console.ReadLine(), "illust");
+                result = await Client.UserIllustsAsync(Console.ReadLine(), IllustType.Illust);
             }
             catch (HttpRequestException e)
             {

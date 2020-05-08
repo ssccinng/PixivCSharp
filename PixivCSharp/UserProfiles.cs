@@ -40,13 +40,13 @@ namespace PixivCSharp
         /// <param name="type">The type of illusts to view. Can be: 'illust' or 'manga'</param>
         /// <param name="filter"></param>
         /// <returns><seealso cref="IllustSearchResult"/></returns>
-        public async Task<IllustSearchResult> UserIllustsAsync(string UserID, string type, string filter = null)
+        public async Task<IllustSearchResult> UserIllustsAsync(string UserID, IllustType type, string filter = null)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID },
-                { "type", type },
+                { "type", type.JsonValue() },
             };
             
             // Adds filter if required
@@ -88,13 +88,13 @@ namespace PixivCSharp
         /// <param name="UserID">The ID of the user to view bookmarks of.</param>
         /// <param name="restrict">The publicity of bookmarks to view. Can be: 'all', 'public' or 'private'.</param>
         /// <returns><seealso cref="IllustSearchResult"/></returns>
-        public async Task<IllustSearchResult> BookmarkedIllustsAsync(string UserID, string restrict = "public")
+        public async Task<IllustSearchResult> BookmarkedIllustsAsync(string UserID, Publicity restrict = Publicity.Public)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID },
-                { "restrict", restrict }
+                { "restrict", restrict.JsonValue() }
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
@@ -108,13 +108,13 @@ namespace PixivCSharp
         /// <param name="UserID">The ID of the user to view novel bookmarks of.</param>
         /// <param name="restrict">The publicity of bookmarks to view. Can be: 'all', 'public' or 'private'.</param>
         /// <returns><seealso cref="NovelSearchResult"/></returns>
-        public async Task<NovelSearchResult> BookmarkedNovelsAsync(string UserID, string restrict = "public")
+        public async Task<NovelSearchResult> BookmarkedNovelsAsync(string UserID, Publicity restrict = Publicity.Public)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID },
-                { "restrict", restrict }
+                { "restrict", restrict.JsonValue() }
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
 
@@ -155,13 +155,13 @@ namespace PixivCSharp
         /// <param name="restrict">The publicity of follows to view. Can be: 'all', 'public' or 'private'.</param>
         /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
         /// <returns><seealso cref="UserSearchResult"/></returns>
-        public async Task<UserSearchResult> FollowingAsync(string UserID, string restrict = "public", string filter = null)
+        public async Task<UserSearchResult> FollowingAsync(string UserID, Publicity restrict = Publicity.Public, string filter = null)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID },
-                { "restrict", restrict }
+                { "restrict", restrict.JsonValue() }
             };
             
             // Adds filter if required
@@ -207,12 +207,12 @@ namespace PixivCSharp
         /// </summary>
         /// <param name="UserID">The ID of the user to follow.</param>
         /// <param name="restrict">The publicity at which to follow. Can be: 'all', 'public' or 'private'.</param>
-        public async Task FollowAsync(string UserID, string restrict = "public")
+        public async Task FollowAsync(string UserID, Publicity restrict = Publicity.Public)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "user_id", UserID },
-                { "restrict", restrict }
+                { "restrict", restrict.JsonValue() }
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
             await RequestClient.RequestAsync(PixivUrls.FollowProfile, encodedParams).ConfigureAwait(false);
