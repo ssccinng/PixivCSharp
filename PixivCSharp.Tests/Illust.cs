@@ -128,7 +128,7 @@ namespace PixivCSharp.Tests
             if (choice == "1")
             {
                 Console.Write("Enter the id of the illust to bookmark\n> ");
-                await Client.AddBookmarkIllustAsync(Console.ReadLine(), "public");
+                await Client.AddBookmarkIllustAsync(Console.ReadLine());
             }
             else if (choice == "2")
             {
