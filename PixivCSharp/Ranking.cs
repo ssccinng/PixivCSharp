@@ -18,7 +18,7 @@ namespace PixivCSharp
         /// <param name="date">The date to get ranking illusts for.</param>
         /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
         /// <returns><seealso cref="IllustSearchResult"/> for ranking illusts.</returns>
-        public async Task<IllustSearchResult> RankingIllustsAsync(string mode = "day", DateTime? date = null,
+        public async Task<IllustSearchResult> RankingIllustsAsync(RankingMode mode = RankingMode.Day, DateTime? date = null,
             string filter = null)
         {
             // Converts time to the correct timezone and produces a date string in correct format
@@ -29,7 +29,7 @@ namespace PixivCSharp
 
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
-                { "mode", mode },
+                { "mode", mode.JsonValue() },
                 { "date", dateString }
             };
             
@@ -53,7 +53,7 @@ namespace PixivCSharp
         /// <param name="mode">The mode to use. Can be: 'day', 'week','day_male', 'day_female' or 'week_rookie'.</param>
         /// <param name="date">The date to get ranking novels for.</param>
         /// <returns><seealso cref="NovelSearchResult"/> for ranking novels.</returns>
-        public async Task<NovelSearchResult> RankingNovelsAsync(string mode = "day", DateTime? date = null)
+        public async Task<NovelSearchResult> RankingNovelsAsync(RankingMode mode = RankingMode.Day, DateTime? date = null)
         {
             // Converts time to the correct timezone and produces a date string in correct format
             Stream response;
@@ -63,7 +63,7 @@ namespace PixivCSharp
             
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
-                { "mode", mode },
+                { "mode", mode.JsonValue() },
                 { "date", dateString }
             };
             FormUrlEncodedContent encodedParams = new FormUrlEncodedContent(parameters);
