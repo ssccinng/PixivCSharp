@@ -8,6 +8,7 @@
         /// <summary>
         /// No filter.
         /// </summary>
+        [JsonValue(null)]
         None,
         
         /// <summary>
