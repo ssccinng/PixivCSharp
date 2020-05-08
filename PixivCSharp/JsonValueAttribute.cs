@@ -28,6 +28,11 @@ namespace PixivCSharp
     /// </summary>
     public static class ExtensionMethods
     {
+        /// <summary>
+        /// JsonValue extension method.
+        /// </summary>
+        /// <param name="value">Enum value.</param>
+        /// <returns></returns>
         public static string JsonValue(this Enum value)
         {
             Type type = value.GetType();

@@ -3,7 +3,7 @@
     /// <summary>
     /// Potential values for filter parameter.
     /// </summary>
-    public enum Filter
+    public enum FilterType
     {
         /// <summary>
         /// No filter.
@@ -21,6 +21,24 @@
         /// </summary>
         [JsonValue("for_ios")]
         IOS
+    }
+
+    /// <summary>
+    /// Types of Illusts.
+    /// </summary>
+    public enum IllustType
+    {
+        /// <summary>
+        /// Illusts.
+        /// </summary>
+        [JsonValue("illust")]
+        Illust,
+
+        /// <summary>
+        /// Manga.
+        /// </summary>
+        [JsonValue("manga")]
+        Manga
     }
 
     /// <summary>
