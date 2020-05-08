@@ -122,7 +122,7 @@ namespace PixivCSharp.Tests
             // Error handling
             try
             {
-                result = await Client.NewFollowNovelsAsync("public");
+                result = await Client.NewFollowNovelsAsync();
             }
             catch (HttpRequestException e)
             {

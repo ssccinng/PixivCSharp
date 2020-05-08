@@ -89,12 +89,12 @@ namespace PixivCSharp
         /// </summary>
         /// <param name="restrict">Specifies of what restrict to search for: 'public', 'private' or 'mypixiv'.</param>
         /// <returns><seealso cref="NovelSearchResult"/> for new novels from followed accounts.</returns>
-        public async Task<NovelSearchResult> NewFollowNovelsAsync(string restrict)
+        public async Task<NovelSearchResult> NewFollowNovelsAsync(Publicity restrict = Publicity.Public)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
-                { "restrict", restrict }
+                { "restrict", restrict.JsonValue() }
             };
             
             // Encodeds parameters and sends request
