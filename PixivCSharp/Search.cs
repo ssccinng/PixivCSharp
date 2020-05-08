@@ -19,16 +19,16 @@ namespace PixivCSharp
         /// <param name="mergePlainKeywordResults">Currnetly unknown.</param>
         /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
         /// <returns><seealso cref="IllustSearchResult"/></returns>
-        public async Task<IllustSearchResult> SearchIllustsAsync(string searchTerm, string sort ="date_desc",
-            string searchTarget = "partial_match_for_tags", bool includeTranslatedTags = true,
+        public async Task<IllustSearchResult> SearchIllustsAsync(string searchTerm, Sort sort = Sort.DateDesc,
+            SearchTarget searchTarget = SearchTarget.PartialTagMatch, bool includeTranslatedTags = true,
             bool mergePlainKeywordResults = true, string filter = null)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "word", searchTerm },
-                { "search_target", searchTarget },
-                { "sort", sort },
+                { "search_target", searchTarget.JsonValue() },
+                { "sort", sort.JsonValue() },
                 { "include_translated_tags", includeTranslatedTags.ToString().ToLower() },
                 { "merge_plain_keywork_results", mergePlainKeywordResults.ToString().ToLower() }
             };
@@ -53,16 +53,16 @@ namespace PixivCSharp
         /// <param name="includeTranslatedTags">Whether to include tag translations.</param>
         /// <param name="mergePlainKeywordResults">Currently unknown.</param>
         /// <returns><seealso cref="NovelSearchResult"/></returns>
-        public async Task<NovelSearchResult> SearchNovelsAsync(string searchTerm, string sort = "date_desc",
-            string searchTarget = "partial_match_for_tags", bool includeTranslatedTags = true,
+        public async Task<NovelSearchResult> SearchNovelsAsync(string searchTerm, Sort sort = Sort.DateDesc,
+            SearchTarget searchTarget = SearchTarget.PartialTagMatch, bool includeTranslatedTags = true,
             bool mergePlainKeywordResults = true)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "word", searchTerm },
-                { "search_target", searchTarget },
-                { "sort", sort },
+                { "search_target", searchTarget.JsonValue() },
+                { "sort", sort.JsonValue() },
                 { "include_translated_tags", includeTranslatedTags.ToString().ToLower() },
                 { "merge_plain_keyword_results", mergePlainKeywordResults.ToString().ToLower() }
             };
@@ -125,16 +125,16 @@ namespace PixivCSharp
         /// <param name="mergePlainKeywordResults">Currently unknown.</param>
         /// <param name="filter">The filter to use. Can be 'none', 'for_android' or 'for_ios'.</param>
         /// <returns><seealso cref="IllustSearchResult"/></returns>
-        public async Task<IllustSearchResult> PopularIllustsPreviewAsync(string searchTerm, string sort = "date_desc",
-            string searchTarget = "partial_match_for_tags", bool includeTranslatedTags = true,
+        public async Task<IllustSearchResult> PopularIllustsPreviewAsync(string searchTerm, Sort sort = Sort.DateDesc,
+            SearchTarget searchTarget = SearchTarget.PartialTagMatch, bool includeTranslatedTags = true,
             bool mergePlainKeywordResults = true, string filter = null)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 {"word", searchTerm},
-                {"sort", sort},
-                {"search_target", searchTarget},
+                {"sort", sort.JsonValue()},
+                {"search_target", searchTarget.JsonValue()},
                 {"include_translated_tags", includeTranslatedTags.ToString().ToLower()},
                 {"merge_plain_keyword_results", mergePlainKeywordResults.ToString().ToLower()}
             };
@@ -159,16 +159,16 @@ namespace PixivCSharp
         /// <param name="includeTranslatedTags">Whether to include tag translations.</param>
         /// <param name="mergePlainKeywordResults">Currently unknown.</param>
         /// <returns><seealso cref="NovelSearchResult"/></returns>
-        public async Task<NovelSearchResult> PopularNovelsPreviewAsync(string searchTerm, string sort = "date_desc",
-            string searchTarget = "partial_match_for_tags", bool includeTranslatedTags = true,
+        public async Task<NovelSearchResult> PopularNovelsPreviewAsync(string searchTerm, Sort sort = Sort.DateDesc,
+            SearchTarget searchTarget = SearchTarget.PartialTagMatch, bool includeTranslatedTags = true,
             bool mergePlainKeywordResults = true)
         {
             Stream response;
             Dictionary<string, string> parameters = new Dictionary<string, string>()
             {
                 { "word", searchTerm },
-                { "sort", sort },
-                { "search_target", searchTarget},
+                { "sort", sort.JsonValue() },
+                { "search_target", searchTarget.JsonValue()},
                 { "include_translated_tags", includeTranslatedTags.ToString().ToLower() },
                 { "merge_plain_keyword_results", mergePlainKeywordResults.ToString().ToLower() }
             };
