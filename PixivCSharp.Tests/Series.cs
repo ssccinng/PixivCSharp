@@ -113,7 +113,7 @@ namespace PixivCSharp.Tests
 
             try
             {
-                result = await Client.IllustSeriesInfoAsync(ID, filter:"none");
+                result = await Client.IllustSeriesInfoAsync(ID, filter:FilterType.None);
                 if (result.NextUrl == null) allFound = true;
                 works.AddRange(result.Illusts);
             }
